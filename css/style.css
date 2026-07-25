@@ -830,6 +830,21 @@ main > section { padding: clamp(4rem, 8vw, 7rem) clamp(1.25rem, 5vw, 4rem); }
 .cat-card:hover h3, .cat-card:hover span { color: var(--white); }
 
 /* ---------- 8. Products & Homepage Offer Sections ---------- */
+.product-grid {
+  max-width: 1300px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+  gap: 1.6rem;
+  align-items: stretch;
+}
+
+main > section.products {
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 2.5rem clamp(1.25rem, 5vw, 3rem) 5rem;
+}
+
 .product-card {
   position: relative;
   background: var(--surface);
@@ -837,17 +852,32 @@ main > section { padding: clamp(4rem, 8vw, 7rem) clamp(1.25rem, 5vw, 4rem); }
   border-radius: var(--radius-md);
   overflow: hidden;
   box-shadow: var(--shadow-sm);
-  transition: transform 0.25s var(--ease), box-shadow 0.4s var(--ease);
-  transform-style: preserve-3d;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  transition: transform 0.3s var(--ease), box-shadow 0.4s var(--ease);
 }
-.product-card:hover { box-shadow: var(--shadow-lg); }
+.product-card:hover {
+  transform: translateY(-5px);
+  box-shadow: var(--shadow-lg);
+}
 
-.product-media { position: relative; aspect-ratio: 1/1; overflow: hidden; background: var(--bg); }
+.product-media {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 1 / 1;
+  overflow: hidden;
+  background: var(--bg);
+  flex-shrink: 0;
+}
 .product-media img {
-  width: 100%; height: 100%; object-fit: cover;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
   transition: transform 0.6s var(--ease);
 }
-.product-card:hover .product-media img { transform: scale(1.1); }
+.product-card:hover .product-media img { transform: scale(1.08); }
 
 .product-tag {
   position: absolute; top: 12px; left: 12px;
@@ -873,7 +903,13 @@ main > section { padding: clamp(4rem, 8vw, 7rem) clamp(1.25rem, 5vw, 4rem); }
 .wish-btn.active { color: #FF4D6D; }
 .wish-btn.active i { font-weight: 900; }
 
-.product-info { padding: 1.1rem 1.2rem 1.3rem; }
+.product-info {
+  padding: 1.1rem 1.2rem 1.25rem;
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  justify-content: space-between;
+}
 .product-cat { font-size: 0.72rem; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.06em; }
 .product-title { font-family: var(--font-head); font-size: 1rem; font-weight: 600; margin: 0.3rem 0 0.5rem; }
 
@@ -1144,6 +1180,10 @@ main > section { padding: clamp(4rem, 8vw, 7rem) clamp(1.25rem, 5vw, 4rem); }
   .offer-banner-grid, .trending-compact-grid {
     grid-template-columns: repeat(2, 1fr);
   }
+  .product-grid {
+    grid-template-columns: repeat(auto-fill, minmax(210px, 1fr));
+    gap: 1.25rem;
+  }
 }
 @media (max-width: 640px) {
   .section-head-bar {
@@ -1157,7 +1197,16 @@ main > section { padding: clamp(4rem, 8vw, 7rem) clamp(1.25rem, 5vw, 4rem); }
   .offer-banner-grid, .trending-compact-grid {
     grid-template-columns: 1fr;
   }
+  .product-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1rem;
+  }
   .scroll-arrow { display: none; }
+}
+@media (max-width: 440px) {
+  .product-grid {
+    grid-template-columns: 1fr;
+  }
 }
 
 /* ---------- 10. Promo banner ---------- */
