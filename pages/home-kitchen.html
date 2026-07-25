@@ -1,0 +1,312 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Home & Kitchen — NovaCart</title>
+<meta name="description" content="Elevate your space with minimal lighting, kitchen appliances, and home decor at NovaCart.">
+
+<!-- Fonts & Icons -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Sora:wght@300;400;500;600;700;800&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+<link rel="stylesheet" href="../css/style.css">
+</head>
+<body>
+
+<!-- ============ NAVIGATION ============ -->
+<nav class="navbar" id="navbar">
+  <div class="nav-container">
+    <a href="../index.html" class="logo">
+      <span class="logo-mark">
+        <svg width="30" height="30" viewBox="0 0 30 30"><path d="M15 2 L27 9 V21 L15 28 L3 21 V9 Z" fill="none" stroke="url(#navGrad)" stroke-width="2.2"/><circle cx="15" cy="15" r="4" fill="url(#navGrad)"/><defs><linearGradient id="navGrad" x1="0" y1="0" x2="1" y2="1"><stop offset="0%" stop-color="#6C63FF"/><stop offset="100%" stop-color="#00C9A7"/></linearGradient></defs></svg>
+      </span>
+      <span class="logo-text">Nova<span class="logo-accent">Cart</span></span>
+    </a>
+
+    <ul class="nav-links" id="navLinks">
+      <li><a href="../index.html" class="nav-link">Home</a></li>
+      <li><a href="home-kitchen.html" class="nav-link active">Shop</a></li>
+      <li><a href="../index.html#collections" class="nav-link">Collections</a></li>
+      <li><a href="deals.html" class="nav-link">Deals</a></li>
+      <li><a href="../index.html#about" class="nav-link">About</a></li>
+      <li><a href="../index.html#contact" class="nav-link">Contact</a></li>
+    </ul>
+
+    <div class="nav-actions">
+      <button class="icon-btn" id="searchToggle" aria-label="Search"><i class="fa-solid fa-magnifying-glass"></i></button>
+      <a href="wishlist.html" class="icon-btn" aria-label="Wishlist"><i class="fa-regular fa-heart"></i><span class="badge" id="wishBadge">2</span></a>
+      <a href="cart.html" class="icon-btn" aria-label="Cart"><i class="fa-solid fa-bag-shopping"></i><span class="badge cart-badge" id="cartBadge">3</span></a>
+      <a href="orders.html" class="icon-btn" aria-label="Orders" title="My Orders"><i class="fa-solid fa-clock-rotate-left"></i></a>
+      <div class="account-nav-wrapper">
+        <button class="icon-btn" id="accountToggle" aria-label="Account" aria-haspopup="true" aria-expanded="false" title="Account"><i class="fa-regular fa-user"></i></button>
+        <div class="account-panel" id="accountPanel" role="menu" aria-label="Account Menu"></div>
+      </div>
+      <button class="icon-btn theme-toggle" id="themeToggle" aria-label="Toggle dark mode"><i class="fa-solid fa-moon"></i></button>
+      <button class="hamburger" id="hamburger" aria-label="Menu"><span></span><span></span><span></span></button>
+    </div>
+  </div>
+
+  <div class="search-panel" id="searchPanel">
+    <div class="search-panel-inner">
+      <i class="fa-solid fa-magnifying-glass"></i>
+      <input type="text" placeholder="Search home & kitchen..." id="searchInput">
+      <button id="searchClose" aria-label="Close search"><i class="fa-solid fa-xmark"></i></button>
+    </div>
+  </div>
+</nav>
+
+<!-- ============ CATEGORY BAR ============ -->
+<div class="category-bar" id="categoryBar">
+  <div class="category-container">
+    <div class="all-categories-wrapper">
+      <button class="all-categories-btn" id="allCategoriesBtn" aria-haspopup="true" aria-expanded="false" aria-controls="allCategoriesPanel">
+        <i class="fa-solid fa-bars"></i>
+        <span>All</span>
+        <i class="fa-solid fa-chevron-down caret-icon"></i>
+      </button>
+
+      <div class="all-categories-panel" id="allCategoriesPanel" role="menu" aria-label="All Categories">
+        <div class="panel-header"><span>Shop Categories</span></div>
+        <ul class="category-panel-list">
+          <li><a href="electronics.html" role="menuitem" class="category-panel-link"><i class="fa-solid fa-laptop"></i> Electronics</a></li>
+          <li><a href="fashion.html" role="menuitem" class="category-panel-link"><i class="fa-solid fa-shirt"></i> Fashion</a></li>
+          <li><a href="home-kitchen.html" role="menuitem" class="category-panel-link"><i class="fa-solid fa-house"></i> Home & Kitchen</a></li>
+          <li><a href="beauty.html" role="menuitem" class="category-panel-link"><i class="fa-solid fa-sparkles"></i> Beauty & Personal Care</a></li>
+          <li><a href="sports.html" role="menuitem" class="category-panel-link"><i class="fa-solid fa-futbol"></i> Sports & Outdoors</a></li>
+          <li><a href="deals.html" role="menuitem" class="category-panel-link"><i class="fa-solid fa-tag"></i> Deals & Sales</a></li>
+          <li><a href="new-arrivals.html" role="menuitem" class="category-panel-link"><i class="fa-solid fa-wand-magic-sparkles"></i> New Arrivals</a></li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="category-quick-links">
+      <a href="electronics.html" class="cat-quick-link">Electronics</a>
+      <a href="fashion.html" class="cat-quick-link">Fashion</a>
+      <a href="home-kitchen.html" class="cat-quick-link active">Home & Kitchen</a>
+      <a href="deals.html" class="cat-quick-link">Deals</a>
+      <a href="new-arrivals.html" class="cat-quick-link">New Arrivals</a>
+      <a href="beauty.html" class="cat-quick-link">Beauty</a>
+      <a href="sports.html" class="cat-quick-link">Sports</a>
+    </div>
+  </div>
+</div>
+
+<div class="mobile-menu" id="mobileMenu">
+  <ul>
+    <li><a href="../index.html">Home</a></li>
+    <li><a href="home-kitchen.html">Home & Kitchen</a></li>
+    <li><a href="deals.html">Deals</a></li>
+    <li><a href="cart.html">Cart</a></li>
+    <li><a href="wishlist.html">Wishlist</a></li>
+    <li><a href="orders.html">Orders</a></li>
+  </ul>
+</div>
+
+<main>
+  <!-- ============ PAGE BANNER ============ -->
+  <section class="page-banner">
+    <span class="eyebrow">Living Spaces</span>
+    <h1>Home & Kitchen</h1>
+    <p>Elevate your everyday environment with thoughtful aesthetics, smart kitchenware, and minimal decor.</p>
+  </section>
+
+  <!-- ============ FILTER & SORT BAR ============ -->
+  <div class="filter-sort-bar">
+    <div class="filter-chips">
+      <button class="chip active">All</button>
+      <button class="chip">Lighting</button>
+      <button class="chip">Appliances</button>
+      <button class="chip">Cookware</button>
+      <button class="chip">Decor</button>
+    </div>
+    <div class="sort-wrapper">
+      <label for="sortSelect">Sort by:</label>
+      <select id="sortSelect" class="sort-select">
+        <option value="featured">Featured</option>
+        <option value="low-high">Price: Low to High</option>
+        <option value="high-low">Price: High to Low</option>
+        <option value="rating">Customer Rating</option>
+        <option value="newest">Newest First</option>
+      </select>
+    </div>
+  </div>
+
+  <!-- ============ PRODUCT GRID ============ -->
+  <section class="products">
+    <div class="product-grid">
+      <div class="product-card fade-in" data-id="301">
+        <div class="product-media">
+          <span class="product-tag">NEW</span>
+          <button class="wish-btn" data-id="301" aria-label="Add to wishlist"><i class="fa-regular fa-heart"></i></button>
+          <img src="https://images.unsplash.com/photo-1507473885765-e6ed057f782c?w=500&auto=format&fit=crop&q=60" alt="Oak Grain Desk Lamp" loading="lazy">
+        </div>
+        <div class="product-info">
+          <span class="product-cat">Lighting</span>
+          <h3 class="product-title">Oak Grain Desk Lamp</h3>
+          <div class="product-rating"><span class="stars">★★★★☆</span> 4.7 · 64</div>
+          <div class="product-price-row">
+            <div class="price-group"><span class="price">$58.00</span></div>
+            <button class="add-cart-btn" data-id="301" aria-label="Add to cart"><i class="fa-solid fa-plus"></i></button>
+          </div>
+        </div>
+      </div>
+
+      <div class="product-card fade-in" data-id="302">
+        <div class="product-media">
+          <button class="wish-btn" data-id="302" aria-label="Add to wishlist"><i class="fa-regular fa-heart"></i></button>
+          <img src="https://images.unsplash.com/photo-1517668808822-9ebe02f2a698?w=500&auto=format&fit=crop&q=60" alt="Barista Pro Espresso Machine" loading="lazy">
+        </div>
+        <div class="product-info">
+          <span class="product-cat">Appliances</span>
+          <h3 class="product-title">Barista Pro Espresso Machine</h3>
+          <div class="product-rating"><span class="stars">★★★★★</span> 4.9 · 142</div>
+          <div class="product-price-row">
+            <div class="price-group"><span class="price">$289.00</span></div>
+            <button class="add-cart-btn" data-id="302" aria-label="Add to cart"><i class="fa-solid fa-plus"></i></button>
+          </div>
+        </div>
+      </div>
+
+      <div class="product-card fade-in" data-id="303">
+        <div class="product-media">
+          <span class="product-tag">20% OFF</span>
+          <button class="wish-btn" data-id="303" aria-label="Add to wishlist"><i class="fa-regular fa-heart"></i></button>
+          <img src="https://images.unsplash.com/photo-1584269600464-37b1b58a9fe7?w=500&auto=format&fit=crop&q=60" alt="Digital Air Fryer XL" loading="lazy">
+        </div>
+        <div class="product-info">
+          <span class="product-cat">Appliances</span>
+          <h3 class="product-title">Digital Air Fryer XL</h3>
+          <div class="product-rating"><span class="stars">★★★★☆</span> 4.8 · 210</div>
+          <div class="product-price-row">
+            <div class="price-group"><span class="price">$119.00</span><span class="price-old">$149.00</span></div>
+            <button class="add-cart-btn" data-id="303" aria-label="Add to cart"><i class="fa-solid fa-plus"></i></button>
+          </div>
+        </div>
+      </div>
+
+      <div class="product-card fade-in" data-id="304">
+        <div class="product-media">
+          <button class="wish-btn" data-id="304" aria-label="Add to wishlist"><i class="fa-regular fa-heart"></i></button>
+          <img src="https://images.unsplash.com/photo-1556911220-e15b29be8c8f?w=500&auto=format&fit=crop&q=60" alt="Ceramic Cookware Set" loading="lazy">
+        </div>
+        <div class="product-info">
+          <span class="product-cat">Cookware</span>
+          <h3 class="product-title">Ceramic Cookware Set</h3>
+          <div class="product-rating"><span class="stars">★★★★★</span> 4.9 · 95</div>
+          <div class="product-price-row">
+            <div class="price-group"><span class="price">$149.00</span></div>
+            <button class="add-cart-btn" data-id="304" aria-label="Add to cart"><i class="fa-solid fa-plus"></i></button>
+          </div>
+        </div>
+      </div>
+
+      <div class="product-card fade-in" data-id="305">
+        <div class="product-media">
+          <button class="wish-btn" data-id="305" aria-label="Add to wishlist"><i class="fa-regular fa-heart"></i></button>
+          <img src="https://images.unsplash.com/photo-1518640467707-6811f4a6ab73?w=500&auto=format&fit=crop&q=60" alt="Smart Robot Vacuum Cleaner" loading="lazy">
+        </div>
+        <div class="product-info">
+          <span class="product-cat">Appliances</span>
+          <h3 class="product-title">Smart Robot Vacuum Cleaner</h3>
+          <div class="product-rating"><span class="stars">★★★★☆</span> 4.6 · 178</div>
+          <div class="product-price-row">
+            <div class="price-group"><span class="price">$279.00</span></div>
+            <button class="add-cart-btn" data-id="305" aria-label="Add to cart"><i class="fa-solid fa-plus"></i></button>
+          </div>
+        </div>
+      </div>
+
+      <div class="product-card fade-in" data-id="306">
+        <div class="product-media">
+          <button class="wish-btn" data-id="306" aria-label="Add to wishlist"><i class="fa-regular fa-heart"></i></button>
+          <img src="https://images.unsplash.com/photo-1616486338812-3dadae4b4ace?w=500&auto=format&fit=crop&q=60" alt="Memory Foam Ergonomic Pillow" loading="lazy">
+        </div>
+        <div class="product-info">
+          <span class="product-cat">Bedding</span>
+          <h3 class="product-title">Memory Foam Ergonomic Pillow</h3>
+          <div class="product-rating"><span class="stars">★★★★★</span> 4.7 · 119</div>
+          <div class="product-price-row">
+            <div class="price-group"><span class="price">$48.00</span></div>
+            <button class="add-cart-btn" data-id="306" aria-label="Add to cart"><i class="fa-solid fa-plus"></i></button>
+          </div>
+        </div>
+      </div>
+
+      <div class="product-card fade-in" data-id="307">
+        <div class="product-media">
+          <button class="wish-btn" data-id="307" aria-label="Add to wishlist"><i class="fa-regular fa-heart"></i></button>
+          <img src="https://images.unsplash.com/photo-1593618998160-e34014e67546?w=500&auto=format&fit=crop&q=60" alt="Japanese Chef Knife Set" loading="lazy">
+        </div>
+        <div class="product-info">
+          <span class="product-cat">Cutlery</span>
+          <h3 class="product-title">Japanese Chef Knife Set</h3>
+          <div class="product-rating"><span class="stars">★★★★★</span> 4.9 · 230</div>
+          <div class="product-price-row">
+            <div class="price-group"><span class="price">$89.00</span></div>
+            <button class="add-cart-btn" data-id="307" aria-label="Add to cart"><i class="fa-solid fa-plus"></i></button>
+          </div>
+        </div>
+      </div>
+
+      <div class="product-card fade-in" data-id="308">
+        <div class="product-media">
+          <button class="wish-btn" data-id="308" aria-label="Add to wishlist"><i class="fa-regular fa-heart"></i></button>
+          <img src="https://images.unsplash.com/photo-1602928321679-560b4139c901?w=500&auto=format&fit=crop&q=60" alt="Ultrasonic Aroma Diffuser" loading="lazy">
+        </div>
+        <div class="product-info">
+          <span class="product-cat">Decor</span>
+          <h3 class="product-title">Ultrasonic Aroma Diffuser</h3>
+          <div class="product-rating"><span class="stars">★★★★☆</span> 4.5 · 84</div>
+          <div class="product-price-row">
+            <div class="price-group"><span class="price">$36.00</span></div>
+            <button class="add-cart-btn" data-id="308" aria-label="Add to cart"><i class="fa-solid fa-plus"></i></button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="pagination-wrapper">
+      <button class="btn btn-ghost ripple" id="loadMoreBtn">Load More Products</button>
+    </div>
+  </section>
+</main>
+
+<!-- ============ FOOTER ============ -->
+<footer class="footer">
+  <div class="footer-grid">
+    <div class="footer-brand">
+      <a href="../index.html" class="logo"><span class="logo-text">Nova<span class="logo-accent">Cart</span></span></a>
+      <p>Redefining online shopping with futuristic aesthetics and curated products.</p>
+    </div>
+    <div class="footer-col">
+      <h4>Shop</h4>
+      <a href="electronics.html">Electronics</a>
+      <a href="fashion.html">Fashion</a>
+      <a href="home-kitchen.html">Home & Kitchen</a>
+      <a href="deals.html">Flash Deals</a>
+    </div>
+    <div class="footer-col">
+      <h4>Account</h4>
+      <a href="cart.html">View Cart</a>
+      <a href="wishlist.html">Wishlist</a>
+      <a href="orders.html">My Orders</a>
+    </div>
+    <div class="footer-col">
+      <h4>Customer Support</h4>
+      <a href="../index.html#contact">Help Center</a>
+      <a href="../index.html#contact">Shipping & Returns</a>
+      <a href="../index.html#contact">Contact Us</a>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <p>&copy; 2026 NovaCart Inc. All rights reserved.</p>
+  </div>
+</footer>
+
+<button class="back-to-top" id="backToTop" aria-label="Back to top"><i class="fa-solid fa-arrow-up"></i></button>
+
+<script src="../js/script.js"></script>
+</body>
+</html>

@@ -1,0 +1,416 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>NovaCart — Redefining Online Shopping</title>
+<meta name="description" content="NovaCart is a premium, minimal, futuristic shopping experience.">
+
+<!-- Fonts -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Sora:wght@300;400;500;600;700;800&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+<!-- Font Awesome -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+<!-- ============ NAVIGATION ============ -->
+<nav class="navbar" id="navbar">
+  <div class="nav-container">
+    <a href="#home" class="logo">
+      <span class="logo-mark">
+        <svg width="30" height="30" viewBox="0 0 30 30"><path d="M15 2 L27 9 V21 L15 28 L3 21 V9 Z" fill="none" stroke="url(#navGrad)" stroke-width="2.2"/><circle cx="15" cy="15" r="4" fill="url(#navGrad)"/><defs><linearGradient id="navGrad" x1="0" y1="0" x2="1" y2="1"><stop offset="0%" stop-color="#6C63FF"/><stop offset="100%" stop-color="#00C9A7"/></linearGradient></defs></svg>
+      </span>
+      <span class="logo-text">Nova<span class="logo-accent">Cart</span></span>
+    </a>
+
+    <ul class="nav-links" id="navLinks">
+      <li><a href="#home" class="nav-link active">Home</a></li>
+      <li><a href="#shop" class="nav-link">Shop</a></li>
+      <li><a href="#collections" class="nav-link">Collections</a></li>
+      <li><a href="#deals" class="nav-link">Deals</a></li>
+      <li><a href="#about" class="nav-link">About</a></li>
+      <li><a href="#contact" class="nav-link">Contact</a></li>
+    </ul>
+
+    <div class="nav-actions">
+      <button class="icon-btn" id="searchToggle" aria-label="Search"><i class="fa-solid fa-magnifying-glass"></i></button>
+      <a href="pages/wishlist.html" class="icon-btn" aria-label="Wishlist"><i class="fa-regular fa-heart"></i><span class="badge" id="wishBadge">2</span></a>
+      <a href="pages/cart.html" class="icon-btn" aria-label="Cart"><i class="fa-solid fa-bag-shopping"></i><span class="badge cart-badge" id="cartBadge">3</span></a>
+      <a href="pages/orders.html" class="icon-btn" aria-label="Orders" title="My Orders"><i class="fa-solid fa-clock-rotate-left"></i></a>
+      <div class="account-nav-wrapper">
+        <button class="icon-btn" id="accountToggle" aria-label="Account" aria-haspopup="true" aria-expanded="false" title="Account"><i class="fa-regular fa-user"></i></button>
+        <div class="account-panel" id="accountPanel" role="menu" aria-label="Account Menu"></div>
+      </div>
+      <button class="icon-btn theme-toggle" id="themeToggle" aria-label="Toggle dark mode"><i class="fa-solid fa-moon"></i></button>
+      <button class="hamburger" id="hamburger" aria-label="Menu"><span></span><span></span><span></span></button>
+    </div>
+  </div>
+
+  <div class="search-panel" id="searchPanel">
+    <div class="search-panel-inner">
+      <i class="fa-solid fa-magnifying-glass"></i>
+      <input type="text" placeholder="Search for products, brands, categories…" id="searchInput">
+      <button id="searchClose" aria-label="Close search"><i class="fa-solid fa-xmark"></i></button>
+    </div>
+  </div>
+</nav>
+
+<!-- ============ CATEGORY BAR ============ -->
+<div class="category-bar" id="categoryBar">
+  <div class="category-container">
+    <div class="all-categories-wrapper">
+      <button class="all-categories-btn" id="allCategoriesBtn" aria-haspopup="true" aria-expanded="false" aria-controls="allCategoriesPanel">
+        <i class="fa-solid fa-bars"></i>
+        <span>All</span>
+        <i class="fa-solid fa-chevron-down caret-icon"></i>
+      </button>
+
+      <div class="all-categories-panel" id="allCategoriesPanel" role="menu" aria-label="All Categories">
+        <div class="panel-header">
+          <span>Shop Categories</span>
+        </div>
+        <ul class="category-panel-list">
+          <li><a href="pages/electronics.html" role="menuitem" class="category-panel-link"><i class="fa-solid fa-laptop"></i> Electronics</a></li>
+          <li><a href="pages/fashion.html" role="menuitem" class="category-panel-link"><i class="fa-solid fa-shirt"></i> Fashion</a></li>
+          <li><a href="pages/home-kitchen.html" role="menuitem" class="category-panel-link"><i class="fa-solid fa-house"></i> Home & Kitchen</a></li>
+          <li><a href="pages/beauty.html" role="menuitem" class="category-panel-link"><i class="fa-solid fa-sparkles"></i> Beauty & Personal Care</a></li>
+          <li><a href="pages/sports.html" role="menuitem" class="category-panel-link"><i class="fa-solid fa-futbol"></i> Sports & Outdoors</a></li>
+          <li><a href="pages/deals.html" role="menuitem" class="category-panel-link"><i class="fa-solid fa-tag"></i> Deals & Sales</a></li>
+          <li><a href="pages/new-arrivals.html" role="menuitem" class="category-panel-link"><i class="fa-solid fa-wand-magic-sparkles"></i> New Arrivals</a></li>
+          <li><a href="pages/electronics.html" role="menuitem" class="category-panel-link"><i class="fa-solid fa-gamepad"></i> Toys & Games</a></li>
+          <li><a href="pages/fashion.html" role="menuitem" class="category-panel-link"><i class="fa-solid fa-book"></i> Books & Media</a></li>
+          <li><a href="pages/electronics.html" role="menuitem" class="category-panel-link"><i class="fa-solid fa-car"></i> Automotive</a></li>
+          <li><a href="pages/home-kitchen.html" role="menuitem" class="category-panel-link"><i class="fa-solid fa-basket-shopping"></i> Grocery</a></li>
+          <li><a href="pages/beauty.html" role="menuitem" class="category-panel-link"><i class="fa-solid fa-heart-pulse"></i> Health & Wellness</a></li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="category-quick-links">
+      <a href="pages/electronics.html" class="cat-quick-link">Electronics</a>
+      <a href="pages/fashion.html" class="cat-quick-link">Fashion</a>
+      <a href="pages/home-kitchen.html" class="cat-quick-link">Home & Kitchen</a>
+      <a href="pages/deals.html" class="cat-quick-link">Deals</a>
+      <a href="pages/new-arrivals.html" class="cat-quick-link">New Arrivals</a>
+      <a href="pages/beauty.html" class="cat-quick-link">Beauty</a>
+      <a href="pages/sports.html" class="cat-quick-link">Sports</a>
+    </div>
+  </div>
+</div>
+
+<div class="mobile-menu" id="mobileMenu">
+  <ul>
+    <li><a href="#home">Home</a></li>
+    <li><a href="#shop">Shop</a></li>
+    <li><a href="#collections">Collections</a></li>
+    <li><a href="#deals">Deals</a></li>
+    <li><a href="#about">About</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+</div>
+
+<main>
+
+<!-- ============ HERO ============ -->
+<section class="hero" id="home">
+  <div class="hero-blobs">
+    <div class="blob blob-1"></div>
+    <div class="blob blob-2"></div>
+    <div class="blob blob-3"></div>
+  </div>
+
+  <div class="hero-container">
+    <div class="hero-copy">
+      <span class="eyebrow reveal">The 2026 collection is live</span>
+      <h1 class="hero-title">
+        <span class="reveal-line"><span class="reveal-word">Redefining</span></span>
+        <span class="reveal-line"><span class="reveal-word">Online</span> <span class="reveal-word grad-text">Shopping.</span></span>
+      </h1>
+      <p class="hero-sub reveal">Curated goods, honest pricing, and a store that feels like it was built around you — not the other way around.</p>
+      <div class="hero-actions reveal">
+        <a href="#shop" class="btn btn-primary ripple">Shop Now <i class="fa-solid fa-arrow-right"></i></a>
+        <a href="#collections" class="btn btn-ghost ripple">Explore Collections</a>
+      </div>
+      <div class="hero-stats reveal">
+        <div class="stat"><span class="stat-num" data-count="120">0</span><span class="stat-label">Brands</span></div>
+        <div class="stat"><span class="stat-num" data-count="48">0</span><span class="stat-label">Countries shipped</span></div>
+        <div class="stat"><span class="stat-num" data-count="99">0</span><span class="stat-label">% happy returns</span></div>
+      </div>
+    </div>
+
+    <div class="hero-visual">
+      <div class="floating-card card-main" data-depth="20">
+        <img src="https://images.unsplash.com/photo-1542291026-7eec264c27ff?w=500&auto=format&fit=crop&q=60" alt="Featured sneaker" loading="lazy">
+      </div>
+      <div class="floating-card card-price" data-depth="40">
+        <i class="fa-solid fa-tag"></i>
+        <div><strong>$128.00</strong><span>Aero Runner</span></div>
+      </div>
+      <div class="floating-card card-rating" data-depth="55">
+        <div class="stars">★★★★★</div>
+        <span>4.9 · 2.1k reviews</span>
+      </div>
+      <div class="floating-card card-shipping" data-depth="30">
+        <i class="fa-solid fa-truck-fast"></i>
+        <span>Free shipping today</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="scroll-cue"><span></span>Scroll</div>
+</section>
+
+<!-- ============ FEATURED CATEGORIES ============ -->
+<section class="categories" id="collections">
+  <div class="section-head">
+    <span class="eyebrow">Browse</span>
+    <h2>Shop by category</h2>
+  </div>
+
+  <div class="category-grid">
+    <a href="pages/electronics.html" class="cat-card fade-in">
+      <i class="fa-solid fa-mobile-screen-button"></i>
+      <h3>Electronics</h3>
+      <span>412 items</span>
+    </a>
+    <a href="pages/fashion.html" class="cat-card fade-in">
+      <i class="fa-solid fa-shirt"></i>
+      <h3>Fashion</h3>
+      <span>968 items</span>
+    </a>
+    <a href="pages/electronics.html" class="cat-card fade-in">
+      <i class="fa-solid fa-gamepad"></i>
+      <h3>Gaming</h3>
+      <span>203 items</span>
+    </a>
+    <a href="pages/home-kitchen.html" class="cat-card fade-in">
+      <i class="fa-solid fa-couch"></i>
+      <h3>Home</h3>
+      <span>576 items</span>
+    </a>
+    <a href="pages/beauty.html" class="cat-card fade-in">
+      <i class="fa-solid fa-spray-can-sparkles"></i>
+      <h3>Beauty</h3>
+      <span>340 items</span>
+    </a>
+    <a href="pages/fashion.html" class="cat-card fade-in">
+      <i class="fa-solid fa-glasses"></i>
+      <h3>Accessories</h3>
+      <span>289 items</span>
+    </a>
+  </div>
+</section>
+
+<!-- ============ TODAY'S DEALS ============ -->
+<section class="todays-deals-section" id="deals">
+  <div class="section-head-bar">
+    <div class="section-head-left">
+      <span class="eyebrow">Limited Time</span>
+      <div class="title-with-timer">
+        <h2>Today's Deals</h2>
+        <div class="deal-countdown" id="dealCountdown" aria-label="Deal countdown timer">
+          <i class="fa-solid fa-bolt deal-icon"></i>
+          <span class="cd-digits"><span id="dealCdHours">05</span>:<span id="dealCdMinutes">42</span>:<span id="dealCdSeconds">18</span></span>
+        </div>
+      </div>
+    </div>
+    <a href="pages/deals.html" class="view-all-link">View All Deals <i class="fa-solid fa-arrow-right"></i></a>
+  </div>
+
+  <div class="horizontal-scroll-container">
+    <button class="scroll-arrow prev" id="dealsScrollPrev" aria-label="Scroll left"><i class="fa-solid fa-chevron-left"></i></button>
+    <div class="horizontal-scroll-row" id="todaysDealsRow">
+      <!-- Cards injected dynamically by script.js -->
+    </div>
+    <button class="scroll-arrow next" id="dealsScrollNext" aria-label="Scroll right"><i class="fa-solid fa-chevron-right"></i></button>
+  </div>
+</section>
+
+<!-- ============ OFFER ZONE ============ -->
+<section class="offer-zone-section" id="shop">
+  <div class="section-head">
+    <span class="eyebrow">Offers</span>
+    <h2>Offer Zone</h2>
+  </div>
+
+  <div class="offer-banner-grid">
+    <a href="pages/electronics.html" class="offer-banner-tile">
+      <img src="https://images.unsplash.com/photo-1505740420928-5e560c06d30e?w=800&auto=format&fit=crop&q=80" alt="Electronics Sale" loading="lazy" class="banner-bg">
+      <div class="banner-overlay"></div>
+      <div class="banner-content">
+        <span class="banner-badge">Electronics</span>
+        <h3 class="banner-title">Electronics Sale</h3>
+        <p class="banner-discount">Up to 40% OFF</p>
+        <span class="banner-btn">Shop Now <i class="fa-solid fa-arrow-right"></i></span>
+      </div>
+    </a>
+
+    <a href="pages/fashion.html" class="offer-banner-tile">
+      <img src="https://images.unsplash.com/photo-1490481651871-ab68de25d43d?w=800&auto=format&fit=crop&q=80" alt="Fashion Week" loading="lazy" class="banner-bg">
+      <div class="banner-overlay"></div>
+      <div class="banner-content">
+        <span class="banner-badge">Fashion</span>
+        <h3 class="banner-title">Fashion Week</h3>
+        <p class="banner-discount">Buy 1 Get 1 Free</p>
+        <span class="banner-btn">Shop Now <i class="fa-solid fa-arrow-right"></i></span>
+      </div>
+    </a>
+
+    <a href="pages/home-kitchen.html" class="offer-banner-tile">
+      <img src="https://images.unsplash.com/photo-1616486338812-3dadae4b4ace?w=800&auto=format&fit=crop&q=80" alt="Home Essentials" loading="lazy" class="banner-bg">
+      <div class="banner-overlay"></div>
+      <div class="banner-content">
+        <span class="banner-badge">Home & Kitchen</span>
+        <h3 class="banner-title">Home Essentials</h3>
+        <p class="banner-discount">Flat 25% OFF</p>
+        <span class="banner-btn">Shop Now <i class="fa-solid fa-arrow-right"></i></span>
+      </div>
+    </a>
+
+    <a href="pages/beauty.html" class="offer-banner-tile">
+      <img src="https://images.unsplash.com/photo-1596462502278-27bfdc403348?w=800&auto=format&fit=crop&q=80" alt="New Beauty Drop" loading="lazy" class="banner-bg">
+      <div class="banner-overlay"></div>
+      <div class="banner-content">
+        <span class="banner-badge">Beauty</span>
+        <h3 class="banner-title">New Beauty Drop</h3>
+        <p class="banner-discount">Up to 30% OFF</p>
+        <span class="banner-btn">Shop Now <i class="fa-solid fa-arrow-right"></i></span>
+      </div>
+    </a>
+  </div>
+</section>
+
+<!-- ============ NEW ARRIVALS ============ -->
+<section class="new-arrivals-section" id="new-arrivals">
+  <div class="section-head-bar">
+    <div class="section-head-left">
+      <span class="eyebrow">Just Landed</span>
+      <h2>New Arrivals</h2>
+    </div>
+    <a href="pages/new-arrivals.html" class="view-all-link">View All <i class="fa-solid fa-arrow-right"></i></a>
+  </div>
+
+  <div class="horizontal-scroll-container">
+    <button class="scroll-arrow prev" id="newScrollPrev" aria-label="Scroll left"><i class="fa-solid fa-chevron-left"></i></button>
+    <div class="horizontal-scroll-row" id="newArrivalsRow">
+      <!-- Cards injected dynamically by script.js -->
+    </div>
+    <button class="scroll-arrow next" id="newScrollNext" aria-label="Scroll right"><i class="fa-solid fa-chevron-right"></i></button>
+  </div>
+</section>
+
+<!-- ============ TRENDING NOW (COMPACT) ============ -->
+<section class="trending-now-section" id="trending-now">
+  <div class="section-head">
+    <span class="eyebrow">Popular</span>
+    <h2>Trending Now</h2>
+  </div>
+
+  <div class="trending-compact-grid" id="trendingCompactRow">
+    <!-- 4 top-rated product cards injected dynamically by script.js -->
+  </div>
+</section>
+
+<!-- ============ TESTIMONIALS ============ -->
+<section class="testimonials" id="about">
+  <div class="section-head">
+    <span class="eyebrow">Loved by shoppers</span>
+    <h2>What people are saying</h2>
+  </div>
+
+  <div class="testimonial-slider" id="testiSlider">
+    <div class="testimonial-track" id="testiTrack">
+      <div class="testi-card">
+        <div class="stars">★★★★★</div>
+        <p>"Checkout took less than a minute and the packaging alone felt premium. This is how online shopping should feel."</p>
+        <div class="testi-user"><img src="https://i.pravatar.cc/64?img=32" alt="Maya R." loading="lazy"><div><strong>Maya R.</strong><span>Verified buyer</span></div></div>
+      </div>
+      <div class="testi-card">
+        <div class="stars">★★★★★</div>
+        <p>"Shipping was faster than promised and their support team actually replied in minutes, not days."</p>
+        <div class="testi-user"><img src="https://i.pravatar.cc/64?img=12" alt="Daniel K." loading="lazy"><div><strong>Daniel K.</strong><span>Verified buyer</span></div></div>
+      </div>
+      <div class="testi-card">
+        <div class="stars">★★★★★</div>
+        <p>"The site itself feels like a product — smooth, fast, and genuinely enjoyable to browse."</p>
+        <div class="testi-user"><img src="https://i.pravatar.cc/64?img=47" alt="Priya S." loading="lazy"><div><strong>Priya S.</strong><span>Verified buyer</span></div></div>
+      </div>
+    </div>
+    <div class="testi-dots" id="testiDots"></div>
+  </div>
+</section>
+
+<!-- ============ NEWSLETTER ============ -->
+<section class="newsletter">
+  <div class="newsletter-card">
+    <div class="newsletter-copy">
+      <h2>Get first access to drops</h2>
+      <p>One email a week. New arrivals, real discounts, zero spam.</p>
+    </div>
+    <form class="newsletter-form" id="newsletterForm">
+      <input type="email" placeholder="you@email.com" id="newsletterEmail" required>
+      <button type="submit" class="btn btn-primary ripple">
+        <span class="btn-label">Subscribe</span>
+        <i class="fa-solid fa-paper-plane"></i>
+      </button>
+    </form>
+    <p class="form-msg" id="formMsg"></p>
+  </div>
+</section>
+
+</main>
+
+<!-- ============ FOOTER ============ -->
+<footer class="footer" id="contact">
+  <div class="footer-grid">
+    <div class="footer-brand">
+      <span class="logo-text">Nova<span class="logo-accent">Cart</span></span>
+      <p>A premium shopping experience, built for people who notice the details.</p>
+      <div class="social-icons">
+        <a href="#" aria-label="Instagram"><i class="fa-brands fa-instagram"></i></a>
+        <a href="#" aria-label="X"><i class="fa-brands fa-x-twitter"></i></a>
+        <a href="#" aria-label="Facebook"><i class="fa-brands fa-facebook-f"></i></a>
+        <a href="#" aria-label="Pinterest"><i class="fa-brands fa-pinterest-p"></i></a>
+      </div>
+    </div>
+
+    <div class="footer-col">
+      <h4>Shop</h4>
+      <a href="#shop">New Arrivals</a>
+      <a href="#shop">Best Sellers</a>
+      <a href="#deals">Deals</a>
+      <a href="#collections">Collections</a>
+    </div>
+
+    <div class="footer-col">
+      <h4>Company</h4>
+      <a href="#about">About Us</a>
+      <a href="#">Careers</a>
+      <a href="#">Press</a>
+      <a href="#">Sustainability</a>
+    </div>
+
+    <div class="footer-col">
+      <h4>Contact</h4>
+      <a href="mailto:hello@novacart.com"><i class="fa-solid fa-envelope"></i> hello@novacart.com</a>
+      <a href="tel:+10000000000"><i class="fa-solid fa-phone"></i> +1 (000) 000‑0000</a>
+      <a href="#"><i class="fa-solid fa-location-dot"></i> Remote‑first, worldwide</a>
+    </div>
+  </div>
+
+  <div class="footer-bottom">
+    <span>© 2026 NovaCart. All rights reserved.</span>
+    <div class="footer-links"><a href="#">Privacy</a><a href="#">Terms</a><a href="#">Cookies</a></div>
+  </div>
+</footer>
+
+<button class="back-to-top" id="backToTop" aria-label="Back to top"><i class="fa-solid fa-arrow-up"></i></button>
+
+<script src="js/script.js"></script>
+</body>
+</html>

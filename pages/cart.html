@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Your Shopping Cart — NovaCart</title>
+<meta name="description" content="Review your shopping cart, manage quantities, apply discount codes, and proceed to checkout.">
+
+<!-- Fonts & Icons -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Sora:wght@300;400;500;600;700;800&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+<link rel="stylesheet" href="../css/style.css">
+</head>
+<body>
+
+<!-- ============ NAVIGATION ============ -->
+<nav class="navbar" id="navbar">
+  <div class="nav-container">
+    <a href="../index.html" class="logo">
+      <span class="logo-mark">
+        <svg width="30" height="30" viewBox="0 0 30 30"><path d="M15 2 L27 9 V21 L15 28 L3 21 V9 Z" fill="none" stroke="url(#navGrad)" stroke-width="2.2"/><circle cx="15" cy="15" r="4" fill="url(#navGrad)"/><defs><linearGradient id="navGrad" x1="0" y1="0" x2="1" y2="1"><stop offset="0%" stop-color="#6C63FF"/><stop offset="100%" stop-color="#00C9A7"/></linearGradient></defs></svg>
+      </span>
+      <span class="logo-text">Nova<span class="logo-accent">Cart</span></span>
+    </a>
+
+    <ul class="nav-links" id="navLinks">
+      <li><a href="../index.html" class="nav-link">Home</a></li>
+      <li><a href="electronics.html" class="nav-link">Shop</a></li>
+      <li><a href="../index.html#collections" class="nav-link">Collections</a></li>
+      <li><a href="deals.html" class="nav-link">Deals</a></li>
+      <li><a href="../index.html#about" class="nav-link">About</a></li>
+      <li><a href="../index.html#contact" class="nav-link">Contact</a></li>
+    </ul>
+
+    <div class="nav-actions">
+      <button class="icon-btn" id="searchToggle" aria-label="Search"><i class="fa-solid fa-magnifying-glass"></i></button>
+      <a href="wishlist.html" class="icon-btn" aria-label="Wishlist"><i class="fa-regular fa-heart"></i><span class="badge" id="wishBadge">2</span></a>
+      <a href="cart.html" class="icon-btn" aria-label="Cart"><i class="fa-solid fa-bag-shopping"></i><span class="badge cart-badge" id="cartBadge">3</span></a>
+      <a href="orders.html" class="icon-btn" aria-label="Orders" title="My Orders"><i class="fa-solid fa-clock-rotate-left"></i></a>
+      <div class="account-nav-wrapper">
+        <button class="icon-btn" id="accountToggle" aria-label="Account" aria-haspopup="true" aria-expanded="false" title="Account"><i class="fa-regular fa-user"></i></button>
+        <div class="account-panel" id="accountPanel" role="menu" aria-label="Account Menu"></div>
+      </div>
+      <button class="icon-btn theme-toggle" id="themeToggle" aria-label="Toggle dark mode"><i class="fa-solid fa-moon"></i></button>
+      <button class="hamburger" id="hamburger" aria-label="Menu"><span></span><span></span><span></span></button>
+    </div>
+  </div>
+
+  <div class="search-panel" id="searchPanel">
+    <div class="search-panel-inner">
+      <i class="fa-solid fa-magnifying-glass"></i>
+      <input type="text" placeholder="Search for items..." id="searchInput">
+      <button id="searchClose" aria-label="Close search"><i class="fa-solid fa-xmark"></i></button>
+    </div>
+  </div>
+</nav>
+
+<!-- ============ CATEGORY BAR ============ -->
+<div class="category-bar" id="categoryBar">
+  <div class="category-container">
+    <div class="all-categories-wrapper">
+      <button class="all-categories-btn" id="allCategoriesBtn" aria-haspopup="true" aria-expanded="false" aria-controls="allCategoriesPanel">
+        <i class="fa-solid fa-bars"></i>
+        <span>All</span>
+        <i class="fa-solid fa-chevron-down caret-icon"></i>
+      </button>
+
+      <div class="all-categories-panel" id="allCategoriesPanel" role="menu" aria-label="All Categories">
+        <div class="panel-header"><span>Shop Categories</span></div>
+        <ul class="category-panel-list">
+          <li><a href="electronics.html" role="menuitem" class="category-panel-link"><i class="fa-solid fa-laptop"></i> Electronics</a></li>
+          <li><a href="fashion.html" role="menuitem" class="category-panel-link"><i class="fa-solid fa-shirt"></i> Fashion</a></li>
+          <li><a href="home-kitchen.html" role="menuitem" class="category-panel-link"><i class="fa-solid fa-house"></i> Home & Kitchen</a></li>
+          <li><a href="beauty.html" role="menuitem" class="category-panel-link"><i class="fa-solid fa-sparkles"></i> Beauty & Personal Care</a></li>
+          <li><a href="sports.html" role="menuitem" class="category-panel-link"><i class="fa-solid fa-futbol"></i> Sports & Outdoors</a></li>
+          <li><a href="deals.html" role="menuitem" class="category-panel-link"><i class="fa-solid fa-tag"></i> Deals & Sales</a></li>
+          <li><a href="new-arrivals.html" role="menuitem" class="category-panel-link"><i class="fa-solid fa-wand-magic-sparkles"></i> New Arrivals</a></li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="category-quick-links">
+      <a href="electronics.html" class="cat-quick-link">Electronics</a>
+      <a href="fashion.html" class="cat-quick-link">Fashion</a>
+      <a href="home-kitchen.html" class="cat-quick-link">Home & Kitchen</a>
+      <a href="deals.html" class="cat-quick-link">Deals</a>
+      <a href="new-arrivals.html" class="cat-quick-link">New Arrivals</a>
+      <a href="beauty.html" class="cat-quick-link">Beauty</a>
+      <a href="sports.html" class="cat-quick-link">Sports</a>
+    </div>
+  </div>
+</div>
+
+<div class="mobile-menu" id="mobileMenu">
+  <ul>
+    <li><a href="../index.html">Home</a></li>
+    <li><a href="electronics.html">Shop</a></li>
+    <li><a href="cart.html">Cart</a></li>
+    <li><a href="wishlist.html">Wishlist</a></li>
+    <li><a href="orders.html">Orders</a></li>
+  </ul>
+</div>
+
+<main>
+  <section class="cart-section">
+    <div class="section-head" style="margin-bottom: 1.5rem; text-align: left; max-width: 100%;">
+      <span class="eyebrow">Review Items</span>
+      <h2>Shopping Cart</h2>
+    </div>
+
+    <div class="cart-layout">
+      <!-- CART ITEMS LIST -->
+      <div class="cart-items-list" id="cartItemsList">
+        <div class="cart-item-card" data-price="189">
+          <img src="https://images.unsplash.com/photo-1505740420928-5e560c06d30e?w=500&auto=format&fit=crop&q=60" alt="Studio Wireless Headphones" class="cart-item-img">
+          <div class="cart-item-info">
+            <span class="cart-item-cat">Audio</span>
+            <h4 class="cart-item-title">Studio Wireless Headphones</h4>
+            <span class="cart-item-price">$189.00</span>
+          </div>
+          <div class="qty-stepper">
+            <button class="qty-btn minus" aria-label="Decrease quantity"><i class="fa-solid fa-minus"></i></button>
+            <span class="qty-val">1</span>
+            <button class="qty-btn plus" aria-label="Increase quantity"><i class="fa-solid fa-plus"></i></button>
+          </div>
+          <button class="cart-item-remove" aria-label="Remove item"><i class="fa-solid fa-trash-can"></i></button>
+        </div>
+
+        <div class="cart-item-card" data-price="128">
+          <img src="https://images.unsplash.com/photo-1542291026-7eec264c27ff?w=500&auto=format&fit=crop&q=60" alt="Aero Runner Sneaker" class="cart-item-img">
+          <div class="cart-item-info">
+            <span class="cart-item-cat">Footwear</span>
+            <h4 class="cart-item-title">Aero Runner Sneaker</h4>
+            <span class="cart-item-price">$128.00</span>
+          </div>
+          <div class="qty-stepper">
+            <button class="qty-btn minus" aria-label="Decrease quantity"><i class="fa-solid fa-minus"></i></button>
+            <span class="qty-val">1</span>
+            <button class="qty-btn plus" aria-label="Increase quantity"><i class="fa-solid fa-plus"></i></button>
+          </div>
+          <button class="cart-item-remove" aria-label="Remove item"><i class="fa-solid fa-trash-can"></i></button>
+        </div>
+
+        <div class="cart-item-card" data-price="96">
+          <img src="https://images.unsplash.com/photo-1524805444758-089113d48a6d?w=500&auto=format&fit=crop&q=60" alt="Minimalist Chrono Watch" class="cart-item-img">
+          <div class="cart-item-info">
+            <span class="cart-item-cat">Accessories</span>
+            <h4 class="cart-item-title">Minimalist Chrono Watch</h4>
+            <span class="cart-item-price">$96.00</span>
+          </div>
+          <div class="qty-stepper">
+            <button class="qty-btn minus" aria-label="Decrease quantity"><i class="fa-solid fa-minus"></i></button>
+            <span class="qty-val">1</span>
+            <button class="qty-btn plus" aria-label="Increase quantity"><i class="fa-solid fa-plus"></i></button>
+          </div>
+          <button class="cart-item-remove" aria-label="Remove item"><i class="fa-solid fa-trash-can"></i></button>
+        </div>
+      </div>
+
+      <!-- ORDER SUMMARY SIDEBAR -->
+      <div class="order-summary-card">
+        <h3>Order Summary</h3>
+        <div class="summary-row">
+          <span>Subtotal</span>
+          <span id="cartSubtotal">$413.00</span>
+        </div>
+        <div class="summary-row">
+          <span>Estimated Shipping</span>
+          <span id="cartShipping">FREE</span>
+        </div>
+        <div class="summary-row">
+          <span>Estimated Tax (8%)</span>
+          <span id="cartTax">$33.04</span>
+        </div>
+
+        <div class="promo-box">
+          <input type="text" placeholder="Promo code (e.g. NOVA20)">
+          <button class="btn btn-ghost" style="padding:0.65rem 1rem;">Apply</button>
+        </div>
+
+        <div class="summary-row total">
+          <span>Total</span>
+          <span id="cartTotal">$446.04</span>
+        </div>
+
+        <a href="checkout.html" class="btn btn-primary ripple" id="checkoutBtn" style="width: 100%; justify-content: center; margin-top: 1.5rem;">
+          Proceed to Checkout <i class="fa-solid fa-arrow-right"></i>
+        </a>
+      </div>
+    </div>
+  </section>
+</main>
+
+<!-- ============ FOOTER ============ -->
+<footer class="footer">
+  <div class="footer-grid">
+    <div class="footer-brand">
+      <a href="../index.html" class="logo"><span class="logo-text">Nova<span class="logo-accent">Cart</span></span></a>
+      <p>Redefining online shopping with futuristic aesthetics and curated products.</p>
+    </div>
+    <div class="footer-col">
+      <h4>Shop</h4>
+      <a href="electronics.html">Electronics</a>
+      <a href="fashion.html">Fashion</a>
+      <a href="home-kitchen.html">Home & Kitchen</a>
+      <a href="deals.html">Flash Deals</a>
+    </div>
+    <div class="footer-col">
+      <h4>Account</h4>
+      <a href="cart.html">View Cart</a>
+      <a href="wishlist.html">Wishlist</a>
+      <a href="orders.html">My Orders</a>
+    </div>
+    <div class="footer-col">
+      <h4>Customer Support</h4>
+      <a href="../index.html#contact">Help Center</a>
+      <a href="../index.html#contact">Shipping & Returns</a>
+      <a href="../index.html#contact">Contact Us</a>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <p>&copy; 2026 NovaCart Inc. All rights reserved.</p>
+  </div>
+</footer>
+
+<button class="back-to-top" id="backToTop" aria-label="Back to top"><i class="fa-solid fa-arrow-up"></i></button>
+
+<script src="../js/script.js"></script>
+</body>
+</html>

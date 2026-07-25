@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Sign Up — NovaCart</title>
+<meta name="description" content="Create a NovaCart account to unlock exclusive member rewards, faster checkout, and personal wishlists.">
+
+<!-- Fonts & Icons -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Sora:wght@300;400;500;600;700;800&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+<link rel="stylesheet" href="../css/style.css">
+</head>
+<body class="auth-page-body">
+
+<div class="auth-top-nav">
+  <a href="../index.html" class="logo">
+    <span class="logo-mark">
+      <svg width="30" height="30" viewBox="0 0 30 30"><path d="M15 2 L27 9 V21 L15 28 L3 21 V9 Z" fill="none" stroke="url(#navGrad)" stroke-width="2.2"/><circle cx="15" cy="15" r="4" fill="url(#navGrad)"/><defs><linearGradient id="navGrad" x1="0" y1="0" x2="1" y2="1"><stop offset="0%" stop-color="#6C63FF"/><stop offset="100%" stop-color="#00C9A7"/></linearGradient></defs></svg>
+    </span>
+    <span class="logo-text">Nova<span class="logo-accent">Cart</span></span>
+  </a>
+
+  <button class="icon-btn theme-toggle" id="themeToggle" aria-label="Toggle dark mode"><i class="fa-solid fa-moon"></i></button>
+</div>
+
+<main>
+  <div class="auth-card">
+    <h2>Create Your Account</h2>
+    <p class="auth-subtext">Join NovaCart for personalized shopping drops and rapid checkout.</p>
+
+    <form id="signupForm">
+      <div class="form-group" style="margin-bottom: 1.2rem;">
+        <label for="signupName">Full Name</label>
+        <input type="text" id="signupName" class="form-input" placeholder="Alex Morgan" required>
+      </div>
+
+      <div class="form-group" style="margin-bottom: 1.2rem;">
+        <label for="signupEmail">Email Address</label>
+        <input type="email" id="signupEmail" class="form-input" placeholder="alex.morgan@example.com" required>
+      </div>
+
+      <div class="form-group password-group" style="margin-bottom: 1.2rem;">
+        <label for="signupPassword">Password</label>
+        <input type="password" id="signupPassword" class="form-input" placeholder="••••••••" required>
+        <button type="button" class="password-toggle-btn" id="toggleSignupPassBtn" aria-label="Toggle password visibility">
+          <i class="fa-regular fa-eye"></i>
+        </button>
+      </div>
+
+      <div class="form-group password-group" style="margin-bottom: 1.2rem;">
+        <label for="signupConfirmPassword">Confirm Password</label>
+        <input type="password" id="signupConfirmPassword" class="form-input" placeholder="••••••••" required>
+        <button type="button" class="password-toggle-btn" id="toggleSignupConfirmBtn" aria-label="Toggle confirm password visibility">
+          <i class="fa-regular fa-eye"></i>
+        </button>
+        <span class="form-error-msg" id="passErrorMsg">Passwords do not match. Please try again.</span>
+      </div>
+
+      <button type="submit" class="btn btn-primary ripple" id="signupSubmitBtn" style="width:100%; justify-content:center; padding:0.85rem; margin-top:0.5rem;">
+        Create Account <i class="fa-solid fa-arrow-right"></i>
+      </button>
+    </form>
+
+    <div class="divider-with-text">
+      <span>or continue with</span>
+    </div>
+
+    <div class="social-auth-grid">
+      <button type="button" class="social-btn">
+        <i class="fa-brands fa-google" style="color:#EA4335;"></i> Google
+      </button>
+      <button type="button" class="social-btn">
+        <i class="fa-brands fa-apple"></i> Apple
+      </button>
+    </div>
+
+    <div class="auth-footer-text">
+      Already have an account? <a href="signin.html">Sign In</a>
+    </div>
+  </div>
+</main>
+
+<script src="../js/script.js"></script>
+</body>
+</html>
