@@ -37,6 +37,11 @@
   --font-body: "Inter", sans-serif;
 
   --nav-h: 76px;
+
+  --banner-bg: #0F1420;
+  --banner-text: #FFFFFF;
+  --banner-subtext: #94A3B8;
+  --banner-border: rgba(255, 255, 255, 0.1);
 }
 
 [data-theme="dark"] {
@@ -49,6 +54,9 @@
   --shadow-sm: 0 4px 16px rgba(0, 0, 0, 0.3);
   --shadow-md: 0 12px 32px rgba(0, 0, 0, 0.4);
   --shadow-lg: 0 24px 60px rgba(0, 0, 0, 0.5);
+
+  --banner-bg: #090D16;
+  --banner-border: rgba(255, 255, 255, 0.12);
 }
 
 /* ---------- 2. Reset ---------- */
@@ -2364,4 +2372,196 @@ a:focus-visible, button:focus-visible, input:focus-visible {
 }
 .auth-footer-text a:hover {
   text-decoration: underline;
+}
+
+/* ============================================================
+   APPLE-STORE-STYLE AD / PROMO BANNER COMPONENT
+   ============================================================ */
+.ad-banner {
+  grid-column: 1 / -1;
+  width: 100%;
+  max-width: 1300px;
+  margin: 3.5rem auto;
+  background: var(--banner-bg);
+  border: 1px solid var(--banner-border);
+  border-radius: var(--radius-lg);
+  color: var(--banner-text);
+  position: relative;
+  overflow: hidden;
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.35);
+  transition: transform 0.4s var(--ease), box-shadow 0.4s var(--ease);
+}
+.ad-banner:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 28px 60px rgba(0, 0, 0, 0.45);
+}
+
+.ad-banner::before {
+  content: "";
+  position: absolute;
+  top: 50%; left: 50%;
+  transform: translate(-50%, -50%);
+  width: 320px; height: 320px;
+  background: radial-gradient(circle, var(--banner-accent-glow, rgba(108, 99, 255, 0.25)) 0%, transparent 70%);
+  filter: blur(40px);
+  pointer-events: none;
+  z-index: 1;
+}
+
+.ad-banner-inner {
+  position: relative;
+  z-index: 2;
+  display: grid;
+  grid-template-columns: 1fr 1.1fr 1fr;
+  align-items: center;
+  gap: 2rem;
+  padding: 2.5rem 3rem;
+}
+
+/* Left Section */
+.ad-banner-left {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+.ad-banner-eyebrow {
+  font-family: var(--font-head);
+  font-size: 0.78rem;
+  font-weight: 800;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--banner-accent-color, var(--primary));
+  margin-bottom: 0.4rem;
+}
+.ad-banner-subtext {
+  font-size: 1rem;
+  color: var(--banner-subtext);
+  margin-bottom: 0.8rem;
+  font-weight: 400;
+  line-height: 1.4;
+}
+.ad-banner-price {
+  font-family: var(--font-head);
+  font-size: 1.05rem;
+  font-weight: 700;
+  color: #FFFFFF;
+  background: rgba(255, 255, 255, 0.08);
+  padding: 0.35rem 0.9rem;
+  border-radius: var(--radius-pill);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+}
+
+/* Center Cutout Image Section */
+.ad-banner-center {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 220px;
+  position: relative;
+}
+.ad-banner-img {
+  max-height: 210px;
+  width: auto;
+  max-width: 100%;
+  object-fit: contain;
+  border-radius: var(--radius-md);
+  filter: drop-shadow(0 16px 24px rgba(0, 0, 0, 0.5));
+  transition: transform 0.5s var(--ease);
+}
+.ad-banner:hover .ad-banner-img {
+  transform: scale(1.06) rotate(-1.5deg);
+}
+
+/* Right Section */
+.ad-banner-right {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  text-align: right;
+}
+.ad-banner-cat {
+  font-size: 0.76rem;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: var(--banner-subtext);
+  margin-bottom: 0.4rem;
+  font-weight: 600;
+}
+.ad-banner-headline {
+  font-family: var(--font-head);
+  font-size: 1.6rem;
+  font-weight: 700;
+  color: #FFFFFF;
+  line-height: 1.25;
+  margin-bottom: 1.2rem;
+}
+
+/* Button CTA */
+.btn-banner-cta {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  background: #FFFFFF;
+  color: #0F1420;
+  font-family: var(--font-head);
+  font-size: 0.9rem;
+  font-weight: 700;
+  padding: 0.75rem 1.6rem;
+  border-radius: var(--radius-pill);
+  text-decoration: none;
+  box-shadow: 0 8px 20px rgba(255, 255, 255, 0.15);
+  transition: transform 0.3s var(--ease), background 0.3s, color 0.3s, gap 0.3s var(--ease);
+}
+.btn-banner-cta:hover {
+  background: var(--banner-accent-color, var(--primary));
+  color: #FFFFFF;
+  transform: translateY(-2px);
+  gap: 0.75rem;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
+}
+
+/* Accent Modifiers */
+.ad-banner--purple {
+  --banner-accent-color: #6C63FF;
+  --banner-accent-glow: rgba(108, 99, 255, 0.3);
+}
+.ad-banner--teal {
+  --banner-accent-color: #00C9A7;
+  --banner-accent-glow: rgba(0, 201, 167, 0.3);
+}
+.ad-banner--orange {
+  --banner-accent-color: #FFB347;
+  --banner-accent-glow: rgba(255, 179, 71, 0.3);
+}
+
+/* Responsive Breakpoints */
+@media (max-width: 992px) {
+  .ad-banner-inner {
+    grid-template-columns: 1fr 1fr;
+    padding: 2rem 2rem;
+  }
+  .ad-banner-right {
+    grid-column: span 2;
+    align-items: center;
+    text-align: center;
+    margin-top: 0.5rem;
+  }
+}
+@media (max-width: 640px) {
+  .ad-banner-inner {
+    grid-template-columns: 1fr;
+    text-align: center;
+    gap: 1.5rem;
+    padding: 2rem 1.5rem;
+  }
+  .ad-banner-left {
+    align-items: center;
+  }
+  .ad-banner-right {
+    grid-column: span 1;
+    align-items: center;
+  }
+  .ad-banner-headline {
+    font-size: 1.35rem;
+  }
 }
