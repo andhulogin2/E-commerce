@@ -1238,6 +1238,51 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
 
+  /* ---------- Active Link Highlight Controller ---------- */
+  function updateActiveNavLinks() {
+    let pageKey = document.body.getAttribute('data-page');
+    if (!pageKey) {
+      const pathname = window.location.pathname.toLowerCase();
+      const filename = pathname.split('/').pop() || 'index.html';
+      pageKey = filename.replace('.html', '');
+      if (pageKey === '' || pageKey === 'index') pageKey = 'home';
+    }
+
+    document.querySelectorAll('.nav-link, .cat-quick-link').forEach(el => {
+      el.classList.remove('active');
+    });
+
+    const topNavLinks = document.querySelectorAll('.nav-link');
+    topNavLinks.forEach(link => {
+      const text = link.textContent.trim().toLowerCase();
+      const href = (link.getAttribute('href') || '').toLowerCase();
+
+      if (pageKey === 'home') {
+        if (text === 'home' || href.includes('#home') || href.includes('index.html')) {
+          link.classList.add('active');
+        }
+      } else if (['electronics', 'fashion', 'home-kitchen', 'beauty', 'sports', 'new-arrivals'].includes(pageKey)) {
+        if (text === 'shop' || text === 'collections' || href.includes('#shop')) {
+          link.classList.add('active');
+        }
+      } else if (pageKey === 'deals') {
+        if (text === 'deals' || href.includes('deals')) {
+          link.classList.add('active');
+        }
+      }
+    });
+
+    const catQuickLinks = document.querySelectorAll('.cat-quick-link');
+    catQuickLinks.forEach(link => {
+      const href = (link.getAttribute('href') || '').toLowerCase();
+      if (href && href.includes(pageKey + '.html')) {
+        link.classList.add('active');
+      }
+    });
+  }
+
+  updateActiveNavLinks();
+
   /* ---------- Dark mode toggle ---------- */
   const themeToggle = document.getElementById('themeToggle');
   const root = document.documentElement;
