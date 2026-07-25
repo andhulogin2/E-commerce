@@ -1262,6 +1262,22 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   /* ---------- Animated counters ---------- */
+  function animateCounter(el) {
+    if (!el || !el.dataset.count) return;
+    const target = parseFloat(el.dataset.count);
+    const isDecimal = el.dataset.count.includes('.');
+    const duration = 1400;
+    const start = performance.now();
+    function tick(now) {
+      const progress = Math.min((now - start) / duration, 1);
+      const eased = 1 - Math.pow(1 - progress, 3);
+      const current = eased * target;
+      el.textContent = isDecimal ? current.toFixed(1) : Math.round(current);
+      if (progress < 1) requestAnimationFrame(tick);
+    }
+    requestAnimationFrame(tick);
+  }
+
   const counters = document.querySelectorAll('.stat-num');
   if (counters.length) {
     const counterObserver = new IntersectionObserver((entries) => {
@@ -1273,19 +1289,6 @@ document.addEventListener('DOMContentLoaded', () => {
       });
     }, { threshold: 0.6 });
     counters.forEach(c => counterObserver.observe(c));
-
-    function animateCounter(el) {
-      const target = parseInt(el.dataset.count, 10);
-      const duration = 1400;
-      const start = performance.now();
-      function tick(now) {
-        const progress = Math.min((now - start) / duration, 1);
-        const eased = 1 - Math.pow(1 - progress, 3);
-        el.textContent = Math.round(eased * target);
-        if (progress < 1) requestAnimationFrame(tick);
-      }
-      requestAnimationFrame(tick);
-    }
   }
 
   /* ---------- Scroll fade-in ---------- */
@@ -1303,15 +1306,120 @@ document.addEventListener('DOMContentLoaded', () => {
     document.querySelectorAll('.product-card.fade-in').forEach(el => fadeObserver.observe(el));
   }
 
-  /* ---------- Hero parallax ---------- */
-  const heroVisual = document.querySelector('.hero-visual');
+  /* ---------- Hero Slider Controller ---------- */
+  const heroSlides = document.querySelectorAll('.hero-slide');
+  const heroDots = document.querySelectorAll('.hero-dot');
+  const heroPrevBtn = document.getElementById('heroPrevBtn');
+  const heroNextBtn = document.getElementById('heroNextBtn');
+  const heroBlobs = document.getElementById('heroBlobs') || document.querySelector('.hero-blobs');
+
+  if (heroSlides.length > 0) {
+    let currentHeroSlide = 0;
+    let heroAutoTimer = null;
+
+    const blobFilters = [
+      'none',
+      'hue-rotate(-35deg) saturate(1.2)',
+      'hue-rotate(20deg) saturate(1.1)',
+      'hue-rotate(90deg) saturate(1.2)',
+      'hue-rotate(-80deg) saturate(1.3)'
+    ];
+
+    function goToHeroSlide(index) {
+      if (heroSlides[currentHeroSlide]) {
+        heroSlides[currentHeroSlide].classList.remove('active');
+        heroSlides[currentHeroSlide].setAttribute('aria-hidden', 'true');
+      }
+      if (heroDots[currentHeroSlide]) {
+        heroDots[currentHeroSlide].classList.remove('active');
+        heroDots[currentHeroSlide].setAttribute('aria-selected', 'false');
+      }
+
+      currentHeroSlide = (index + heroSlides.length) % heroSlides.length;
+
+      if (heroSlides[currentHeroSlide]) {
+        heroSlides[currentHeroSlide].classList.add('active');
+        heroSlides[currentHeroSlide].setAttribute('aria-hidden', 'false');
+      }
+      if (heroDots[currentHeroSlide]) {
+        heroDots[currentHeroSlide].classList.add('active');
+        heroDots[currentHeroSlide].setAttribute('aria-selected', 'true');
+      }
+
+      if (heroBlobs && blobFilters[currentHeroSlide]) {
+        heroBlobs.style.filter = blobFilters[currentHeroSlide];
+        heroBlobs.style.transition = 'filter 0.8s ease';
+      }
+
+      // Re-trigger counter animations in active slide
+      const activeCounters = heroSlides[currentHeroSlide].querySelectorAll('.stat-num');
+      activeCounters.forEach(c => animateCounter(c));
+    }
+
+    function nextHeroSlide() { goToHeroSlide(currentHeroSlide + 1); }
+    function prevHeroSlide() { goToHeroSlide(currentHeroSlide - 1); }
+
+    function startHeroAutoPlay() {
+      stopHeroAutoPlay();
+      heroAutoTimer = setInterval(nextHeroSlide, 6000);
+    }
+    function stopHeroAutoPlay() {
+      if (heroAutoTimer) clearInterval(heroAutoTimer);
+    }
+
+    if (heroNextBtn) {
+      heroNextBtn.addEventListener('click', () => { nextHeroSlide(); startHeroAutoPlay(); });
+    }
+    if (heroPrevBtn) {
+      heroPrevBtn.addEventListener('click', () => { prevHeroSlide(); startHeroAutoPlay(); });
+    }
+
+    heroDots.forEach((dot, idx) => {
+      dot.addEventListener('click', () => { goToHeroSlide(idx); startHeroAutoPlay(); });
+    });
+
+    const heroSec = document.getElementById('home');
+    if (heroSec) {
+      heroSec.addEventListener('mouseenter', stopHeroAutoPlay);
+      heroSec.addEventListener('mouseleave', startHeroAutoPlay);
+      heroSec.addEventListener('focusin', stopHeroAutoPlay);
+      heroSec.addEventListener('focusout', startHeroAutoPlay);
+
+      let touchStartX = 0;
+      heroSec.addEventListener('touchstart', (e) => {
+        touchStartX = e.touches[0].clientX;
+        stopHeroAutoPlay();
+      }, { passive: true });
+
+      heroSec.addEventListener('touchend', (e) => {
+        const touchEndX = e.changedTouches[0].clientX;
+        const diff = touchStartX - touchEndX;
+        if (Math.abs(diff) > 40) {
+          if (diff > 0) nextHeroSlide();
+          else prevHeroSlide();
+        }
+        startHeroAutoPlay();
+      }, { passive: true });
+
+      heroSec.addEventListener('keydown', (e) => {
+        if (e.key === 'ArrowRight') { nextHeroSlide(); startHeroAutoPlay(); }
+        else if (e.key === 'ArrowLeft') { prevHeroSlide(); startHeroAutoPlay(); }
+      });
+    }
+
+    startHeroAutoPlay();
+  }
+
+  /* ---------- Hero Parallax ---------- */
   const heroSec = document.querySelector('.hero');
-  if (heroVisual && heroSec && window.matchMedia('(pointer: fine)').matches) {
+  if (heroSec && window.matchMedia('(pointer: fine)').matches) {
     heroSec.addEventListener('mousemove', (e) => {
+      const activeVisual = heroSec.querySelector('.hero-slide.active .hero-visual');
+      if (!activeVisual) return;
       const { innerWidth, innerHeight } = window;
       const x = (e.clientX / innerWidth - 0.5);
       const y = (e.clientY / innerHeight - 0.5);
-      heroVisual.querySelectorAll('.floating-card').forEach(card => {
+      activeVisual.querySelectorAll('.floating-card').forEach(card => {
         const depth = parseInt(card.dataset.depth || 20, 10);
         card.style.transform = `translate(${x * depth}px, ${y * depth}px)`;
       });

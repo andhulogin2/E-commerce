@@ -117,48 +117,232 @@
 <main>
 
 <!-- ============ HERO ============ -->
-<section class="hero" id="home">
-  <div class="hero-blobs">
+<section class="hero" id="home" role="region" aria-roledescription="carousel" aria-label="Featured Promotions Slider" tabindex="0">
+  <div class="hero-blobs" id="heroBlobs">
     <div class="blob blob-1"></div>
     <div class="blob blob-2"></div>
     <div class="blob blob-3"></div>
   </div>
 
-  <div class="hero-container">
-    <div class="hero-copy">
-      <span class="eyebrow reveal">The 2026 collection is live</span>
-      <h1 class="hero-title">
-        <span class="reveal-line"><span class="reveal-word">Redefining</span></span>
-        <span class="reveal-line"><span class="reveal-word">Online</span> <span class="reveal-word grad-text">Shopping.</span></span>
-      </h1>
-      <p class="hero-sub reveal">Curated goods, honest pricing, and a store that feels like it was built around you — not the other way around.</p>
-      <div class="hero-actions reveal">
-        <a href="#shop" class="btn btn-primary ripple">Shop Now <i class="fa-solid fa-arrow-right"></i></a>
-        <a href="#collections" class="btn btn-ghost ripple">Explore Collections</a>
+  <div class="hero-slider" id="heroSlider">
+    <div class="hero-slides-wrapper" id="heroSlidesWrapper">
+
+      <!-- Slide 1: Welcome -->
+      <div class="hero-slide active" role="group" aria-roledescription="slide" aria-label="1 of 5: Welcome" aria-hidden="false">
+        <div class="hero-container">
+          <div class="hero-copy">
+            <span class="eyebrow">The 2026 collection is live</span>
+            <h1 class="hero-title">
+              <span class="reveal-line"><span class="reveal-word">Redefining</span></span>
+              <span class="reveal-line"><span class="reveal-word">Online</span> <span class="reveal-word grad-text">Shopping.</span></span>
+            </h1>
+            <p class="hero-sub">Curated goods, honest pricing, and a store that feels like it was built around you — not the other way around.</p>
+            <div class="hero-actions">
+              <a href="#shop" class="btn btn-primary ripple">Shop Now <i class="fa-solid fa-arrow-right"></i></a>
+              <a href="#collections" class="btn btn-ghost ripple">Explore Collections</a>
+            </div>
+            <div class="hero-stats">
+              <div class="stat"><span class="stat-num" data-count="120">0</span><span class="stat-label">Brands</span></div>
+              <div class="stat"><span class="stat-num" data-count="48">0</span><span class="stat-label">Countries shipped</span></div>
+              <div class="stat"><span class="stat-num" data-count="99">0</span><span class="stat-label">% happy returns</span></div>
+            </div>
+          </div>
+
+          <div class="hero-visual">
+            <div class="floating-card card-main" data-depth="20">
+              <img src="https://images.unsplash.com/photo-1542291026-7eec264c27ff?w=600&auto=format&fit=crop&q=80" alt="Aero Runner Sneaker" loading="lazy">
+            </div>
+            <div class="floating-card card-price" data-depth="40">
+              <i class="fa-solid fa-tag"></i>
+              <div><strong>$128.00</strong><span>Aero Runner</span></div>
+            </div>
+            <div class="floating-card card-rating" data-depth="55">
+              <div class="stars">★★★★★</div>
+              <span>4.9 · 2.1k reviews</span>
+            </div>
+            <div class="floating-card card-shipping" data-depth="30">
+              <i class="fa-solid fa-truck-fast"></i>
+              <span>Free shipping today</span>
+            </div>
+          </div>
+        </div>
       </div>
-      <div class="hero-stats reveal">
-        <div class="stat"><span class="stat-num" data-count="120">0</span><span class="stat-label">Brands</span></div>
-        <div class="stat"><span class="stat-num" data-count="48">0</span><span class="stat-label">Countries shipped</span></div>
-        <div class="stat"><span class="stat-num" data-count="99">0</span><span class="stat-label">% happy returns</span></div>
+
+      <!-- Slide 2: Today's Deals -->
+      <div class="hero-slide" role="group" aria-roledescription="slide" aria-label="2 of 5: Today's Deals" aria-hidden="true">
+        <div class="hero-container">
+          <div class="hero-copy">
+            <span class="eyebrow">Limited Time</span>
+            <h1 class="hero-title">
+              <span class="reveal-line"><span class="reveal-word">Deals That</span></span>
+              <span class="reveal-line"><span class="reveal-word">Won't</span> <span class="reveal-word grad-text">Last.</span></span>
+            </h1>
+            <p class="hero-sub">Flash discounts on top-rated gear. Grab premium picks at up to 50% off before the clock runs out.</p>
+            <div class="hero-actions">
+              <a href="pages/deals.html" class="btn btn-primary ripple">Shop Today's Deals <i class="fa-solid fa-arrow-right"></i></a>
+              <a href="#deals" class="btn btn-ghost ripple">View Flash Sale</a>
+            </div>
+            <div class="hero-stats">
+              <div class="stat"><span class="stat-num" data-count="50">0</span><span class="stat-label">% Max Discount</span></div>
+              <div class="stat"><span class="stat-num" data-count="6">0</span><span class="stat-label">Hours Remaining</span></div>
+              <div class="stat"><span class="stat-num" data-count="200">0</span><span class="stat-label">+ Active Deals</span></div>
+            </div>
+          </div>
+
+          <div class="hero-visual">
+            <div class="floating-card card-main" data-depth="20">
+              <img src="https://images.unsplash.com/photo-1505740420928-5e560c06d30e?w=600&auto=format&fit=crop&q=80" alt="Studio Wireless Headphones" loading="lazy">
+            </div>
+            <div class="floating-card card-price" data-depth="40">
+              <i class="fa-solid fa-bolt"></i>
+              <div><strong>$189.00 <span class="price-old-inline">$229</span></strong><span>Studio Headphones</span></div>
+            </div>
+            <div class="floating-card card-rating" data-depth="55">
+              <span class="badge-deal-tag">32% OFF</span>
+            </div>
+            <div class="floating-card card-shipping" data-depth="30">
+              <i class="fa-solid fa-clock"></i>
+              <span>Ends tonight</span>
+            </div>
+          </div>
+        </div>
       </div>
+
+      <!-- Slide 3: Offer Zone -->
+      <div class="hero-slide" role="group" aria-roledescription="slide" aria-label="3 of 5: Offer Zone" aria-hidden="true">
+        <div class="hero-container">
+          <div class="hero-copy">
+            <span class="eyebrow">Offers</span>
+            <h1 class="hero-title">
+              <span class="reveal-line"><span class="reveal-word">Your Offer Zone</span></span>
+              <span class="reveal-line"><span class="reveal-word">Awaits</span> <span class="reveal-word grad-text">Savings.</span></span>
+            </h1>
+            <p class="hero-sub">Category-wide promotional offers across Electronics, Fashion, Home, and Beauty. Save more on every drop.</p>
+            <div class="hero-actions">
+              <a href="#shop" class="btn btn-primary ripple">Explore Offers <i class="fa-solid fa-arrow-right"></i></a>
+              <a href="pages/electronics.html" class="btn btn-ghost ripple">Category Sales</a>
+            </div>
+            <div class="hero-stats">
+              <div class="stat"><span class="stat-num" data-count="4">0</span><span class="stat-label">Major Sale Zones</span></div>
+              <div class="stat"><span class="stat-num" data-count="40">0</span><span class="stat-label">% Off Electronics</span></div>
+              <div class="stat"><span class="stat-num" data-count="100">0</span><span class="stat-label">% Quality Assured</span></div>
+            </div>
+          </div>
+
+          <div class="hero-visual">
+            <div class="floating-card card-main" data-depth="20">
+              <img src="https://images.unsplash.com/photo-1524805444758-089113d48a6d?w=600&auto=format&fit=crop&q=80" alt="Minimalist Chrono Watch" loading="lazy">
+            </div>
+            <div class="floating-card card-price" data-depth="40">
+              <i class="fa-solid fa-tags"></i>
+              <div><strong>Up to 40% OFF</strong><span>Category Offers</span></div>
+            </div>
+            <div class="floating-card card-rating" data-depth="55">
+              <span class="badge-offer-tag">Flat 25% OFF</span>
+            </div>
+            <div class="floating-card card-shipping" data-depth="30">
+              <i class="fa-solid fa-gift"></i>
+              <span>Exclusive Bundles</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Slide 4: New Arrivals -->
+      <div class="hero-slide" role="group" aria-roledescription="slide" aria-label="4 of 5: New Arrivals" aria-hidden="true">
+        <div class="hero-container">
+          <div class="hero-copy">
+            <span class="eyebrow">Just Landed</span>
+            <h1 class="hero-title">
+              <span class="reveal-line"><span class="reveal-word">Meet What's</span></span>
+              <span class="reveal-line"><span class="reveal-word">Fresh</span> <span class="reveal-word grad-text">&amp; New.</span></span>
+            </h1>
+            <p class="hero-sub">Fresh silhouettes, ultra-modern tech, and high-craft essentials newly added to our curated catalog.</p>
+            <div class="hero-actions">
+              <a href="pages/new-arrivals.html" class="btn btn-primary ripple">Shop New Arrivals <i class="fa-solid fa-arrow-right"></i></a>
+              <a href="#new-arrivals" class="btn btn-ghost ripple">Explore New Drops</a>
+            </div>
+            <div class="hero-stats">
+              <div class="stat"><span class="stat-num" data-count="35">0</span><span class="stat-label">New Weekly Drops</span></div>
+              <div class="stat"><span class="stat-num" data-count="100">0</span><span class="stat-label">% Sustainable</span></div>
+              <div class="stat"><span class="stat-num" data-count="5">0</span><span class="stat-label">★ Quality Rating</span></div>
+            </div>
+          </div>
+
+          <div class="hero-visual">
+            <div class="floating-card card-main" data-depth="20">
+              <img src="https://images.unsplash.com/photo-1591561954557-26941169b49e?w=600&auto=format&fit=crop&q=80" alt="Everyday Canvas Tote" loading="lazy">
+            </div>
+            <div class="floating-card card-price" data-depth="40">
+              <i class="fa-solid fa-sparkles"></i>
+              <div><strong>$42.00</strong><span>Canvas Tote</span></div>
+            </div>
+            <div class="floating-card card-rating" data-depth="55">
+              <div class="stars">★★★★★</div>
+              <span>4.6 · 88 reviews</span>
+            </div>
+            <div class="floating-card card-shipping" data-depth="30">
+              <i class="fa-solid fa-wand-magic-sparkles"></i>
+              <span>NEW DROP</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Slide 5: Trending Now -->
+      <div class="hero-slide" role="group" aria-roledescription="slide" aria-label="5 of 5: Trending Now" aria-hidden="true">
+        <div class="hero-container">
+          <div class="hero-copy">
+            <span class="eyebrow">Popular</span>
+            <h1 class="hero-title">
+              <span class="reveal-line"><span class="reveal-word">What Everyone's</span></span>
+              <span class="reveal-line"><span class="reveal-word">Loving</span> <span class="reveal-word grad-text">Now.</span></span>
+            </h1>
+            <p class="hero-sub">Discover our highest-rated products, viral community favorites, and top-rated customer picks.</p>
+            <div class="hero-actions">
+              <a href="#trending-now" class="btn btn-primary ripple">See What's Trending <i class="fa-solid fa-arrow-right"></i></a>
+              <a href="pages/electronics.html" class="btn btn-ghost ripple">Best Sellers</a>
+            </div>
+            <div class="hero-stats">
+              <div class="stat"><span class="stat-num" data-count="5">0</span><span class="stat-label">★ Avg Rating Score</span></div>
+              <div class="stat"><span class="stat-num" data-count="315">0</span><span class="stat-label">+ Top Reviews</span></div>
+              <div class="stat"><span class="stat-num" data-count="1">0</span><span class="stat-label">#1 Community Pick</span></div>
+            </div>
+          </div>
+
+          <div class="hero-visual">
+            <div class="floating-card card-main" data-depth="20">
+              <img src="https://images.unsplash.com/photo-1527443224154-c4a3942d3acf?w=600&auto=format&fit=crop&q=80" alt="UltraHD 4K Curved Monitor" loading="lazy">
+            </div>
+            <div class="floating-card card-price" data-depth="40">
+              <i class="fa-solid fa-crown"></i>
+              <div><strong>$349.00</strong><span>4K Curved Monitor</span></div>
+            </div>
+            <div class="floating-card card-rating" data-depth="55">
+              <div class="stars">★★★★★</div>
+              <span>4.9 · 315 reviews</span>
+            </div>
+            <div class="floating-card card-shipping" data-depth="30">
+              <i class="fa-solid fa-fire"></i>
+              <span>#1 Bestseller</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
     </div>
 
-    <div class="hero-visual">
-      <div class="floating-card card-main" data-depth="20">
-        <img src="https://images.unsplash.com/photo-1542291026-7eec264c27ff?w=500&auto=format&fit=crop&q=60" alt="Featured sneaker" loading="lazy">
-      </div>
-      <div class="floating-card card-price" data-depth="40">
-        <i class="fa-solid fa-tag"></i>
-        <div><strong>$128.00</strong><span>Aero Runner</span></div>
-      </div>
-      <div class="floating-card card-rating" data-depth="55">
-        <div class="stars">★★★★★</div>
-        <span>4.9 · 2.1k reviews</span>
-      </div>
-      <div class="floating-card card-shipping" data-depth="30">
-        <i class="fa-solid fa-truck-fast"></i>
-        <span>Free shipping today</span>
-      </div>
+    <!-- Arrow Controls -->
+    <button class="hero-arrow prev" id="heroPrevBtn" aria-label="Previous slide"><i class="fa-solid fa-chevron-left"></i></button>
+    <button class="hero-arrow next" id="heroNextBtn" aria-label="Next slide"><i class="fa-solid fa-chevron-right"></i></button>
+
+    <!-- Dot Indicators -->
+    <div class="hero-dots" id="heroDots" role="tablist" aria-label="Hero slider pagination">
+      <button class="hero-dot active" role="tab" aria-selected="true" aria-label="Slide 1: Welcome" data-slide="0"></button>
+      <button class="hero-dot" role="tab" aria-selected="false" aria-label="Slide 2: Today's Deals" data-slide="1"></button>
+      <button class="hero-dot" role="tab" aria-selected="false" aria-label="Slide 3: Offer Zone" data-slide="2"></button>
+      <button class="hero-dot" role="tab" aria-selected="false" aria-label="Slide 4: New Arrivals" data-slide="3"></button>
+      <button class="hero-dot" role="tab" aria-selected="false" aria-label="Slide 5: Trending Now" data-slide="4"></button>
     </div>
   </div>
 
