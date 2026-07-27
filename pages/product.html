@@ -15,93 +15,19 @@
 </head>
 <body data-page="product">
 
-<!-- ============ NAVIGATION ============ -->
-<nav class="navbar" id="navbar">
-  <div class="nav-container">
-    <a href="../index.html" class="logo">
-      <span class="logo-mark">
-        <svg width="30" height="30" viewBox="0 0 30 30"><path d="M15 2 L27 9 V21 L15 28 L3 21 V9 Z" fill="none" stroke="url(#navGrad)" stroke-width="2.2"/><circle cx="15" cy="15" r="4" fill="url(#navGrad)"/><defs><linearGradient id="navGrad" x1="0" y1="0" x2="1" y2="1"><stop offset="0%" stop-color="#6C63FF"/><stop offset="100%" stop-color="#00C9A7"/></linearGradient></defs></svg>
-      </span>
-      <span class="logo-text">Nova<span class="logo-accent">Cart</span></span>
-    </a>
+<!-- ============ HEADER & NAVIGATION ============ -->
+<div id="site-header"></div>
 
-    <ul class="nav-links" id="navLinks">
-      <li><a href="../index.html" class="nav-link">Home</a></li>
-      <li><a href="electronics.html" class="nav-link">Shop</a></li>
-      <li><a href="../index.html#collections" class="nav-link">Collections</a></li>
-      <li><a href="deals.html" class="nav-link">Deals</a></li>
-      <li><a href="../index.html#about" class="nav-link">About</a></li>
-      <li><a href="../index.html#contact" class="nav-link">Contact</a></li>
-    </ul>
-
-    <div class="nav-actions">
-      <button class="icon-btn" id="searchToggle" aria-label="Search"><i class="fa-solid fa-magnifying-glass"></i></button>
-      <a href="wishlist.html" class="icon-btn" aria-label="Wishlist"><i class="fa-regular fa-heart"></i><span class="badge" id="wishBadge">2</span></a>
-      <a href="cart.html" class="icon-btn" aria-label="Cart"><i class="fa-solid fa-bag-shopping"></i><span class="badge cart-badge" id="cartBadge">3</span></a>
-      <a href="orders.html" class="icon-btn" aria-label="Orders" title="My Orders"><i class="fa-solid fa-clock-rotate-left"></i></a>
-      <div class="account-nav-wrapper">
-        <button class="icon-btn" id="accountToggle" aria-label="Account" aria-haspopup="true" aria-expanded="false" title="Account"><i class="fa-regular fa-user"></i></button>
-        <div class="account-panel" id="accountPanel" role="menu" aria-label="Account Menu"></div>
-      </div>
-      <button class="icon-btn theme-toggle" id="themeToggle" aria-label="Toggle dark mode"><i class="fa-solid fa-moon"></i></button>
-      <button class="hamburger" id="hamburger" aria-label="Menu"><span></span><span></span><span></span></button>
-    </div>
-  </div>
-
-  <div class="search-panel" id="searchPanel">
-    <div class="search-panel-inner">
-      <i class="fa-solid fa-magnifying-glass"></i>
-      <input type="text" placeholder="Search products..." id="searchInput">
-      <button id="searchClose" aria-label="Close search"><i class="fa-solid fa-xmark"></i></button>
-    </div>
+<!-- ============ BREADCRUMBS ============ -->
+<nav class="breadcrumbs-wrapper" aria-label="Breadcrumb">
+  <div class="breadcrumbs" id="pdpBreadcrumbs">
+    <div class="breadcrumb-item"><a href="../index.html" class="breadcrumb-link"><i class="fa-solid fa-house"></i> Home</a></div>
+    <span class="breadcrumb-sep"><i class="fa-solid fa-chevron-right"></i></span>
+    <div class="breadcrumb-item"><a href="electronics.html" class="breadcrumb-link" id="pdpBreadcrumbCat">Shop</a></div>
+    <span class="breadcrumb-sep"><i class="fa-solid fa-chevron-right"></i></span>
+    <div class="breadcrumb-item"><span class="breadcrumb-current" id="pdpBreadcrumbTitle">Product</span></div>
   </div>
 </nav>
-
-<!-- ============ CATEGORY BAR ============ -->
-<div class="category-bar" id="categoryBar">
-  <div class="category-container">
-    <div class="all-categories-wrapper">
-      <button class="all-categories-btn" id="allCategoriesBtn" aria-haspopup="true" aria-expanded="false" aria-controls="allCategoriesPanel">
-        <i class="fa-solid fa-bars"></i>
-        <span>All</span>
-        <i class="fa-solid fa-chevron-down caret-icon"></i>
-      </button>
-
-      <div class="all-categories-panel" id="allCategoriesPanel" role="menu" aria-label="All Categories">
-        <div class="panel-header"><span>Shop Categories</span></div>
-        <ul class="category-panel-list">
-          <li><a href="electronics.html" role="menuitem" class="category-panel-link"><i class="fa-solid fa-laptop"></i> Electronics</a></li>
-          <li><a href="fashion.html" role="menuitem" class="category-panel-link"><i class="fa-solid fa-shirt"></i> Fashion</a></li>
-          <li><a href="home-kitchen.html" role="menuitem" class="category-panel-link"><i class="fa-solid fa-house"></i> Home & Kitchen</a></li>
-          <li><a href="beauty.html" role="menuitem" class="category-panel-link"><i class="fa-solid fa-sparkles"></i> Beauty & Personal Care</a></li>
-          <li><a href="sports.html" role="menuitem" class="category-panel-link"><i class="fa-solid fa-futbol"></i> Sports & Outdoors</a></li>
-          <li><a href="deals.html" role="menuitem" class="category-panel-link"><i class="fa-solid fa-tag"></i> Deals & Sales</a></li>
-          <li><a href="new-arrivals.html" role="menuitem" class="category-panel-link"><i class="fa-solid fa-wand-magic-sparkles"></i> New Arrivals</a></li>
-        </ul>
-      </div>
-    </div>
-
-    <div class="category-quick-links">
-      <a href="electronics.html" class="cat-quick-link">Electronics</a>
-      <a href="fashion.html" class="cat-quick-link">Fashion</a>
-      <a href="home-kitchen.html" class="cat-quick-link">Home & Kitchen</a>
-      <a href="deals.html" class="cat-quick-link">Deals</a>
-      <a href="new-arrivals.html" class="cat-quick-link">New Arrivals</a>
-      <a href="beauty.html" class="cat-quick-link">Beauty</a>
-      <a href="sports.html" class="cat-quick-link">Sports</a>
-    </div>
-  </div>
-</div>
-
-<div class="mobile-menu" id="mobileMenu">
-  <ul>
-    <li><a href="../index.html">Home</a></li>
-    <li><a href="electronics.html">Shop</a></li>
-    <li><a href="cart.html">Cart</a></li>
-    <li><a href="wishlist.html">Wishlist</a></li>
-    <li><a href="orders.html">Orders</a></li>
-  </ul>
-</div>
 
 <main>
   <!-- ============ NOT FOUND STATE ============ -->
@@ -150,6 +76,16 @@
             Product description loading...
           </p>
 
+          <!-- VARIANTS SELECTION -->
+          <div style="margin: 1.5rem 0; padding-top: 1.25rem; border-top: 1px solid var(--border-soft);">
+            <div style="font-size: 0.9rem; font-weight: 600; margin-bottom: 0.6rem;">Color / Finish</div>
+            <div style="display: flex; gap: 0.6rem; align-items: center;" id="pdpColorVariants">
+              <button class="variant-pill active" style="padding: 0.4rem 0.9rem; border-radius: var(--radius-pill); border: 1px solid var(--primary); background: rgba(108,99,255,0.1); font-weight: 600; font-size: 0.85rem;">Obsidian Black</button>
+              <button class="variant-pill" style="padding: 0.4rem 0.9rem; border-radius: var(--radius-pill); border: 1px solid var(--border-soft); background: var(--surface); font-size: 0.85rem;">Silver Snow</button>
+              <button class="variant-pill" style="padding: 0.4rem 0.9rem; border-radius: var(--radius-pill); border: 1px solid var(--border-soft); background: var(--surface); font-size: 0.85rem;">Midnight Blue</button>
+            </div>
+          </div>
+
           <!-- SPECS TABLE -->
           <div class="specs-container">
             <div class="specs-title">Technical Specifications</div>
@@ -174,6 +110,82 @@
               <i class="fa-regular fa-heart"></i>
             </button>
           </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ RATINGS & REVIEWS SECTION ============ -->
+    <section class="reviews-section">
+      <div class="section-head" style="text-align: left; margin-bottom: 2rem; display: flex; justify-content: space-between; align-items: flex-end;">
+        <div>
+          <span class="eyebrow">Verified Buyer Feedback</span>
+          <h2>Customer Ratings & Reviews</h2>
+        </div>
+        <button class="btn btn-primary btn-sm" id="writeReviewBtn"><i class="fa-solid fa-pen"></i> Write a Review</button>
+      </div>
+
+      <div class="reviews-header-grid">
+        <div class="overall-rating">
+          <div class="overall-score" id="pdpReviewScore">4.9</div>
+          <div class="stars-row">★★★★★</div>
+          <div style="font-size: 0.85rem; color: var(--text-muted);" id="pdpReviewSub">Based on 214 reviews</div>
+        </div>
+
+        <div class="rating-bars">
+          <div class="rating-bar-item">
+            <span>5 Stars</span>
+            <div class="bar-track"><div class="bar-fill" style="width: 85%;"></div></div>
+            <span>85%</span>
+          </div>
+          <div class="rating-bar-item">
+            <span>4 Stars</span>
+            <div class="bar-track"><div class="bar-fill" style="width: 10%;"></div></div>
+            <span>10%</span>
+          </div>
+          <div class="rating-bar-item">
+            <span>3 Stars</span>
+            <div class="bar-track"><div class="bar-fill" style="width: 3%;"></div></div>
+            <span>3%</span>
+          </div>
+          <div class="rating-bar-item">
+            <span>2 Stars</span>
+            <div class="bar-track"><div class="bar-fill" style="width: 1%;"></div></div>
+            <span>1%</span>
+          </div>
+          <div class="rating-bar-item">
+            <span>1 Star</span>
+            <div class="bar-track"><div class="bar-fill" style="width: 1%;"></div></div>
+            <span>1%</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Sample Customer Reviews List -->
+      <div class="reviews-list">
+        <div class="review-card">
+          <div class="review-author">
+            <div class="author-avatar">JD</div>
+            <div>
+              <div style="font-weight: 600; font-size: 0.95rem;">Jordan D. <span class="verified-badge"><i class="fa-solid fa-circle-check"></i> Verified Buyer</span></div>
+              <div style="font-size: 0.8rem; color: var(--text-muted);">Reviewed on January 14, 2026</div>
+            </div>
+          </div>
+          <div class="stars-row" style="font-size: 1rem; margin: 0.4rem 0;">★★★★★</div>
+          <h4 style="margin-bottom: 0.4rem; font-family: var(--font-head);">Exceptional build quality and battery life!</h4>
+          <p style="color: var(--text-muted); font-size: 0.92rem;">Exceeded my expectations. The acoustics are crisp and deep, and the noise isolation is top tier. Easily lasts 3 full days of heavy use without recharging.</p>
+        </div>
+
+        <div class="review-card">
+          <div class="review-author">
+            <div class="author-avatar" style="background: var(--grad-warm);">MK</div>
+            <div>
+              <div style="font-weight: 600; font-size: 0.95rem;">Marcus K. <span class="verified-badge"><i class="fa-solid fa-circle-check"></i> Verified Buyer</span></div>
+              <div style="font-size: 0.8rem; color: var(--text-muted);">Reviewed on December 28, 2025</div>
+            </div>
+          </div>
+          <div class="stars-row" style="font-size: 1rem; margin: 0.4rem 0;">★★★★★</div>
+          <h4 style="margin-bottom: 0.4rem; font-family: var(--font-head);">Super comfortable for long studio sessions</h4>
+          <p style="color: var(--text-muted); font-size: 0.92rem;">The memory foam cushions fit seamlessly without causing ear fatigue even after 6+ hours. Fast shipping from NovaCart too!</p>
         </div>
       </div>
     </section>
@@ -205,38 +217,7 @@
 </main>
 
 <!-- ============ FOOTER ============ -->
-<footer class="footer">
-  <div class="footer-grid">
-    <div class="footer-brand">
-      <a href="../index.html" class="logo"><span class="logo-text">Nova<span class="logo-accent">Cart</span></span></a>
-      <p>Redefining online shopping with futuristic aesthetics and curated products.</p>
-    </div>
-    <div class="footer-col">
-      <h4>Shop</h4>
-      <a href="electronics.html">Electronics</a>
-      <a href="fashion.html">Fashion</a>
-      <a href="home-kitchen.html">Home & Kitchen</a>
-      <a href="deals.html">Flash Deals</a>
-    </div>
-    <div class="footer-col">
-      <h4>Account</h4>
-      <a href="cart.html">View Cart</a>
-      <a href="wishlist.html">Wishlist</a>
-      <a href="orders.html">My Orders</a>
-    </div>
-    <div class="footer-col">
-      <h4>Customer Support</h4>
-      <a href="../index.html#contact">Help Center</a>
-      <a href="../index.html#contact">Shipping & Returns</a>
-      <a href="../index.html#contact">Contact Us</a>
-    </div>
-  </div>
-  <div class="footer-bottom">
-    <p>&copy; 2026 NovaCart Inc. All rights reserved.</p>
-  </div>
-</footer>
-
-<button class="back-to-top" id="backToTop" aria-label="Back to top"><i class="fa-solid fa-arrow-up"></i></button>
+<div id="site-footer"></div>
 
 <script src="../js/script.js"></script>
 </body>

@@ -18,101 +18,8 @@
 </head>
 <body data-page="home">
 
-<!-- ============ NAVIGATION ============ -->
-<nav class="navbar" id="navbar">
-  <div class="nav-container">
-    <a href="#home" class="logo">
-      <span class="logo-mark">
-        <svg width="30" height="30" viewBox="0 0 30 30"><path d="M15 2 L27 9 V21 L15 28 L3 21 V9 Z" fill="none" stroke="url(#navGrad)" stroke-width="2.2"/><circle cx="15" cy="15" r="4" fill="url(#navGrad)"/><defs><linearGradient id="navGrad" x1="0" y1="0" x2="1" y2="1"><stop offset="0%" stop-color="#6C63FF"/><stop offset="100%" stop-color="#00C9A7"/></linearGradient></defs></svg>
-      </span>
-      <span class="logo-text">Nova<span class="logo-accent">Cart</span></span>
-    </a>
-
-    <ul class="nav-links" id="navLinks">
-      <li><a href="#home" class="nav-link active">Home</a></li>
-      <li><a href="#shop" class="nav-link">Shop</a></li>
-      <li><a href="#collections" class="nav-link">Collections</a></li>
-      <li><a href="#deals" class="nav-link">Deals</a></li>
-      <li><a href="#about" class="nav-link">About</a></li>
-      <li><a href="#contact" class="nav-link">Contact</a></li>
-    </ul>
-
-    <div class="nav-actions">
-      <button class="icon-btn" id="searchToggle" aria-label="Search"><i class="fa-solid fa-magnifying-glass"></i></button>
-      <a href="pages/wishlist.html" class="icon-btn" aria-label="Wishlist"><i class="fa-regular fa-heart"></i><span class="badge" id="wishBadge">2</span></a>
-      <a href="pages/cart.html" class="icon-btn" aria-label="Cart"><i class="fa-solid fa-bag-shopping"></i><span class="badge cart-badge" id="cartBadge">3</span></a>
-      <a href="pages/orders.html" class="icon-btn" aria-label="Orders" title="My Orders"><i class="fa-solid fa-clock-rotate-left"></i></a>
-      <div class="account-nav-wrapper">
-        <button class="icon-btn" id="accountToggle" aria-label="Account" aria-haspopup="true" aria-expanded="false" title="Account"><i class="fa-regular fa-user"></i></button>
-        <div class="account-panel" id="accountPanel" role="menu" aria-label="Account Menu"></div>
-      </div>
-      <button class="icon-btn theme-toggle" id="themeToggle" aria-label="Toggle dark mode"><i class="fa-solid fa-moon"></i></button>
-      <button class="hamburger" id="hamburger" aria-label="Menu"><span></span><span></span><span></span></button>
-    </div>
-  </div>
-
-  <div class="search-panel" id="searchPanel">
-    <div class="search-panel-inner">
-      <i class="fa-solid fa-magnifying-glass"></i>
-      <input type="text" placeholder="Search for products, brands, categories…" id="searchInput">
-      <button id="searchClose" aria-label="Close search"><i class="fa-solid fa-xmark"></i></button>
-    </div>
-  </div>
-</nav>
-
-<!-- ============ CATEGORY BAR ============ -->
-<div class="category-bar" id="categoryBar">
-  <div class="category-container">
-    <div class="all-categories-wrapper">
-      <button class="all-categories-btn" id="allCategoriesBtn" aria-haspopup="true" aria-expanded="false" aria-controls="allCategoriesPanel">
-        <i class="fa-solid fa-bars"></i>
-        <span>All</span>
-        <i class="fa-solid fa-chevron-down caret-icon"></i>
-      </button>
-
-      <div class="all-categories-panel" id="allCategoriesPanel" role="menu" aria-label="All Categories">
-        <div class="panel-header">
-          <span>Shop Categories</span>
-        </div>
-        <ul class="category-panel-list">
-          <li><a href="pages/electronics.html" role="menuitem" class="category-panel-link"><i class="fa-solid fa-laptop"></i> Electronics</a></li>
-          <li><a href="pages/fashion.html" role="menuitem" class="category-panel-link"><i class="fa-solid fa-shirt"></i> Fashion</a></li>
-          <li><a href="pages/home-kitchen.html" role="menuitem" class="category-panel-link"><i class="fa-solid fa-house"></i> Home & Kitchen</a></li>
-          <li><a href="pages/beauty.html" role="menuitem" class="category-panel-link"><i class="fa-solid fa-sparkles"></i> Beauty & Personal Care</a></li>
-          <li><a href="pages/sports.html" role="menuitem" class="category-panel-link"><i class="fa-solid fa-futbol"></i> Sports & Outdoors</a></li>
-          <li><a href="pages/deals.html" role="menuitem" class="category-panel-link"><i class="fa-solid fa-tag"></i> Deals & Sales</a></li>
-          <li><a href="pages/new-arrivals.html" role="menuitem" class="category-panel-link"><i class="fa-solid fa-wand-magic-sparkles"></i> New Arrivals</a></li>
-          <li><a href="pages/electronics.html" role="menuitem" class="category-panel-link"><i class="fa-solid fa-gamepad"></i> Toys & Games</a></li>
-          <li><a href="pages/fashion.html" role="menuitem" class="category-panel-link"><i class="fa-solid fa-book"></i> Books & Media</a></li>
-          <li><a href="pages/electronics.html" role="menuitem" class="category-panel-link"><i class="fa-solid fa-car"></i> Automotive</a></li>
-          <li><a href="pages/home-kitchen.html" role="menuitem" class="category-panel-link"><i class="fa-solid fa-basket-shopping"></i> Grocery</a></li>
-          <li><a href="pages/beauty.html" role="menuitem" class="category-panel-link"><i class="fa-solid fa-heart-pulse"></i> Health & Wellness</a></li>
-        </ul>
-      </div>
-    </div>
-
-    <div class="category-quick-links">
-      <a href="pages/electronics.html" class="cat-quick-link">Electronics</a>
-      <a href="pages/fashion.html" class="cat-quick-link">Fashion</a>
-      <a href="pages/home-kitchen.html" class="cat-quick-link">Home & Kitchen</a>
-      <a href="pages/deals.html" class="cat-quick-link">Deals</a>
-      <a href="pages/new-arrivals.html" class="cat-quick-link">New Arrivals</a>
-      <a href="pages/beauty.html" class="cat-quick-link">Beauty</a>
-      <a href="pages/sports.html" class="cat-quick-link">Sports</a>
-    </div>
-  </div>
-</div>
-
-<div class="mobile-menu" id="mobileMenu">
-  <ul>
-    <li><a href="#home">Home</a></li>
-    <li><a href="#shop">Shop</a></li>
-    <li><a href="#collections">Collections</a></li>
-    <li><a href="#deals">Deals</a></li>
-    <li><a href="#about">About</a></li>
-    <li><a href="#contact">Contact</a></li>
-  </ul>
-</div>
+<!-- ============ HEADER & NAVIGATION ============ -->
+<div id="site-header"></div>
 
 <main>
 
@@ -571,50 +478,7 @@
 </main>
 
 <!-- ============ FOOTER ============ -->
-<footer class="footer" id="contact">
-  <div class="footer-grid">
-    <div class="footer-brand">
-      <span class="logo-text">Nova<span class="logo-accent">Cart</span></span>
-      <p>A premium shopping experience, built for people who notice the details.</p>
-      <div class="social-icons">
-        <a href="#" aria-label="Instagram"><i class="fa-brands fa-instagram"></i></a>
-        <a href="#" aria-label="X"><i class="fa-brands fa-x-twitter"></i></a>
-        <a href="#" aria-label="Facebook"><i class="fa-brands fa-facebook-f"></i></a>
-        <a href="#" aria-label="Pinterest"><i class="fa-brands fa-pinterest-p"></i></a>
-      </div>
-    </div>
-
-    <div class="footer-col">
-      <h4>Shop</h4>
-      <a href="#shop">New Arrivals</a>
-      <a href="#shop">Best Sellers</a>
-      <a href="#deals">Deals</a>
-      <a href="#collections">Collections</a>
-    </div>
-
-    <div class="footer-col">
-      <h4>Company</h4>
-      <a href="#about">About Us</a>
-      <a href="#">Careers</a>
-      <a href="#">Press</a>
-      <a href="#">Sustainability</a>
-    </div>
-
-    <div class="footer-col">
-      <h4>Contact</h4>
-      <a href="mailto:hello@novacart.com"><i class="fa-solid fa-envelope"></i> hello@novacart.com</a>
-      <a href="tel:+10000000000"><i class="fa-solid fa-phone"></i> +1 (000) 000‑0000</a>
-      <a href="#"><i class="fa-solid fa-location-dot"></i> Remote‑first, worldwide</a>
-    </div>
-  </div>
-
-  <div class="footer-bottom">
-    <span>© 2026 NovaCart. All rights reserved.</span>
-    <div class="footer-links"><a href="#">Privacy</a><a href="#">Terms</a><a href="#">Cookies</a></div>
-  </div>
-</footer>
-
-<button class="back-to-top" id="backToTop" aria-label="Back to top"><i class="fa-solid fa-arrow-up"></i></button>
+<div id="site-footer"></div>
 
 <script src="js/script.js"></script>
 </body>

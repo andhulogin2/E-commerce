@@ -1140,102 +1140,212 @@ document.addEventListener('DOMContentLoaded', () => {
     setTimeout(() => circle.remove(), 650);
   });
 
-  /* ---------- Navbar scroll effect ---------- */
-  const navbar = document.getElementById('navbar');
-  const backToTop = document.getElementById('backToTop');
-  if (navbar) {
-    window.addEventListener('scroll', () => {
-      const scrolled = window.scrollY > 40;
-      navbar.classList.toggle('scrolled', scrolled);
-      if (backToTop) backToTop.classList.toggle('visible', window.scrollY > 500);
-      updateActiveNavLink();
-    }, { passive: true });
-  }
-
-  if (backToTop) {
-    backToTop.addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
-  }
-
-  /* ---------- Active nav link on scroll ---------- */
-  const sections = ['home', 'shop', 'collections', 'deals', 'about', 'contact']
-    .map(id => document.getElementById(id)).filter(Boolean);
-  const navLinkMap = {};
-  document.querySelectorAll('.nav-link').forEach(link => {
-    const href = link.getAttribute('href');
-    if (href && href.startsWith('#')) {
-      navLinkMap[href.slice(1)] = link;
-    }
-  });
-  function updateActiveNavLink() {
-    if (!sections.length) return;
-    let current = sections[0]?.id;
-    const scrollPos = window.scrollY + 120;
-    sections.forEach(sec => { if (sec.offsetTop <= scrollPos) current = sec.id; });
-    Object.entries(navLinkMap).forEach(([id, link]) => link.classList.toggle('active', id === current));
-  }
-
-  /* ---------- Mobile menu ---------- */
-  const hamburger = document.getElementById('hamburger');
-  const mobileMenu = document.getElementById('mobileMenu');
-  if (hamburger && mobileMenu) {
-    hamburger.addEventListener('click', () => {
-      hamburger.classList.toggle('active');
-      mobileMenu.classList.toggle('open');
-    });
-    mobileMenu.querySelectorAll('a').forEach(a => a.addEventListener('click', () => {
-      hamburger.classList.remove('active');
-      mobileMenu.classList.remove('open');
-    }));
-  }
-
-  /* ---------- Search panel ---------- */
-  const searchToggle = document.getElementById('searchToggle');
-  const searchPanel = document.getElementById('searchPanel');
-  const searchClose = document.getElementById('searchClose');
-  const searchInput = document.getElementById('searchInput');
-  if (searchToggle && searchPanel && searchClose && searchInput) {
-    searchToggle.addEventListener('click', () => {
-      searchPanel.classList.add('open');
-      setTimeout(() => searchInput.focus(), 300);
-    });
-    searchClose.addEventListener('click', () => searchPanel.classList.remove('open'));
-  }
-
-  /* ---------- Category Bar & All Categories Dropdown ---------- */
-  const allCategoriesBtn = document.getElementById('allCategoriesBtn');
-  const allCategoriesPanel = document.getElementById('allCategoriesPanel');
-
-  if (allCategoriesBtn && allCategoriesPanel) {
-    function toggleCategoryPanel(show) {
-      const isOpen = show !== undefined ? show : !allCategoriesPanel.classList.contains('open');
-      allCategoriesPanel.classList.toggle('open', isOpen);
-      allCategoriesBtn.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
+  /* ============================================================
+     HEADER & FOOTER EVENT INITIALIZER
+     ============================================================ */
+  function initHeaderFooterEvents() {
+    /* ---------- Navbar scroll effect ---------- */
+    const navbar = document.getElementById('navbar');
+    const backToTop = document.getElementById('backToTop');
+    if (navbar) {
+      window.addEventListener('scroll', () => {
+        const scrolled = window.scrollY > 40;
+        navbar.classList.toggle('scrolled', scrolled);
+        if (backToTop) backToTop.classList.toggle('visible', window.scrollY > 500);
+      }, { passive: true });
     }
 
-    allCategoriesBtn.addEventListener('click', (e) => {
-      e.stopPropagation();
-      toggleCategoryPanel();
-    });
+    if (backToTop) {
+      backToTop.addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
+    }
 
-    // Prevent clicks inside panel from closing it
-    allCategoriesPanel.addEventListener('click', (e) => {
-      e.stopPropagation();
-    });
+    /* ---------- Mobile menu ---------- */
+    const hamburger = document.getElementById('hamburger');
+    const mobileMenu = document.getElementById('mobileMenu');
+    if (hamburger && mobileMenu) {
+      hamburger.addEventListener('click', () => {
+        hamburger.classList.toggle('active');
+        mobileMenu.classList.toggle('open');
+      });
+      mobileMenu.querySelectorAll('a').forEach(a => a.addEventListener('click', () => {
+        hamburger.classList.remove('active');
+        mobileMenu.classList.remove('open');
+      }));
+    }
 
-    // Close on click outside
-    document.addEventListener('click', () => {
-      if (allCategoriesPanel.classList.contains('open')) {
-        toggleCategoryPanel(false);
+    /* ---------- Toast Notification Engine ---------- */
+    window.showToast = function(title, message, type = 'success', duration = 3500) {
+      let container = document.querySelector('.toast-container');
+      if (!container) {
+        container = document.createElement('div');
+        container.className = 'toast-container';
+        document.body.appendChild(container);
       }
-    });
 
-    // Close on Escape key press
-    document.addEventListener('keydown', (e) => {
-      if (e.key === 'Escape' && allCategoriesPanel.classList.contains('open')) {
-        toggleCategoryPanel(false);
-        allCategoriesBtn.focus();
+      const iconMap = {
+        success: 'fa-circle-check',
+        info: 'fa-circle-info',
+        warning: 'fa-triangle-exclamation',
+        error: 'fa-circle-xmark'
+      };
+
+      const toast = document.createElement('div');
+      toast.className = `toast toast-${type}`;
+      toast.innerHTML = `
+        <i class="fa-solid ${iconMap[type] || iconMap.info} toast-icon"></i>
+        <div class="toast-body">
+          <div class="toast-title">${title}</div>
+          ${message ? `<div class="toast-msg">${message}</div>` : ''}
+        </div>
+      `;
+
+      container.appendChild(toast);
+
+      setTimeout(() => {
+        toast.classList.add('toast-exit');
+        toast.addEventListener('animationend', () => toast.remove());
+      }, duration);
+    };
+
+    /* ---------- Live Smart Search System ---------- */
+    const searchToggle = document.getElementById('searchToggle');
+    const searchPanel = document.getElementById('searchPanel');
+    const searchClose = document.getElementById('searchClose');
+    const searchInput = document.getElementById('searchInput');
+    const searchResults = document.getElementById('searchResults');
+
+    if (searchToggle && searchPanel && searchClose && searchInput) {
+      searchToggle.onclick = () => {
+        searchPanel.classList.add('open');
+        setTimeout(() => searchInput.focus(), 300);
+      };
+
+      searchClose.onclick = () => {
+        searchPanel.classList.remove('open');
+        if (searchResults) searchResults.classList.remove('active');
+      };
+
+      if (searchInput && searchResults) {
+        searchInput.oninput = (e) => {
+          const query = e.target.value.trim().toLowerCase();
+          if (!query) {
+            searchResults.innerHTML = '';
+            searchResults.classList.remove('active');
+            return;
+          }
+
+          const matches = PRODUCTS.filter(p => 
+            p.title.toLowerCase().includes(query) ||
+            p.cat.toLowerCase().includes(query) ||
+            (p.description && p.description.toLowerCase().includes(query))
+          ).slice(0, 5);
+
+          const isPagesDir = window.location.pathname.includes('/pages/');
+          const productLinkPrefix = isPagesDir ? '' : 'pages/';
+
+          if (matches.length === 0) {
+            searchResults.innerHTML = `<div class="search-no-results">No products found matching "<strong>${query}</strong>"</div>`;
+          } else {
+            searchResults.innerHTML = matches.map(p => `
+              <div class="search-result-item" data-id="${p.id}">
+                <img src="${p.img}" alt="${p.title}" class="search-result-thumb">
+                <div class="search-result-info">
+                  <div class="search-result-title">${p.title}</div>
+                  <div class="search-result-cat">${p.cat}</div>
+                </div>
+                <div class="search-result-price">$${p.price}</div>
+              </div>
+            `).join('');
+
+            searchResults.querySelectorAll('.search-result-item').forEach(item => {
+              item.onclick = () => {
+                const id = item.getAttribute('data-id');
+                window.location.href = `${productLinkPrefix}product.html?id=${id}`;
+              };
+            });
+          }
+          searchResults.classList.add('active');
+        };
       }
-    });
+    }
+
+    /* ---------- Newsletter Subscription Form ---------- */
+    const newsletterForm = document.getElementById('newsletterForm');
+    const newsletterEmail = document.getElementById('newsletterEmail');
+    if (newsletterForm && newsletterEmail) {
+      newsletterForm.onsubmit = (e) => {
+        e.preventDefault();
+        const email = newsletterEmail.value.trim();
+        if (email) {
+          window.showToast('Subscribed!', `Thank you for subscribing with ${email}`, 'success');
+          newsletterEmail.value = '';
+        }
+      };
+    }
+
+    /* ---------- Category Bar & All Categories Dropdown ---------- */
+    const allCategoriesBtn = document.getElementById('allCategoriesBtn');
+    const allCategoriesPanel = document.getElementById('allCategoriesPanel');
+
+    if (allCategoriesBtn && allCategoriesPanel) {
+      function toggleCategoryPanel(show) {
+        const isOpen = show !== undefined ? show : !allCategoriesPanel.classList.contains('open');
+        allCategoriesPanel.classList.toggle('open', isOpen);
+        allCategoriesBtn.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
+      }
+
+      allCategoriesBtn.onclick = (e) => {
+        e.stopPropagation();
+        toggleCategoryPanel();
+      };
+
+      allCategoriesPanel.onclick = (e) => {
+        e.stopPropagation();
+      };
+
+      document.onclick = () => {
+        if (allCategoriesPanel.classList.contains('open')) {
+          toggleCategoryPanel(false);
+        }
+      };
+
+      document.onkeydown = (e) => {
+        if (e.key === 'Escape' && allCategoriesPanel.classList.contains('open')) {
+          toggleCategoryPanel(false);
+          allCategoriesBtn.focus();
+        }
+      };
+    }
+
+    /* ---------- Dark mode toggle ---------- */
+    const themeToggle = document.getElementById('themeToggle');
+    const root = document.documentElement;
+    let savedTheme = 'light';
+    try { savedTheme = window.localStorage ? (localStorage.getItem('novacart-theme') || 'light') : 'light'; } catch (err) { savedTheme = 'light'; }
+    if (savedTheme === 'dark') {
+      root.setAttribute('data-theme', 'dark');
+      if (themeToggle) themeToggle.innerHTML = '<i class="fa-solid fa-sun"></i>';
+    }
+    if (themeToggle) {
+      themeToggle.onclick = () => {
+        const isDark = root.getAttribute('data-theme') === 'dark';
+        if (isDark) {
+          root.removeAttribute('data-theme');
+          themeToggle.innerHTML = '<i class="fa-solid fa-moon"></i>';
+        } else {
+          root.setAttribute('data-theme', 'dark');
+          themeToggle.innerHTML = '<i class="fa-solid fa-sun"></i>';
+        }
+        try { localStorage.setItem('novacart-theme', isDark ? 'light' : 'dark'); } catch (err) { /* storage unavailable */ }
+      };
+    }
+
+    /* ---------- Active Link Highlight ---------- */
+    updateActiveNavLinks();
+
+    /* ---------- Update Badge Counters ---------- */
+    if (typeof updateCartBadge === 'function') updateCartBadge();
+    if (typeof updateWishlistBadge === 'function') updateWishlistBadge();
   }
 
   /* ---------- Active Link Highlight Controller ---------- */
@@ -1281,30 +1391,55 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
 
-  updateActiveNavLinks();
+  /* ============================================================
+     COMPONENT LOADER (FETCH & INJECT HEADER/FOOTER)
+     ============================================================ */
+  async function loadSiteComponents() {
+    const siteHeader = document.getElementById('site-header');
+    const siteFooter = document.getElementById('site-footer');
 
-  /* ---------- Dark mode toggle ---------- */
-  const themeToggle = document.getElementById('themeToggle');
-  const root = document.documentElement;
-  let savedTheme = 'light';
-  try { savedTheme = window.localStorage ? (localStorage.getItem('novacart-theme') || 'light') : 'light'; } catch (err) { savedTheme = 'light'; }
-  if (savedTheme === 'dark') {
-    root.setAttribute('data-theme', 'dark');
-    if (themeToggle) themeToggle.innerHTML = '<i class="fa-solid fa-sun"></i>';
-  }
-  if (themeToggle) {
-    themeToggle.addEventListener('click', () => {
-      const isDark = root.getAttribute('data-theme') === 'dark';
-      if (isDark) {
-        root.removeAttribute('data-theme');
-        themeToggle.innerHTML = '<i class="fa-solid fa-moon"></i>';
-      } else {
-        root.setAttribute('data-theme', 'dark');
-        themeToggle.innerHTML = '<i class="fa-solid fa-sun"></i>';
+    if (!siteHeader && !siteFooter) {
+      initHeaderFooterEvents();
+      return;
+    }
+
+    const isPagesDir = window.location.pathname.includes('/pages/');
+    const headerPath = isPagesDir ? '../components/header.html' : 'components/header.html';
+    const footerPath = isPagesDir ? '../components/footer.html' : 'components/footer.html';
+
+    try {
+      const [headerRes, footerRes] = await Promise.all([
+        siteHeader ? fetch(headerPath) : Promise.resolve(null),
+        siteFooter ? fetch(footerPath) : Promise.resolve(null)
+      ]);
+
+      if (headerRes && headerRes.ok && siteHeader) {
+        siteHeader.innerHTML = await headerRes.text();
       }
-      try { localStorage.setItem('novacart-theme', isDark ? 'light' : 'dark'); } catch (err) { /* storage unavailable */ }
-    });
+      if (footerRes && footerRes.ok && siteFooter) {
+        siteFooter.innerHTML = await footerRes.text();
+      }
+
+      if (isPagesDir) {
+        document.querySelectorAll('#site-header a, #site-footer a').forEach(a => {
+          let href = a.getAttribute('href');
+          if (!href || href.startsWith('#') || href.startsWith('http') || href.startsWith('javascript:')) return;
+
+          if (href.startsWith('pages/')) {
+            a.setAttribute('href', href.replace('pages/', ''));
+          } else if (href === 'index.html' || href.startsWith('index.html#')) {
+            a.setAttribute('href', '../' + href);
+          }
+        });
+      }
+    } catch (err) {
+      console.warn('NovaCart Component Loader: Local server required for fetch injection.', err);
+    }
+
+    initHeaderFooterEvents();
   }
+
+  loadSiteComponents();
 
   /* ---------- Animated counters ---------- */
   function animateCounter(el) {

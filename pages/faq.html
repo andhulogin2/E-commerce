@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Frequently Asked Questions — NovaCart</title>
+<meta name="description" content="Find quick answers to common questions about shipping, delivery, order tracking, returns, and payment options at NovaCart.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Sora:wght@300;400;500;600;700;800&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+<link rel="stylesheet" href="../css/style.css">
+</head>
+<body data-page="faq">
+
+<!-- ============ HEADER & NAVIGATION ============ -->
+<div id="site-header"></div>
+
+<!-- ============ BREADCRUMBS ============ -->
+<nav class="breadcrumbs-wrapper" aria-label="Breadcrumb">
+  <div class="breadcrumbs">
+    <div class="breadcrumb-item"><a href="../index.html" class="breadcrumb-link"><i class="fa-solid fa-house"></i> Home</a></div>
+    <span class="breadcrumb-sep"><i class="fa-solid fa-chevron-right"></i></span>
+    <div class="breadcrumb-item"><span class="breadcrumb-current">FAQ & Help Center</span></div>
+  </div>
+</nav>
+
+<main>
+  <!-- ============ PAGE HERO ============ -->
+  <section class="page-hero">
+    <h1>Frequently Asked Questions</h1>
+    <p>Everything you need to know about shopping, delivery timelines, payment security, and our hassle-free return policy.</p>
+  </section>
+
+  <div class="faq-container">
+    <div class="faq-item active">
+      <button class="faq-header">
+        <span><i class="fa-solid fa-truck-fast" style="margin-right: 0.75rem; color: var(--primary);"></i> How fast is shipping?</span>
+        <i class="fa-solid fa-chevron-down faq-icon"></i>
+      </button>
+      <div class="faq-body">
+        Standard shipping delivers in 2–4 business days worldwide. Express overnight shipping options are available at checkout for urgent orders. Orders placed before 2 PM EST ship out the same day.
+      </div>
+    </div>
+
+    <div class="faq-item">
+      <button class="faq-header">
+        <span><i class="fa-solid fa-rotate-left" style="margin-right: 0.75rem; color: var(--primary);"></i> What is your return & exchange policy?</span>
+        <i class="fa-solid fa-chevron-down faq-icon"></i>
+      </button>
+      <div class="faq-body">
+        We offer a 30-day money-back guarantee on all items. Items must be in original condition with tags intact. Returns are free — generate a pre-paid return shipping label directly from your <a href="orders.html" style="color: var(--primary); text-decoration: underline;">Orders Page</a>.
+      </div>
+    </div>
+
+    <div class="faq-item">
+      <button class="faq-header">
+        <span><i class="fa-solid fa-credit-card" style="margin-right: 0.75rem; color: var(--primary);"></i> What payment methods do you accept?</span>
+        <i class="fa-solid fa-chevron-down faq-icon"></i>
+      </button>
+      <div class="faq-body">
+        We support Visa, Mastercard, American Express, Apple Pay, Google Pay, PayPal, and Klarna pay-in-4 installments. All transactions are protected with 256-bit SSL encryption.
+      </div>
+    </div>
+
+    <div class="faq-item">
+      <button class="faq-header">
+        <span><i class="fa-solid fa-location-dot" style="margin-right: 0.75rem; color: var(--primary);"></i> How do I track my shipment?</span>
+        <i class="fa-solid fa-chevron-down faq-icon"></i>
+      </button>
+      <div class="faq-body">
+        Once your order ships, you will receive an email notification with a direct tracking link. You can also view live tracking updates on your <a href="orders.html" style="color: var(--primary); text-decoration: underline;">My Orders</a> page at any time.
+      </div>
+    </div>
+
+    <div class="faq-item">
+      <button class="faq-header">
+        <span><i class="fa-solid fa-shield-halved" style="margin-right: 0.75rem; color: var(--primary);"></i> Are NovaCart products covered by warranty?</span>
+        <i class="fa-solid fa-chevron-down faq-icon"></i>
+      </button>
+      <div class="faq-body">
+        Yes! All electronics and hardware products purchased on NovaCart come with a standard 1-Year Limited Manufacturer Warranty against defect in materials and craftsmanship.
+      </div>
+    </div>
+  </div>
+</main>
+
+<!-- ============ FOOTER ============ -->
+<div id="site-footer"></div>
+
+<script src="../js/script.js"></script>
+<script>
+document.addEventListener('DOMContentLoaded', () => {
+  document.querySelectorAll('.faq-header').forEach(header => {
+    header.onclick = () => {
+      const item = header.parentElement;
+      item.classList.toggle('active');
+    };
+  });
+});
+</script>
+</body>
+</html>
