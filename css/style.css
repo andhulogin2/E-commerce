@@ -2719,10 +2719,13 @@ a:focus-visible, button:focus-visible, input:focus-visible {
 
 /* ---------- BREADCRUMBS ---------- */
 .breadcrumbs-wrapper {
+  margin-top: calc(var(--nav-h) + 44px);
   background: var(--surface);
   border-bottom: 1px solid var(--border-soft);
   padding: 0.85rem 0;
   margin-bottom: 1.5rem;
+  position: relative;
+  z-index: 10;
 }
 .breadcrumbs {
   display: flex;
