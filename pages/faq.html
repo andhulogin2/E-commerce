@@ -90,13 +90,19 @@
 
 <script src="../js/script.js"></script>
 <script>
-document.addEventListener('DOMContentLoaded', () => {
-  document.querySelectorAll('.faq-header').forEach(header => {
-    header.onclick = () => {
-      const item = header.parentElement;
-      item.classList.toggle('active');
-    };
-  });
+document.addEventListener('click', (e) => {
+  const header = e.target.closest('.faq-header');
+  if (header) {
+    e.preventDefault();
+    const item = header.closest('.faq-item');
+    if (item) {
+      const isOpen = item.classList.contains('active');
+      document.querySelectorAll('.faq-item').forEach(i => i.classList.remove('active'));
+      if (!isOpen) {
+        item.classList.add('active');
+      }
+    }
+  }
 });
 </script>
 </body>
