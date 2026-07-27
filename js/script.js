@@ -1283,27 +1283,10 @@ document.addEventListener('DOMContentLoaded', () => {
       };
     }
 
-    /* ---------- Account & Category Dropdowns (Global Delegated Click) ---------- */
+    /* ---------- Category Dropdown (Global Delegated Click) ---------- */
     document.addEventListener('click', (e) => {
-      const accountToggle = e.target.closest('#accountToggle');
-      const accountPanel = document.getElementById('accountPanel');
       const allCategoriesBtn = e.target.closest('#allCategoriesBtn');
       const allCategoriesPanel = document.getElementById('allCategoriesPanel');
-
-      // Click on Account Toggle
-      if (accountToggle && accountPanel) {
-        e.stopPropagation();
-        const isOpen = accountPanel.classList.contains('open');
-        accountPanel.classList.toggle('open', !isOpen);
-        accountToggle.setAttribute('aria-expanded', !isOpen ? 'true' : 'false');
-        if (allCategoriesPanel) allCategoriesPanel.classList.remove('open');
-        return;
-      }
-
-      // Click inside Account Panel (keep open)
-      if (e.target.closest('#accountPanel')) {
-        return;
-      }
 
       // Click on All Categories Toggle
       if (allCategoriesBtn && allCategoriesPanel) {
@@ -1311,21 +1294,15 @@ document.addEventListener('DOMContentLoaded', () => {
         const isOpen = allCategoriesPanel.classList.contains('open');
         allCategoriesPanel.classList.toggle('open', !isOpen);
         allCategoriesBtn.setAttribute('aria-expanded', !isOpen ? 'true' : 'false');
-        if (accountPanel) accountPanel.classList.remove('open');
         return;
       }
 
-      // Click inside All Categories Panel
+      // Click inside All Categories Panel — keep open
       if (e.target.closest('#allCategoriesPanel')) {
         return;
       }
 
-      // Outside click: Close all dropdown panels
-      if (accountPanel && accountPanel.classList.contains('open')) {
-        accountPanel.classList.remove('open');
-        const btn = document.getElementById('accountToggle');
-        if (btn) btn.setAttribute('aria-expanded', 'false');
-      }
+      // Outside click: close All Categories panel
       if (allCategoriesPanel && allCategoriesPanel.classList.contains('open')) {
         allCategoriesPanel.classList.remove('open');
         const btn = document.getElementById('allCategoriesBtn');
@@ -1335,13 +1312,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
     document.addEventListener('keydown', (e) => {
       if (e.key === 'Escape') {
-        const accountPanel = document.getElementById('accountPanel');
-        const accountToggle = document.getElementById('accountToggle');
-        if (accountPanel && accountPanel.classList.contains('open')) {
-          accountPanel.classList.remove('open');
-          if (accountToggle) accountToggle.setAttribute('aria-expanded', 'false');
-        }
-
         const allCategoriesPanel = document.getElementById('allCategoriesPanel');
         const allCategoriesBtn = document.getElementById('allCategoriesBtn');
         if (allCategoriesPanel && allCategoriesPanel.classList.contains('open')) {
@@ -2136,7 +2106,6 @@ document.addEventListener('DOMContentLoaded', () => {
   /* ---------- Account Navbar State & Auth Logic ---------- */
   function updateNavAccountState() {
     const accountToggle = document.getElementById('accountToggle');
-    const accountPanel = document.getElementById('accountPanel');
     if (!accountToggle) return;
 
     const storedUser = localStorage.getItem('novacart-user');
@@ -2147,66 +2116,17 @@ document.addEventListener('DOMContentLoaded', () => {
       try {
         const user = JSON.parse(storedUser);
         const initial = user.name ? user.name.trim()[0].toUpperCase() : 'U';
-
-        accountToggle.innerHTML = `<span class="user-avatar-badge" style="width:28px; height:28px; border-radius:50%; background:var(--grad-brand); color:#fff; display:inline-flex; align-items:center; justify-content:center; font-weight:700; font-size:0.82rem;">${initial}</span>`;
+        accountToggle.href = `${pagePrefix}profile.html`;
         accountToggle.title = user.name || 'My Account';
-
-        if (accountPanel) {
-          accountPanel.innerHTML = `
-            <a href="${pagePrefix}profile.html" style="text-decoration:none; color:inherit;">
-              <div class="account-panel-header">
-                <strong style="font-size:0.95rem; font-family:var(--font-head);">${user.name || 'Shopper'}</strong>
-                <span style="font-size:0.8rem; color:var(--text-muted);">${user.email || ''}</span>
-              </div>
-            </a>
-            <hr style="border:none; border-top:1px solid var(--border-soft); margin:0.6rem 0;">
-            <ul class="account-panel-menu">
-              <li><a href="${pagePrefix}profile.html"><i class="fa-solid fa-user-gear"></i> My Profile</a></li>
-              <li><a href="${pagePrefix}orders.html"><i class="fa-solid fa-clock-rotate-left"></i> My Orders</a></li>
-              <li><a href="${pagePrefix}wishlist.html"><i class="fa-regular fa-heart"></i> My Wishlist</a></li>
-            </ul>
-            <hr style="border:none; border-top:1px solid var(--border-soft); margin:0.6rem 0;">
-            <button type="button" id="signOutBtn" class="btn btn-ghost btn-sm" style="width:100%; justify-content:center; color:#FF4757; font-weight:600;"><i class="fa-solid fa-right-from-bracket"></i> Sign Out</button>
-          `;
-
-          const signOutBtn = accountPanel.querySelector('#signOutBtn');
-          if (signOutBtn) {
-            signOutBtn.onclick = (e) => {
-              e.stopPropagation();
-              localStorage.removeItem('novacart-user');
-              accountPanel.classList.remove('open');
-              accountToggle.setAttribute('aria-expanded', 'false');
-              if (window.showToast) window.showToast('Signed Out', 'You have been signed out.', 'info');
-              updateNavAccountState();
-            };
-          }
-        }
-      } catch (e) {
+        accountToggle.innerHTML = `<span class="user-avatar-badge" style="width:28px;height:28px;border-radius:50%;background:var(--grad-brand);color:#fff;display:inline-flex;align-items:center;justify-content:center;font-weight:700;font-size:0.82rem;">${initial}</span>`;
+      } catch (err) {
         localStorage.removeItem('novacart-user');
         updateNavAccountState();
-        return;
       }
     } else {
+      accountToggle.href = `${pagePrefix}signin.html`;
+      accountToggle.title = 'Sign In / Sign Up';
       accountToggle.innerHTML = `<i class="fa-regular fa-user"></i>`;
-      accountToggle.title = "Sign In / Sign Up";
-
-      if (accountPanel) {
-        accountPanel.innerHTML = `
-          <div class="account-panel-header">
-            <strong style="font-size:0.95rem; font-family:var(--font-head);">Welcome to NovaCart</strong>
-            <p style="font-size:0.8rem; color:var(--text-muted); margin-top:2px;">Sign in to access your orders & account.</p>
-          </div>
-          <div class="account-panel-actions" style="display:flex; flex-direction:column; gap:0.5rem; margin:0.6rem 0;">
-            <a href="${pagePrefix}signin.html" class="btn btn-primary btn-sm" style="width:100%; justify-content:center; text-align:center; display:inline-flex;">Sign In</a>
-            <a href="${pagePrefix}signup.html" class="btn btn-ghost btn-sm" style="width:100%; justify-content:center; text-align:center; display:inline-flex; border:1px solid var(--border-soft);">Create Account</a>
-          </div>
-          <hr style="border:none; border-top:1px solid var(--border-soft); margin:0.6rem 0;">
-          <ul class="account-panel-menu">
-            <li><a href="${pagePrefix}orders.html"><i class="fa-solid fa-clock-rotate-left"></i> My Orders</a></li>
-            <li><a href="${pagePrefix}wishlist.html"><i class="fa-regular fa-heart"></i> My Wishlist</a></li>
-          </ul>
-        `;
-      }
     }
   }
 
