@@ -1283,6 +1283,48 @@ document.addEventListener('DOMContentLoaded', () => {
       };
     }
 
+    /* ---------- Account Dropdown Panel ---------- */
+    const accountToggle = document.getElementById('accountToggle');
+    const accountPanel = document.getElementById('accountPanel');
+    if (accountToggle && accountPanel) {
+      const isPagesDir = window.location.pathname.includes('/pages/');
+      const pagePrefix = isPagesDir ? '' : 'pages/';
+
+      accountPanel.innerHTML = `
+        <div class="account-panel-header">
+          <strong>My Account</strong>
+          <p>Sign in to access your orders & account.</p>
+        </div>
+        <div class="account-panel-actions">
+          <a href="${pagePrefix}signin.html" class="btn btn-primary btn-sm" style="width:100%; justify-content:center; text-align:center; display:inline-flex;">Sign In</a>
+          <a href="${pagePrefix}signup.html" class="btn btn-ghost btn-sm" style="width:100%; justify-content:center; text-align:center; display:inline-flex; border:1px solid var(--border-soft);">Create Account</a>
+        </div>
+        <hr style="border:none; border-top:1px solid var(--border-soft); margin:0.8rem 0;">
+        <ul class="account-panel-menu">
+          <li><a href="${pagePrefix}orders.html"><i class="fa-solid fa-clock-rotate-left"></i> My Orders</a></li>
+          <li><a href="${pagePrefix}wishlist.html"><i class="fa-regular fa-heart"></i> My Wishlist</a></li>
+        </ul>
+      `;
+
+      accountToggle.onclick = (e) => {
+        e.stopPropagation();
+        const isOpen = accountPanel.classList.contains('open');
+        accountPanel.classList.toggle('open', !isOpen);
+        accountToggle.setAttribute('aria-expanded', !isOpen ? 'true' : 'false');
+      };
+
+      accountPanel.onclick = (e) => {
+        e.stopPropagation();
+      };
+
+      document.addEventListener('click', () => {
+        if (accountPanel.classList.contains('open')) {
+          accountPanel.classList.remove('open');
+          accountToggle.setAttribute('aria-expanded', 'false');
+        }
+      });
+    }
+
     /* ---------- Category Bar & All Categories Dropdown ---------- */
     const allCategoriesBtn = document.getElementById('allCategoriesBtn');
     const allCategoriesPanel = document.getElementById('allCategoriesPanel');
@@ -1343,9 +1385,10 @@ document.addEventListener('DOMContentLoaded', () => {
     /* ---------- Active Link Highlight ---------- */
     updateActiveNavLinks();
 
-    /* ---------- Update Badge Counters ---------- */
+    /* ---------- Update Badge Counters & Account State ---------- */
     if (typeof updateCartBadge === 'function') updateCartBadge();
     if (typeof updateWishlistBadge === 'function') updateWishlistBadge();
+    if (typeof updateNavAccountState === 'function') updateNavAccountState();
   }
 
   /* ---------- Active Link Highlight Controller ---------- */
@@ -2109,135 +2152,141 @@ document.addEventListener('DOMContentLoaded', () => {
       try {
         const user = JSON.parse(storedUser);
         const initial = user.name ? user.name.trim()[0].toUpperCase() : 'U';
-        
-        accountToggle.innerHTML = `<span class="user-avatar-badge">${initial}</span>`;
-        accountToggle.title = user.name || 'Account';
+
+        accountToggle.innerHTML = `<span class="user-avatar-badge" style="width:28px; height:28px; border-radius:50%; background:var(--grad-brand); color:#fff; display:inline-flex; align-items:center; justify-content:center; font-weight:700; font-size:0.82rem;">${initial}</span>`;
+        accountToggle.title = user.name || 'My Account';
 
         if (accountPanel) {
           accountPanel.innerHTML = `
             <div class="account-panel-header">
-              <div class="user-avatar-lg">${initial}</div>
-              <div class="user-info-text">
-                <strong class="user-name">${user.name || 'Shopper'}</strong>
-                <span class="user-email">${user.email || ''}</span>
-              </div>
+              <strong style="font-size:0.95rem; font-family:var(--font-head);">${user.name || 'Shopper'}</strong>
+              <span style="font-size:0.8rem; color:var(--text-muted);">${user.email || ''}</span>
             </div>
+            <hr style="border:none; border-top:1px solid var(--border-soft); margin:0.6rem 0;">
             <ul class="account-panel-menu">
-              <li><a href="${pagePrefix}orders.html"><i class="fa-solid fa-box"></i> My Orders</a></li>
-              <li><a href="${pagePrefix}wishlist.html"><i class="fa-regular fa-heart"></i> Wishlist</a></li>
-              <li><button type="button" id="signOutBtn" class="account-menu-btn"><i class="fa-solid fa-arrow-right-from-bracket"></i> Sign Out</button></li>
-            </ul>`;
+              <li><a href="${pagePrefix}orders.html"><i class="fa-solid fa-clock-rotate-left"></i> My Orders</a></li>
+              <li><a href="${pagePrefix}wishlist.html"><i class="fa-regular fa-heart"></i> My Wishlist</a></li>
+            </ul>
+            <hr style="border:none; border-top:1px solid var(--border-soft); margin:0.6rem 0;">
+            <button type="button" id="signOutBtn" class="btn btn-ghost btn-sm" style="width:100%; justify-content:center; color:#FF4757; font-weight:600;"><i class="fa-solid fa-right-from-bracket"></i> Sign Out</button>
+          `;
 
           const signOutBtn = accountPanel.querySelector('#signOutBtn');
           if (signOutBtn) {
-            signOutBtn.addEventListener('click', (e) => {
+            signOutBtn.onclick = (e) => {
               e.stopPropagation();
               localStorage.removeItem('novacart-user');
-              accountPanel.classList.remove('active');
+              accountPanel.classList.remove('open');
               accountToggle.setAttribute('aria-expanded', 'false');
+              if (window.showToast) window.showToast('Signed Out', 'You have been signed out.', 'info');
               updateNavAccountState();
-            });
+            };
           }
         }
       } catch (e) {
         localStorage.removeItem('novacart-user');
         updateNavAccountState();
+        return;
       }
     } else {
       accountToggle.innerHTML = `<i class="fa-regular fa-user"></i>`;
-      accountToggle.title = "Sign In";
+      accountToggle.title = "Sign In / Sign Up";
+
       if (accountPanel) {
-        accountPanel.innerHTML = '';
-        accountPanel.classList.remove('active');
+        accountPanel.innerHTML = `
+          <div class="account-panel-header">
+            <strong style="font-size:0.95rem; font-family:var(--font-head);">Welcome to NovaCart</strong>
+            <p style="font-size:0.8rem; color:var(--text-muted); margin-top:2px;">Sign in to access your orders & account.</p>
+          </div>
+          <div class="account-panel-actions" style="display:flex; flex-direction:column; gap:0.5rem; margin:0.6rem 0;">
+            <a href="${pagePrefix}signin.html" class="btn btn-primary btn-sm" style="width:100%; justify-content:center; text-align:center; display:inline-flex;">Sign In</a>
+            <a href="${pagePrefix}signup.html" class="btn btn-ghost btn-sm" style="width:100%; justify-content:center; text-align:center; display:inline-flex; border:1px solid var(--border-soft);">Create Account</a>
+          </div>
+          <hr style="border:none; border-top:1px solid var(--border-soft); margin:0.6rem 0;">
+          <ul class="account-panel-menu">
+            <li><a href="${pagePrefix}orders.html"><i class="fa-solid fa-clock-rotate-left"></i> My Orders</a></li>
+            <li><a href="${pagePrefix}wishlist.html"><i class="fa-regular fa-heart"></i> My Wishlist</a></li>
+          </ul>
+        `;
       }
     }
-  }
 
-  // Account Toggle Click Handler
-  const accountToggle = document.getElementById('accountToggle');
-  const accountPanel = document.getElementById('accountPanel');
-
-  if (accountToggle) {
-    accountToggle.addEventListener('click', (e) => {
+    accountToggle.onclick = (e) => {
       e.stopPropagation();
       const storedUser = localStorage.getItem('novacart-user');
-      const isInsidePages = window.location.pathname.includes('/pages/');
-
       if (!storedUser) {
-        // Logged out: Navigate to signin.html
+        // If not logged in, navigate straight to Sign In page
         window.location.href = isInsidePages ? 'signin.html' : 'pages/signin.html';
       } else if (accountPanel) {
-        // Logged in: Toggle dropdown panel
-        const isActive = accountPanel.classList.toggle('active');
-        accountToggle.setAttribute('aria-expanded', isActive ? 'true' : 'false');
+        // If logged in, toggle account dropdown
+        const isOpen = accountPanel.classList.contains('open');
+        accountPanel.classList.toggle('open', !isOpen);
+        accountToggle.setAttribute('aria-expanded', !isOpen ? 'true' : 'false');
       }
-    });
+    };
+
+    if (accountPanel) {
+      accountPanel.onclick = (e) => {
+        e.stopPropagation();
+      };
+    }
+
+    document.onclick = () => {
+      if (accountPanel && accountPanel.classList.contains('open')) {
+        accountPanel.classList.remove('open');
+        accountToggle.setAttribute('aria-expanded', 'false');
+      }
+    };
   }
-
-  // Outside click & ESC key handler for account panel
-  document.addEventListener('click', (e) => {
-    if (accountPanel && accountPanel.classList.contains('active')) {
-      if (!e.target.closest('.account-nav-wrapper')) {
-        accountPanel.classList.remove('active');
-        if (accountToggle) accountToggle.setAttribute('aria-expanded', 'false');
-      }
-    }
-  });
-
-  document.addEventListener('keydown', (e) => {
-    if (e.key === 'Escape' && accountPanel && accountPanel.classList.contains('active')) {
-      accountPanel.classList.remove('active');
-      if (accountToggle) accountToggle.setAttribute('aria-expanded', 'false');
-    }
-  });
 
   /* ---------- Sign In & Sign Up Form Handlers ---------- */
   const togglePassBtn = document.getElementById('togglePasswordBtn');
   const signinPass = document.getElementById('signinPassword');
   if (togglePassBtn && signinPass) {
-    togglePassBtn.addEventListener('click', () => {
+    togglePassBtn.onclick = () => {
       const type = signinPass.type === 'password' ? 'text' : 'password';
       signinPass.type = type;
       togglePassBtn.innerHTML = type === 'password' ? '<i class="fa-regular fa-eye"></i>' : '<i class="fa-regular fa-eye-slash"></i>';
-    });
+    };
   }
 
   const toggleSignupPassBtn = document.getElementById('toggleSignupPassBtn');
   const signupPass = document.getElementById('signupPassword');
   if (toggleSignupPassBtn && signupPass) {
-    toggleSignupPassBtn.addEventListener('click', () => {
+    toggleSignupPassBtn.onclick = () => {
       const type = signupPass.type === 'password' ? 'text' : 'password';
       signupPass.type = type;
       toggleSignupPassBtn.innerHTML = type === 'password' ? '<i class="fa-regular fa-eye"></i>' : '<i class="fa-regular fa-eye-slash"></i>';
-    });
+    };
   }
 
   const toggleSignupConfirmBtn = document.getElementById('toggleSignupConfirmBtn');
   const signupConfirmPass = document.getElementById('signupConfirmPassword');
   if (toggleSignupConfirmBtn && signupConfirmPass) {
-    toggleSignupConfirmBtn.addEventListener('click', () => {
+    toggleSignupConfirmBtn.onclick = () => {
       const type = signupConfirmPass.type === 'password' ? 'text' : 'password';
       signupConfirmPass.type = type;
       toggleSignupConfirmBtn.innerHTML = type === 'password' ? '<i class="fa-regular fa-eye"></i>' : '<i class="fa-regular fa-eye-slash"></i>';
-    });
+    };
   }
 
   const signinForm = document.getElementById('signinForm');
   if (signinForm) {
-    signinForm.addEventListener('submit', (e) => {
+    signinForm.onsubmit = (e) => {
       e.preventDefault();
       const email = document.getElementById('signinEmail').value.trim();
       const rawName = email.split('@')[0].replace(/[\._]/g, ' ');
       const formattedName = rawName.charAt(0).toUpperCase() + rawName.slice(1);
 
       localStorage.setItem('novacart-user', JSON.stringify({ name: formattedName, email: email }));
-      window.location.href = '../index.html';
-    });
+      const isInsidePages = window.location.pathname.includes('/pages/');
+      window.location.href = isInsidePages ? '../index.html' : 'index.html';
+    };
   }
 
   const signupForm = document.getElementById('signupForm');
   if (signupForm) {
-    signupForm.addEventListener('submit', (e) => {
+    signupForm.onsubmit = (e) => {
       e.preventDefault();
       const name = document.getElementById('signupName').value.trim();
       const email = document.getElementById('signupEmail').value.trim();
@@ -2252,11 +2301,12 @@ document.addEventListener('DOMContentLoaded', () => {
       if (passErrorMsg) passErrorMsg.style.display = 'none';
 
       localStorage.setItem('novacart-user', JSON.stringify({ name: name, email: email }));
-      window.location.href = '../index.html';
-    });
+      const isInsidePages = window.location.pathname.includes('/pages/');
+      window.location.href = isInsidePages ? '../index.html' : 'index.html';
+    };
   }
 
   /* ---------- Initial state ---------- */
   updateNavAccountState();
-  updateActiveNavLink();
+  updateActiveNavLinks();
 });
