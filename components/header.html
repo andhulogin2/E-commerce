@@ -24,7 +24,22 @@
       <a href="pages/orders.html" class="icon-btn" aria-label="Orders" title="My Orders"><i class="fa-solid fa-clock-rotate-left"></i></a>
       <div class="account-nav-wrapper">
         <button class="icon-btn" id="accountToggle" aria-label="Account" aria-haspopup="true" aria-expanded="false" title="Account"><i class="fa-regular fa-user"></i></button>
-        <div class="account-panel" id="accountPanel" role="menu" aria-label="Account Menu"></div>
+        <div class="account-panel" id="accountPanel" role="menu" aria-label="Account Menu">
+          <div class="account-panel-header">
+            <strong style="font-size:0.95rem; font-family:var(--font-head);">Welcome to NovaCart</strong>
+            <p style="font-size:0.8rem; color:var(--text-muted); margin-top:2px;">Sign in to access your orders & account.</p>
+          </div>
+          <div class="account-panel-actions" style="display:flex; flex-direction:column; gap:0.5rem; margin:0.6rem 0;">
+            <a href="pages/signin.html" class="btn btn-primary btn-sm" style="width:100%; justify-content:center; text-align:center; display:inline-flex;">Sign In</a>
+            <a href="pages/signup.html" class="btn btn-ghost btn-sm" style="width:100%; justify-content:center; text-align:center; display:inline-flex; border:1px solid var(--border-soft);">Create Account</a>
+          </div>
+          <hr style="border:none; border-top:1px solid var(--border-soft); margin:0.6rem 0;">
+          <ul class="account-panel-menu">
+            <li><a href="pages/profile.html"><i class="fa-solid fa-user-gear"></i> My Profile</a></li>
+            <li><a href="pages/orders.html"><i class="fa-solid fa-clock-rotate-left"></i> My Orders</a></li>
+            <li><a href="pages/wishlist.html"><i class="fa-regular fa-heart"></i> My Wishlist</a></li>
+          </ul>
+        </div>
       </div>
       <button class="icon-btn theme-toggle" id="themeToggle" aria-label="Toggle dark mode"><i class="fa-solid fa-moon"></i></button>
       <button class="hamburger" id="hamburger" aria-label="Menu"><span></span><span></span><span></span></button>

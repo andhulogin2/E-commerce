@@ -3221,10 +3221,23 @@ a:focus-visible, button:focus-visible, input:focus-visible {
   display: none;
   flex-direction: column;
   backdrop-filter: blur(16px);
-  animation: fadeInDown 0.25s var(--ease) forwards;
 }
 .account-panel.open {
-  display: flex;
+  display: flex !important;
+  opacity: 1 !important;
+  visibility: visible !important;
+  animation: fadeInDown 0.25s var(--ease) forwards;
+}
+
+@keyframes fadeInDown {
+  from {
+    opacity: 0;
+    transform: translateY(-8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 .account-panel-header {
   margin-bottom: 0.85rem;

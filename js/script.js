@@ -1283,61 +1283,67 @@ document.addEventListener('DOMContentLoaded', () => {
       };
     }
 
-    /* ---------- Account Dropdown Panel ---------- */
-    const accountToggle = document.getElementById('accountToggle');
-    const accountPanel = document.getElementById('accountPanel');
-    if (accountToggle && accountPanel) {
-      accountToggle.onclick = (e) => {
+    /* ---------- Account & Category Dropdowns (Global Delegated Click) ---------- */
+    document.addEventListener('click', (e) => {
+      const accountToggle = e.target.closest('#accountToggle');
+      const accountPanel = document.getElementById('accountPanel');
+      const allCategoriesBtn = e.target.closest('#allCategoriesBtn');
+      const allCategoriesPanel = document.getElementById('allCategoriesPanel');
+
+      // Click on Account Toggle
+      if (accountToggle && accountPanel) {
         e.stopPropagation();
         const isOpen = accountPanel.classList.contains('open');
         accountPanel.classList.toggle('open', !isOpen);
         accountToggle.setAttribute('aria-expanded', !isOpen ? 'true' : 'false');
-      };
-
-      accountPanel.onclick = (e) => {
-        e.stopPropagation();
-      };
-    }
-
-    /* ---------- Category Bar & All Categories Dropdown ---------- */
-    const allCategoriesBtn = document.getElementById('allCategoriesBtn');
-    const allCategoriesPanel = document.getElementById('allCategoriesPanel');
-
-    if (allCategoriesBtn && allCategoriesPanel) {
-      function toggleCategoryPanel(show) {
-        const isOpen = show !== undefined ? show : !allCategoriesPanel.classList.contains('open');
-        allCategoriesPanel.classList.toggle('open', isOpen);
-        allCategoriesBtn.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
+        if (allCategoriesPanel) allCategoriesPanel.classList.remove('open');
+        return;
       }
 
-      allCategoriesBtn.onclick = (e) => {
-        e.stopPropagation();
-        toggleCategoryPanel();
-      };
+      // Click inside Account Panel (keep open)
+      if (e.target.closest('#accountPanel')) {
+        return;
+      }
 
-      allCategoriesPanel.onclick = (e) => {
+      // Click on All Categories Toggle
+      if (allCategoriesBtn && allCategoriesPanel) {
         e.stopPropagation();
-      };
-    }
+        const isOpen = allCategoriesPanel.classList.contains('open');
+        allCategoriesPanel.classList.toggle('open', !isOpen);
+        allCategoriesBtn.setAttribute('aria-expanded', !isOpen ? 'true' : 'false');
+        if (accountPanel) accountPanel.classList.remove('open');
+        return;
+      }
 
-    // Global click & Escape handlers for all dropdown panels
-    document.addEventListener('click', () => {
+      // Click inside All Categories Panel
+      if (e.target.closest('#allCategoriesPanel')) {
+        return;
+      }
+
+      // Outside click: Close all dropdown panels
       if (accountPanel && accountPanel.classList.contains('open')) {
         accountPanel.classList.remove('open');
-        if (accountToggle) accountToggle.setAttribute('aria-expanded', 'false');
+        const btn = document.getElementById('accountToggle');
+        if (btn) btn.setAttribute('aria-expanded', 'false');
       }
       if (allCategoriesPanel && allCategoriesPanel.classList.contains('open')) {
         allCategoriesPanel.classList.remove('open');
-        if (allCategoriesBtn) allCategoriesBtn.setAttribute('aria-expanded', 'false');
+        const btn = document.getElementById('allCategoriesBtn');
+        if (btn) btn.setAttribute('aria-expanded', 'false');
       }
     });
 
     document.addEventListener('keydown', (e) => {
       if (e.key === 'Escape') {
+        const accountPanel = document.getElementById('accountPanel');
+        const accountToggle = document.getElementById('accountToggle');
         if (accountPanel && accountPanel.classList.contains('open')) {
           accountPanel.classList.remove('open');
           if (accountToggle) accountToggle.setAttribute('aria-expanded', 'false');
         }
+
+        const allCategoriesPanel = document.getElementById('allCategoriesPanel');
+        const allCategoriesBtn = document.getElementById('allCategoriesBtn');
         if (allCategoriesPanel && allCategoriesPanel.classList.contains('open')) {
           allCategoriesPanel.classList.remove('open');
           if (allCategoriesBtn) {
