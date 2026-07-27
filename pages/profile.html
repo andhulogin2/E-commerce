@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>My Account — NovaCart</title>
+<meta name="description" content="Manage your NovaCart profile details, shipping addresses, password, and order shortcuts.">
+<script>
+  // Access Control: Redirect to signin.html if user is not logged in
+  if (!localStorage.getItem('novacart-user')) {
+    window.location.href = 'signin.html';
+  }
+</script>
+
+<!-- Fonts & Icons -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Sora:wght@300;400;500;600;700;800&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+<link rel="stylesheet" href="../css/style.css">
+</head>
+<body data-page="profile">
+
+<!-- ============ HEADER & NAVIGATION ============ -->
+<div id="site-header"></div>
+
+<!-- ============ BREADCRUMBS ============ -->
+<nav class="breadcrumbs-wrapper" aria-label="Breadcrumb">
+  <div class="breadcrumbs">
+    <div class="breadcrumb-item"><a href="../index.html" class="breadcrumb-link"><i class="fa-solid fa-house"></i> Home</a></div>
+    <span class="breadcrumb-sep"><i class="fa-solid fa-chevron-right"></i></span>
+    <div class="breadcrumb-item"><a href="profile.html" class="breadcrumb-link">Account</a></div>
+    <span class="breadcrumb-sep"><i class="fa-solid fa-chevron-right"></i></span>
+    <div class="breadcrumb-item"><span class="breadcrumb-current">My Profile</span></div>
+  </div>
+</nav>
+
+<main>
+  <div class="profile-container">
+    
+    <!-- ============ PROFILE HERO CARD ============ -->
+    <div class="profile-hero-card">
+      <div class="profile-hero-left">
+        <div class="profile-avatar-lg" id="profileAvatar">U</div>
+        <div>
+          <h1 class="profile-user-name" id="profileHeroName">User Name</h1>
+          <p class="profile-user-email" id="profileHeroEmail">user@example.com</p>
+          <span class="profile-member-badge"><i class="fa-solid fa-shield-halved"></i> NovaCart Member</span>
+        </div>
+      </div>
+      <button class="btn btn-primary" id="toggleEditProfileBtn">
+        <i class="fa-solid fa-user-pen"></i> Edit Profile
+      </button>
+    </div>
+
+    <!-- ============ SECTION 1: PERSONAL DETAILS ============ -->
+    <div class="profile-section-card">
+      <div class="profile-section-header">
+        <h3><i class="fa-solid fa-id-card"></i> Personal Information</h3>
+        <span id="profileModeLabel" style="font-size: 0.85rem; color: var(--text-muted); font-weight: 500;">Display Mode</span>
+      </div>
+
+      <form id="profileDetailsForm" onsubmit="return false;">
+        <div class="profile-details-grid">
+          <div class="form-group">
+            <label for="profNameInput">Full Name</label>
+            <div id="profNameDisplay" class="field-display-val">—</div>
+            <input type="text" id="profNameInput" class="form-input" style="display:none;" required>
+          </div>
+
+          <div class="form-group">
+            <label for="profEmailInput">Email Address</label>
+            <div id="profEmailDisplay" class="field-display-val">—</div>
+            <input type="email" id="profEmailInput" class="form-input" style="display:none;" required>
+          </div>
+
+          <div class="form-group">
+            <label for="profPhoneInput">Phone Number</label>
+            <div id="profPhoneDisplay" class="field-display-val">Not provided</div>
+            <input type="tel" id="profPhoneInput" class="form-input" placeholder="+1 (555) 000-0000" style="display:none;">
+          </div>
+
+          <div class="form-group">
+            <label for="profDobInput">Date of Birth</label>
+            <div id="profDobDisplay" class="field-display-val">Not provided</div>
+            <input type="date" id="profDobInput" class="form-input" style="display:none;">
+          </div>
+
+          <div class="form-group">
+            <label for="profGenderSelect">Gender</label>
+            <div id="profGenderDisplay" class="field-display-val">Not specified</div>
+            <select id="profGenderSelect" class="form-input" style="display:none;">
+              <option value="">Prefer not to say</option>
+              <option value="Male">Male</option>
+              <option value="Female">Female</option>
+              <option value="Non-Binary">Non-Binary</option>
+              <option value="Other">Other</option>
+            </select>
+          </div>
+        </div>
+
+        <div id="profileEditActions" style="display:none; gap:1rem; margin-top:1.5rem; justify-content:flex-end;">
+          <button type="button" class="btn btn-ghost" id="cancelEditProfileBtn">Cancel</button>
+          <button type="submit" class="btn btn-primary" id="saveProfileBtn"><i class="fa-solid fa-floppy-disk"></i> Save Changes</button>
+        </div>
+      </form>
+    </div>
+
+    <!-- ============ SECTION 2: SAVED ADDRESSES ============ -->
+    <div class="profile-section-card">
+      <div class="profile-section-header">
+        <h3><i class="fa-solid fa-map-location-dot"></i> Saved Shipping Addresses</h3>
+        <button class="btn btn-primary btn-sm" id="addNewAddressBtn">
+          <i class="fa-solid fa-plus"></i> Add New Address
+        </button>
+      </div>
+
+      <div class="address-grid" id="addressGrid">
+        <!-- Rendered dynamically by JS -->
+      </div>
+    </div>
+
+    <!-- ============ SECTION 3: CHANGE PASSWORD ============ -->
+    <div class="profile-section-card">
+      <div class="profile-section-header">
+        <h3><i class="fa-solid fa-lock"></i> Security & Password</h3>
+      </div>
+
+      <form id="changePasswordForm" onsubmit="return false;" style="max-width: 500px;">
+        <div class="form-group" style="margin-bottom: 1.25rem;">
+          <label for="currentPass">Current Password</label>
+          <input type="password" id="currentPass" class="form-input" placeholder="••••••••" required>
+        </div>
+
+        <div class="form-group" style="margin-bottom: 1.25rem;">
+          <label for="newPass">New Password</label>
+          <input type="password" id="newPass" class="form-input" placeholder="••••••••" required>
+        </div>
+
+        <div class="form-group" style="margin-bottom: 1.5rem;">
+          <label for="confirmNewPass">Confirm New Password</label>
+          <input type="password" id="confirmNewPass" class="form-input" placeholder="••••••••" required>
+          <span class="form-error-msg" id="passMismatchMsg">New passwords do not match.</span>
+        </div>
+
+        <button type="submit" class="btn btn-primary" style="padding: 0.85rem 1.6rem;">
+          <i class="fa-solid fa-key"></i> Update Password
+        </button>
+      </form>
+    </div>
+
+    <!-- ============ SECTION 4: ACCOUNT QUICK LINKS ============ -->
+    <div class="profile-section-card">
+      <div class="profile-section-header">
+        <h3><i class="fa-solid fa-grid-2"></i> Account Quick Links</h3>
+      </div>
+
+      <div class="quick-links-grid">
+        <a href="orders.html" class="quick-link-card">
+          <div class="quick-link-icon"><i class="fa-solid fa-clock-rotate-left"></i></div>
+          <div>
+            <div style="font-weight: 700;">My Orders</div>
+            <div style="font-size: 0.8rem; color: var(--text-muted);">Track & view history</div>
+          </div>
+        </a>
+
+        <a href="wishlist.html" class="quick-link-card">
+          <div class="quick-link-icon"><i class="fa-regular fa-heart"></i></div>
+          <div>
+            <div style="font-weight: 700;">Wishlist</div>
+            <div style="font-size: 0.8rem; color: var(--text-muted);">Saved items</div>
+          </div>
+        </a>
+
+        <a href="#" id="profileSignOutLink" class="quick-link-card" style="border-color: rgba(255, 71, 87, 0.3);">
+          <div class="quick-link-icon" style="color: #FF4757;"><i class="fa-solid fa-right-from-bracket"></i></div>
+          <div>
+            <div style="font-weight: 700; color: #FF4757;">Sign Out</div>
+            <div style="font-size: 0.8rem; color: var(--text-muted);">End current session</div>
+          </div>
+        </a>
+      </div>
+    </div>
+
+  </div>
+</main>
+
+<!-- ============ ADD / EDIT ADDRESS MODAL ============ -->
+<div class="modal-overlay" id="addressModal">
+  <div class="modal-card">
+    <div style="display:flex; align-items:center; justify-content:space-between; margin-bottom:1.5rem;">
+      <h3 id="addressModalTitle" style="font-family:var(--font-head); font-size:1.3rem;">Add Shipping Address</h3>
+      <button id="closeAddressModalBtn" style="font-size:1.2rem; color:var(--text-muted); cursor:pointer;"><i class="fa-solid fa-xmark"></i></button>
+    </div>
+
+    <form id="addressForm" onsubmit="return false;" style="display:flex; flex-direction:column; gap:1rem;">
+      <input type="hidden" id="addressIdInput">
+      
+      <div>
+        <label style="display:block; font-size:0.85rem; font-weight:600; margin-bottom:0.3rem;">Address Type</label>
+        <select id="addrType" class="form-input" required>
+          <option value="Home">Home</option>
+          <option value="Work">Work</option>
+          <option value="Other">Other</option>
+        </select>
+      </div>
+
+      <div>
+        <label style="display:block; font-size:0.85rem; font-weight:600; margin-bottom:0.3rem;">Full Name</label>
+        <input type="text" id="addrName" class="form-input" required placeholder="Alex Morgan">
+      </div>
+
+      <div>
+        <label style="display:block; font-size:0.85rem; font-weight:600; margin-bottom:0.3rem;">Phone Number</label>
+        <input type="tel" id="addrPhone" class="form-input" required placeholder="+1 (555) 019-2831">
+      </div>
+
+      <div>
+        <label style="display:block; font-size:0.85rem; font-weight:600; margin-bottom:0.3rem;">Street Address</label>
+        <input type="text" id="addrStreet" class="form-input" required placeholder="742 Evergreen Terrace">
+      </div>
+
+      <div style="display:grid; grid-template-columns:1fr 1fr; gap:0.75rem;">
+        <div>
+          <label style="display:block; font-size:0.85rem; font-weight:600; margin-bottom:0.3rem;">City</label>
+          <input type="text" id="addrCity" class="form-input" required placeholder="Springfield">
+        </div>
+        <div>
+          <label style="display:block; font-size:0.85rem; font-weight:600; margin-bottom:0.3rem;">State / Province</label>
+          <input type="text" id="addrState" class="form-input" required placeholder="IL">
+        </div>
+      </div>
+
+      <div>
+        <label style="display:block; font-size:0.85rem; font-weight:600; margin-bottom:0.3rem;">ZIP / Postal Code</label>
+        <input type="text" id="addrZip" class="form-input" required placeholder="62704">
+      </div>
+
+      <div style="display:flex; justify-content:flex-end; gap:0.75rem; margin-top:0.5rem;">
+        <button type="button" class="btn btn-ghost" id="cancelAddressModalBtn">Cancel</button>
+        <button type="submit" class="btn btn-primary"><i class="fa-solid fa-check"></i> Save Address</button>
+      </div>
+    </form>
+  </div>
+</div>
+
+<!-- ============ FOOTER ============ -->
+<div id="site-footer"></div>
+
+<script src="../js/script.js"></script>
+</body>
+</html>
