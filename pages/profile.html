@@ -99,7 +99,7 @@
           </div>
         </div>
 
-        <div id="profileEditActions" style="display:none; gap:1rem; margin-top:1.5rem; justify-content:flex-end;">
+        <div id="profileEditActions" class="profile-edit-btn-row" style="display:none;">
           <button type="button" class="btn btn-ghost" id="cancelEditProfileBtn">Cancel</button>
           <button type="submit" class="btn btn-primary" id="saveProfileBtn"><i class="fa-solid fa-floppy-disk"></i> Save Changes</button>
         </div>
@@ -188,9 +188,9 @@
 <!-- ============ ADD / EDIT ADDRESS MODAL ============ -->
 <div class="modal-overlay" id="addressModal">
   <div class="modal-card">
-    <div style="display:flex; align-items:center; justify-content:space-between; margin-bottom:1.5rem;">
-      <h3 id="addressModalTitle" style="font-family:var(--font-head); font-size:1.3rem;">Add Shipping Address</h3>
-      <button id="closeAddressModalBtn" style="font-size:1.2rem; color:var(--text-muted); cursor:pointer;"><i class="fa-solid fa-xmark"></i></button>
+    <div class="modal-card-header">
+      <h3 id="addressModalTitle">Add Shipping Address</h3>
+      <button id="closeAddressModalBtn" class="modal-close-btn" aria-label="Close"><i class="fa-solid fa-xmark"></i></button>
     </div>
 
     <form id="addressForm" onsubmit="return false;" style="display:flex; flex-direction:column; gap:1rem;">

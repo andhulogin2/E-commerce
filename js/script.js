@@ -2348,10 +2348,10 @@ document.addEventListener('DOMContentLoaded', () => {
       const list = getAddresses();
       if (!list || list.length === 0) {
         grid.innerHTML = `
-          <div style="grid-column: 1 / -1; text-align: center; padding: 2.5rem 1.5rem; background: var(--bg); border: 1px dashed var(--border-soft); border-radius: var(--radius-sm);">
-            <i class="fa-solid fa-map-location-dot" style="font-size: 2.5rem; color: var(--primary); margin-bottom: 0.75rem;"></i>
-            <h4 style="font-family: var(--font-head); font-size: 1.1rem; margin-bottom: 0.3rem;">No saved addresses yet</h4>
-            <p style="color: var(--text-muted); font-size: 0.88rem;">Add your shipping address for a faster checkout experience.</p>
+          <div class="address-empty-state">
+            <i class="fa-solid fa-map-location-dot"></i>
+            <p>No saved addresses yet.</p>
+            <p style="font-size:0.82rem; margin-bottom:0;">Add your shipping address for a faster checkout experience.</p>
           </div>
         `;
         return;
@@ -2359,20 +2359,20 @@ document.addEventListener('DOMContentLoaded', () => {
 
       grid.innerHTML = list.map(addr => `
         <div class="address-card">
-          <div>
-            <div class="address-card-head">
-              <span class="address-label-badge">${addr.type || 'Home'}</span>
-              <span style="font-weight: 600; font-size: 0.85rem; color: var(--text-main);">${addr.name}</span>
+          <div class="address-card-head">
+            <span class="address-label-badge">${addr.type || 'Home'}</span>
+            <div style="display:flex; gap:0.5rem;">
+              <button class="btn btn-ghost btn-sm edit-addr-btn" data-id="${addr.id}" title="Edit"><i class="fa-solid fa-pen-to-square"></i> Edit</button>
+              <button class="btn btn-ghost btn-sm delete-addr-btn" data-id="${addr.id}" title="Delete" style="color:#FF4757;"><i class="fa-solid fa-trash-can"></i></button>
             </div>
+          </div>
+          <div>
+            <div style="font-weight:700; font-size:0.95rem; color:var(--text-main); margin-bottom:0.4rem;">${addr.name}</div>
             <div class="address-text">
               ${addr.street}<br>
               ${addr.city}, ${addr.state} ${addr.zip}<br>
-              <span style="font-size: 0.82rem; color: var(--text-muted);"><i class="fa-solid fa-phone"></i> ${addr.phone}</span>
+              <span style="font-size:0.82rem;"><i class="fa-solid fa-phone" style="color:var(--primary);"></i>&nbsp;${addr.phone}</span>
             </div>
-          </div>
-          <div class="address-actions">
-            <button class="btn btn-ghost btn-sm edit-addr-btn" data-id="${addr.id}"><i class="fa-solid fa-pen-to-square"></i> Edit</button>
-            <button class="btn btn-ghost btn-sm delete-addr-btn" data-id="${addr.id}" style="color:#FF4757;"><i class="fa-solid fa-trash-can"></i> Delete</button>
           </div>
         </div>
       `).join('');
