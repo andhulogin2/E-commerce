@@ -1287,25 +1287,6 @@ document.addEventListener('DOMContentLoaded', () => {
     const accountToggle = document.getElementById('accountToggle');
     const accountPanel = document.getElementById('accountPanel');
     if (accountToggle && accountPanel) {
-      const isPagesDir = window.location.pathname.includes('/pages/');
-      const pagePrefix = isPagesDir ? '' : 'pages/';
-
-      accountPanel.innerHTML = `
-        <div class="account-panel-header">
-          <strong>My Account</strong>
-          <p>Sign in to access your orders & account.</p>
-        </div>
-        <div class="account-panel-actions">
-          <a href="${pagePrefix}signin.html" class="btn btn-primary btn-sm" style="width:100%; justify-content:center; text-align:center; display:inline-flex;">Sign In</a>
-          <a href="${pagePrefix}signup.html" class="btn btn-ghost btn-sm" style="width:100%; justify-content:center; text-align:center; display:inline-flex; border:1px solid var(--border-soft);">Create Account</a>
-        </div>
-        <hr style="border:none; border-top:1px solid var(--border-soft); margin:0.8rem 0;">
-        <ul class="account-panel-menu">
-          <li><a href="${pagePrefix}orders.html"><i class="fa-solid fa-clock-rotate-left"></i> My Orders</a></li>
-          <li><a href="${pagePrefix}wishlist.html"><i class="fa-regular fa-heart"></i> My Wishlist</a></li>
-        </ul>
-      `;
-
       accountToggle.onclick = (e) => {
         e.stopPropagation();
         const isOpen = accountPanel.classList.contains('open');
@@ -1316,13 +1297,6 @@ document.addEventListener('DOMContentLoaded', () => {
       accountPanel.onclick = (e) => {
         e.stopPropagation();
       };
-
-      document.addEventListener('click', () => {
-        if (accountPanel.classList.contains('open')) {
-          accountPanel.classList.remove('open');
-          accountToggle.setAttribute('aria-expanded', 'false');
-        }
-      });
     }
 
     /* ---------- Category Bar & All Categories Dropdown ---------- */
@@ -1344,20 +1318,35 @@ document.addEventListener('DOMContentLoaded', () => {
       allCategoriesPanel.onclick = (e) => {
         e.stopPropagation();
       };
-
-      document.onclick = () => {
-        if (allCategoriesPanel.classList.contains('open')) {
-          toggleCategoryPanel(false);
-        }
-      };
-
-      document.onkeydown = (e) => {
-        if (e.key === 'Escape' && allCategoriesPanel.classList.contains('open')) {
-          toggleCategoryPanel(false);
-          allCategoriesBtn.focus();
-        }
-      };
     }
+
+    // Global click & Escape handlers for all dropdown panels
+    document.addEventListener('click', () => {
+      if (accountPanel && accountPanel.classList.contains('open')) {
+        accountPanel.classList.remove('open');
+        if (accountToggle) accountToggle.setAttribute('aria-expanded', 'false');
+      }
+      if (allCategoriesPanel && allCategoriesPanel.classList.contains('open')) {
+        allCategoriesPanel.classList.remove('open');
+        if (allCategoriesBtn) allCategoriesBtn.setAttribute('aria-expanded', 'false');
+      }
+    });
+
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape') {
+        if (accountPanel && accountPanel.classList.contains('open')) {
+          accountPanel.classList.remove('open');
+          if (accountToggle) accountToggle.setAttribute('aria-expanded', 'false');
+        }
+        if (allCategoriesPanel && allCategoriesPanel.classList.contains('open')) {
+          allCategoriesPanel.classList.remove('open');
+          if (allCategoriesBtn) {
+            allCategoriesBtn.setAttribute('aria-expanded', 'false');
+            allCategoriesBtn.focus();
+          }
+        }
+      }
+    });
 
     /* ---------- Dark mode toggle ---------- */
     const themeToggle = document.getElementById('themeToggle');
@@ -2158,12 +2147,15 @@ document.addEventListener('DOMContentLoaded', () => {
 
         if (accountPanel) {
           accountPanel.innerHTML = `
-            <div class="account-panel-header">
-              <strong style="font-size:0.95rem; font-family:var(--font-head);">${user.name || 'Shopper'}</strong>
-              <span style="font-size:0.8rem; color:var(--text-muted);">${user.email || ''}</span>
-            </div>
+            <a href="${pagePrefix}profile.html" style="text-decoration:none; color:inherit;">
+              <div class="account-panel-header">
+                <strong style="font-size:0.95rem; font-family:var(--font-head);">${user.name || 'Shopper'}</strong>
+                <span style="font-size:0.8rem; color:var(--text-muted);">${user.email || ''}</span>
+              </div>
+            </a>
             <hr style="border:none; border-top:1px solid var(--border-soft); margin:0.6rem 0;">
             <ul class="account-panel-menu">
+              <li><a href="${pagePrefix}profile.html"><i class="fa-solid fa-user-gear"></i> My Profile</a></li>
               <li><a href="${pagePrefix}orders.html"><i class="fa-solid fa-clock-rotate-left"></i> My Orders</a></li>
               <li><a href="${pagePrefix}wishlist.html"><i class="fa-regular fa-heart"></i> My Wishlist</a></li>
             </ul>
@@ -2210,33 +2202,6 @@ document.addEventListener('DOMContentLoaded', () => {
         `;
       }
     }
-
-    accountToggle.onclick = (e) => {
-      e.stopPropagation();
-      const storedUser = localStorage.getItem('novacart-user');
-      if (!storedUser) {
-        // If not logged in, navigate straight to Sign In page
-        window.location.href = isInsidePages ? 'signin.html' : 'pages/signin.html';
-      } else if (accountPanel) {
-        // If logged in, toggle account dropdown
-        const isOpen = accountPanel.classList.contains('open');
-        accountPanel.classList.toggle('open', !isOpen);
-        accountToggle.setAttribute('aria-expanded', !isOpen ? 'true' : 'false');
-      }
-    };
-
-    if (accountPanel) {
-      accountPanel.onclick = (e) => {
-        e.stopPropagation();
-      };
-    }
-
-    document.onclick = () => {
-      if (accountPanel && accountPanel.classList.contains('open')) {
-        accountPanel.classList.remove('open');
-        accountToggle.setAttribute('aria-expanded', 'false');
-      }
-    };
   }
 
   /* ---------- Sign In & Sign Up Form Handlers ---------- */
@@ -2306,7 +2271,307 @@ document.addEventListener('DOMContentLoaded', () => {
     };
   }
 
+  /* ============================================================
+     PROFILE / MY ACCOUNT PAGE CONTROLLER
+     ============================================================ */
+  function initProfilePage() {
+    const profileContainer = document.querySelector('.profile-container');
+    if (!profileContainer) return;
+
+    // 1. Personal Information Controller
+    function renderProfileInfo() {
+      const storedUser = localStorage.getItem('novacart-user');
+      if (!storedUser) return;
+      
+      let user = {};
+      try { user = JSON.parse(storedUser); } catch(e) { return; }
+
+      const initial = user.name ? user.name.trim()[0].toUpperCase() : 'U';
+      
+      const avatarEl = document.getElementById('profileAvatar');
+      const nameHero = document.getElementById('profileHeroName');
+      const emailHero = document.getElementById('profileHeroEmail');
+
+      if (avatarEl) avatarEl.textContent = initial;
+      if (nameHero) nameHero.textContent = user.name || 'Shopper';
+      if (emailHero) emailHero.textContent = user.email || '';
+
+      // Display fields
+      const profNameDisplay = document.getElementById('profNameDisplay');
+      const profEmailDisplay = document.getElementById('profEmailDisplay');
+      const profPhoneDisplay = document.getElementById('profPhoneDisplay');
+      const profDobDisplay = document.getElementById('profDobDisplay');
+      const profGenderDisplay = document.getElementById('profGenderDisplay');
+
+      if (profNameDisplay) profNameDisplay.textContent = user.name || '—';
+      if (profEmailDisplay) profEmailDisplay.textContent = user.email || '—';
+      if (profPhoneDisplay) profPhoneDisplay.textContent = user.phone || 'Not provided';
+      if (profDobDisplay) profDobDisplay.textContent = user.dob || 'Not provided';
+      if (profGenderDisplay) profGenderDisplay.textContent = user.gender || 'Not specified';
+
+      // Inputs
+      const profNameInput = document.getElementById('profNameInput');
+      const profEmailInput = document.getElementById('profEmailInput');
+      const profPhoneInput = document.getElementById('profPhoneInput');
+      const profDobInput = document.getElementById('profDobInput');
+      const profGenderSelect = document.getElementById('profGenderSelect');
+
+      if (profNameInput) profNameInput.value = user.name || '';
+      if (profEmailInput) profEmailInput.value = user.email || '';
+      if (profPhoneInput) profPhoneInput.value = user.phone || '';
+      if (profDobInput) profDobInput.value = user.dob || '';
+      if (profGenderSelect) profGenderSelect.value = user.gender || '';
+    }
+
+    renderProfileInfo();
+
+    // Toggle Edit Profile Mode
+    const toggleEditBtn = document.getElementById('toggleEditProfileBtn');
+    const cancelEditBtn = document.getElementById('cancelEditProfileBtn');
+    const profileEditActions = document.getElementById('profileEditActions');
+    const profileModeLabel = document.getElementById('profileModeLabel');
+    const profileDetailsForm = document.getElementById('profileDetailsForm');
+
+    function setEditMode(editing) {
+      const displays = ['profNameDisplay', 'profEmailDisplay', 'profPhoneDisplay', 'profDobDisplay', 'profGenderDisplay'];
+      const inputs = ['profNameInput', 'profEmailInput', 'profPhoneInput', 'profDobInput', 'profGenderSelect'];
+
+      displays.forEach(id => {
+        const el = document.getElementById(id);
+        if (el) el.style.display = editing ? 'none' : 'block';
+      });
+
+      inputs.forEach(id => {
+        const el = document.getElementById(id);
+        if (el) el.style.display = editing ? 'block' : 'none';
+      });
+
+      if (profileEditActions) profileEditActions.style.display = editing ? 'flex' : 'none';
+      if (profileModeLabel) profileModeLabel.textContent = editing ? 'Editing Mode' : 'Display Mode';
+      if (toggleEditBtn) toggleEditBtn.style.display = editing ? 'none' : 'inline-flex';
+    }
+
+    if (toggleEditBtn) toggleEditBtn.onclick = () => setEditMode(true);
+    if (cancelEditBtn) cancelEditBtn.onclick = () => { renderProfileInfo(); setEditMode(false); };
+
+    if (profileDetailsForm) {
+      profileDetailsForm.onsubmit = (e) => {
+        e.preventDefault();
+        const storedUser = localStorage.getItem('novacart-user');
+        let user = {};
+        try { user = JSON.parse(storedUser) || {}; } catch(err) { user = {}; }
+
+        const nameVal = document.getElementById('profNameInput').value.trim();
+        const emailVal = document.getElementById('profEmailInput').value.trim();
+        const phoneVal = document.getElementById('profPhoneInput').value.trim();
+        const dobVal = document.getElementById('profDobInput').value;
+        const genderVal = document.getElementById('profGenderSelect').value;
+
+        if (!nameVal || !emailVal) {
+          if (window.showToast) window.showToast('Validation Error', 'Name and Email are required.', 'error');
+          return;
+        }
+
+        user.name = nameVal;
+        user.email = emailVal;
+        user.phone = phoneVal;
+        user.dob = dobVal;
+        user.gender = genderVal;
+
+        localStorage.setItem('novacart-user', JSON.stringify(user));
+        renderProfileInfo();
+        setEditMode(false);
+
+        if (typeof updateNavAccountState === 'function') updateNavAccountState();
+        if (window.showToast) window.showToast('Profile Updated', 'Your profile details have been saved successfully.', 'success');
+      };
+    }
+
+    // 2. Saved Addresses Manager
+    const defaultAddresses = [
+      {
+        id: 'addr-1',
+        type: 'Home',
+        name: 'Alex Morgan',
+        phone: '+1 (555) 019-2831',
+        street: '742 Evergreen Terrace',
+        city: 'Springfield',
+        state: 'IL',
+        zip: '62704'
+      }
+    ];
+
+    function getAddresses() {
+      const stored = localStorage.getItem('novacart-addresses');
+      if (!stored) {
+        localStorage.setItem('novacart-addresses', JSON.stringify(defaultAddresses));
+        return defaultAddresses;
+      }
+      try { return JSON.parse(stored); } catch(e) { return []; }
+    }
+
+    function saveAddresses(list) {
+      localStorage.setItem('novacart-addresses', JSON.stringify(list));
+      renderAddresses();
+    }
+
+    function renderAddresses() {
+      const grid = document.getElementById('addressGrid');
+      if (!grid) return;
+
+      const list = getAddresses();
+      if (!list || list.length === 0) {
+        grid.innerHTML = `
+          <div style="grid-column: 1 / -1; text-align: center; padding: 2.5rem 1.5rem; background: var(--bg); border: 1px dashed var(--border-soft); border-radius: var(--radius-sm);">
+            <i class="fa-solid fa-map-location-dot" style="font-size: 2.5rem; color: var(--primary); margin-bottom: 0.75rem;"></i>
+            <h4 style="font-family: var(--font-head); font-size: 1.1rem; margin-bottom: 0.3rem;">No saved addresses yet</h4>
+            <p style="color: var(--text-muted); font-size: 0.88rem;">Add your shipping address for a faster checkout experience.</p>
+          </div>
+        `;
+        return;
+      }
+
+      grid.innerHTML = list.map(addr => `
+        <div class="address-card">
+          <div>
+            <div class="address-card-head">
+              <span class="address-label-badge">${addr.type || 'Home'}</span>
+              <span style="font-weight: 600; font-size: 0.85rem; color: var(--text-main);">${addr.name}</span>
+            </div>
+            <div class="address-text">
+              ${addr.street}<br>
+              ${addr.city}, ${addr.state} ${addr.zip}<br>
+              <span style="font-size: 0.82rem; color: var(--text-muted);"><i class="fa-solid fa-phone"></i> ${addr.phone}</span>
+            </div>
+          </div>
+          <div class="address-actions">
+            <button class="btn btn-ghost btn-sm edit-addr-btn" data-id="${addr.id}"><i class="fa-solid fa-pen-to-square"></i> Edit</button>
+            <button class="btn btn-ghost btn-sm delete-addr-btn" data-id="${addr.id}" style="color:#FF4757;"><i class="fa-solid fa-trash-can"></i> Delete</button>
+          </div>
+        </div>
+      `).join('');
+
+      // Wire Edit / Delete buttons
+      grid.querySelectorAll('.edit-addr-btn').forEach(btn => {
+        btn.onclick = () => openAddressModal(btn.dataset.id);
+      });
+
+      grid.querySelectorAll('.delete-addr-btn').forEach(btn => {
+        btn.onclick = () => {
+          const id = btn.dataset.id;
+          const updated = getAddresses().filter(a => a.id !== id);
+          saveAddresses(updated);
+          if (window.showToast) window.showToast('Address Deleted', 'Shipping address has been removed.', 'info');
+        };
+      });
+    }
+
+    renderAddresses();
+
+    // Address Modal Controls
+    const addressModal = document.getElementById('addressModal');
+    const addNewAddressBtn = document.getElementById('addNewAddressBtn');
+    const closeAddressModalBtn = document.getElementById('closeAddressModalBtn');
+    const cancelAddressModalBtn = document.getElementById('cancelAddressModalBtn');
+    const addressForm = document.getElementById('addressForm');
+
+    function openAddressModal(editId = null) {
+      if (!addressModal) return;
+      const titleEl = document.getElementById('addressModalTitle');
+      const idInput = document.getElementById('addressIdInput');
+
+      if (editId) {
+        const list = getAddresses();
+        const item = list.find(a => a.id === editId);
+        if (item) {
+          if (titleEl) titleEl.textContent = 'Edit Shipping Address';
+          if (idInput) idInput.value = item.id;
+          document.getElementById('addrType').value = item.type || 'Home';
+          document.getElementById('addrName').value = item.name || '';
+          document.getElementById('addrPhone').value = item.phone || '';
+          document.getElementById('addrStreet').value = item.street || '';
+          document.getElementById('addrCity').value = item.city || '';
+          document.getElementById('addrState').value = item.state || '';
+          document.getElementById('addrZip').value = item.zip || '';
+        }
+      } else {
+        if (titleEl) titleEl.textContent = 'Add Shipping Address';
+        if (idInput) idInput.value = '';
+        if (addressForm) addressForm.reset();
+      }
+
+      addressModal.classList.add('open');
+    }
+
+    function closeAddressModal() {
+      if (addressModal) addressModal.classList.remove('open');
+    }
+
+    if (addNewAddressBtn) addNewAddressBtn.onclick = () => openAddressModal();
+    if (closeAddressModalBtn) closeAddressModalBtn.onclick = closeAddressModal;
+    if (cancelAddressModalBtn) cancelAddressModalBtn.onclick = closeAddressModal;
+
+    if (addressForm) {
+      addressForm.onsubmit = (e) => {
+        e.preventDefault();
+        const id = document.getElementById('addressIdInput').value;
+        const type = document.getElementById('addrType').value;
+        const name = document.getElementById('addrName').value.trim();
+        const phone = document.getElementById('addrPhone').value.trim();
+        const street = document.getElementById('addrStreet').value.trim();
+        const city = document.getElementById('addrCity').value.trim();
+        const state = document.getElementById('addrState').value.trim();
+        const zip = document.getElementById('addrZip').value.trim();
+
+        let list = getAddresses();
+        if (id) {
+          // Edit existing
+          list = list.map(a => a.id === id ? { id, type, name, phone, street, city, state, zip } : a);
+        } else {
+          // Add new
+          const newObj = { id: 'addr-' + Date.now(), type, name, phone, street, city, state, zip };
+          list.push(newObj);
+        }
+
+        saveAddresses(list);
+        closeAddressModal();
+        if (window.showToast) window.showToast('Address Saved', 'Your shipping address has been updated.', 'success');
+      };
+    }
+
+    // 3. Change Password Controller
+    const changePasswordForm = document.getElementById('changePasswordForm');
+    if (changePasswordForm) {
+      changePasswordForm.onsubmit = (e) => {
+        e.preventDefault();
+        const newPass = document.getElementById('newPass').value;
+        const confirmNewPass = document.getElementById('confirmNewPass').value;
+        const mismatchMsg = document.getElementById('passMismatchMsg');
+
+        if (newPass !== confirmNewPass) {
+          if (mismatchMsg) mismatchMsg.style.display = 'block';
+          return;
+        }
+        if (mismatchMsg) mismatchMsg.style.display = 'none';
+
+        if (window.showToast) window.showToast('Password Updated', 'Your security password has been changed successfully.', 'success');
+        changePasswordForm.reset();
+      };
+    }
+
+    // 4. Sign Out Shortcut
+    const profileSignOutLink = document.getElementById('profileSignOutLink');
+    if (profileSignOutLink) {
+      profileSignOutLink.onclick = (e) => {
+        e.preventDefault();
+        localStorage.removeItem('novacart-user');
+        window.location.href = 'signin.html';
+      };
+    }
+  }
+
   /* ---------- Initial state ---------- */
+  initProfilePage();
   updateNavAccountState();
   updateActiveNavLinks();
 });
