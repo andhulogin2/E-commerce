@@ -2350,8 +2350,8 @@ document.addEventListener('DOMContentLoaded', () => {
         grid.innerHTML = `
           <div class="address-empty-state">
             <i class="fa-solid fa-map-location-dot"></i>
-            <p>No saved addresses yet.</p>
-            <p style="font-size:0.82rem; margin-bottom:0;">Add your shipping address for a faster checkout experience.</p>
+            <p>No saved addresses yet</p>
+            <span>Add a shipping address for a faster checkout experience.</span>
           </div>
         `;
         return;
@@ -2361,23 +2361,22 @@ document.addEventListener('DOMContentLoaded', () => {
         <div class="address-card">
           <div class="address-card-head">
             <span class="address-label-badge">${addr.type || 'Home'}</span>
-            <div style="display:flex; gap:0.5rem;">
-              <button class="btn btn-ghost btn-sm edit-addr-btn" data-id="${addr.id}" title="Edit"><i class="fa-solid fa-pen-to-square"></i> Edit</button>
-              <button class="btn btn-ghost btn-sm delete-addr-btn" data-id="${addr.id}" title="Delete" style="color:#FF4757;"><i class="fa-solid fa-trash-can"></i></button>
+            <div style="display:flex; gap:0.4rem;">
+              <button class="btn btn-ghost btn-sm edit-addr-btn" data-id="${addr.id}" title="Edit address"><i class="fa-solid fa-pen-to-square"></i> Edit</button>
+              <button class="btn btn-ghost btn-sm delete-addr-btn" data-id="${addr.id}" title="Delete address" style="color:#FF4757; padding:0.45rem 0.65rem;"><i class="fa-solid fa-trash-can"></i></button>
             </div>
           </div>
           <div>
-            <div style="font-weight:700; font-size:0.95rem; color:var(--text-main); margin-bottom:0.4rem;">${addr.name}</div>
+            <div class="address-recipient">${addr.name}</div>
             <div class="address-text">
               ${addr.street}<br>
               ${addr.city}, ${addr.state} ${addr.zip}<br>
-              <span style="font-size:0.82rem;"><i class="fa-solid fa-phone" style="color:var(--primary);"></i>&nbsp;${addr.phone}</span>
+              <span style="font-size:0.82rem;"><i class="fa-solid fa-phone" style="color:#6C63FF; margin-right:4px;"></i>${addr.phone}</span>
             </div>
           </div>
         </div>
       `).join('');
 
-      // Wire Edit / Delete buttons
       grid.querySelectorAll('.edit-addr-btn').forEach(btn => {
         btn.onclick = () => openAddressModal(btn.dataset.id);
       });
