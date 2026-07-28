@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Help Center & Customer Support Hub — NovaCart</title>
+  <meta name="description"
+    content="NovaCart Help Center. Find quick answers, track your order, initiate a return, learn about shipping & payments, or talk to support.">
+
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Sora:wght@300;400;500;600;700;800&family=Inter:wght@300;400;500;600;700&display=swap"
+    rel="stylesheet">
+
+  <!-- Font Awesome -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
+  <!-- Stylesheets -->
+  <link rel="stylesheet" href="../css/style.css?v=20260727-v10">
+  <link rel="stylesheet" href="../css/help-center.css">
+</head>
+
+<body data-page="help-center">
+
+  <!-- ============ HEADER & NAVIGATION ============ -->
+  <div id="site-header"></div>
+
+  <!-- ============ BREADCRUMBS ============ -->
+  <nav class="breadcrumbs-wrapper" aria-label="Breadcrumb">
+    <div class="breadcrumbs">
+      <div class="breadcrumb-item"><a href="../index.html" class="breadcrumb-link"><i class="fa-solid fa-house"></i>
+          Home</a></div>
+      <span class="breadcrumb-sep"><i class="fa-solid fa-chevron-right"></i></span>
+      <div class="breadcrumb-item"><span class="breadcrumb-current">Help Center Hub</span></div>
+    </div>
+  </nav>
+
+  <main>
+    <!-- ============ PAGE HERO ============ -->
+    <section class="page-hero help-hero">
+      <div class="help-hero-glow" aria-hidden="true"></div>
+      <div class="help-hero-inner">
+        <span class="help-hero-badge"><i class="fa-solid fa-headset"></i> Support & Assistance</span>
+        <h1>How can we <span class="help-hero-accent">help you</span> today?</h1>
+        <p>Your one-stop customer care portal. Track shipments, request returns, explore payment options, or connect with our support team.</p>
+
+        <!-- Prominent Search Bar -->
+        <form class="help-search-form" id="helpSearchForm" action="faq.html" method="GET">
+          <i class="fa-solid fa-magnifying-glass help-search-icon"></i>
+          <input type="text" name="q" id="helpSearchInput" class="help-search-input"
+            placeholder="Search for a question... e.g. returns, UPI, tracking, warranty" autocomplete="off" required>
+          <button type="submit" class="help-search-btn">Search FAQ</button>
+        </form>
+
+        <div class="help-hero-stats">
+          <div class="help-hero-stat"><strong>24/7</strong><span>Support Access</span></div>
+          <div class="help-hero-stat-divider"></div>
+          <div class="help-hero-stat"><strong>30 Days</strong><span>Easy Returns</span></div>
+          <div class="help-hero-stat-divider"></div>
+          <div class="help-hero-stat"><strong>&lt; 2 hrs</strong><span>Avg Response Time</span></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ MAIN CONTENT CONTAINER ============ -->
+    <div class="help-container">
+
+      <!-- ============ QUICK ACCESS CARDS GRID ============ -->
+      <section class="help-section">
+        <div class="help-section-header">
+          <h2>Quick Support Topics</h2>
+          <p>Select a category to jump directly to self-service portals and answers</p>
+        </div>
+
+        <div class="help-grid">
+          <!-- Card 1: Track My Order -->
+          <a href="orders.html" class="help-card">
+            <div class="help-card-icon">
+              <i class="fa-solid fa-truck-fast"></i>
+            </div>
+            <h3>Track My Order</h3>
+            <p>Check real-time delivery status, carrier info, and shipment timeline for your recent purchases.</p>
+            <span class="help-card-link">View Orders <i class="fa-solid fa-arrow-right"></i></span>
+          </a>
+
+          <!-- Card 2: Returns & Refunds -->
+          <a href="faq.html?cat=returns" class="help-card">
+            <div class="help-card-icon">
+              <i class="fa-solid fa-rotate-left"></i>
+            </div>
+            <h3>Returns & Refunds</h3>
+            <p>Initiate a return pickup, check 30-day money back eligibility, or view refund processing status.</p>
+            <span class="help-card-link">Return Policy & FAQs <i class="fa-solid fa-arrow-right"></i></span>
+          </a>
+
+          <!-- Card 3: Shipping & Delivery Info -->
+          <a href="faq.html?cat=shipping" class="help-card">
+            <div class="help-card-icon">
+              <i class="fa-solid fa-box-open"></i>
+            </div>
+            <h3>Shipping & Delivery</h3>
+            <p>Learn about dispatch times, express shipping options, and pan-India coverage details.</p>
+            <span class="help-card-link">Shipping Guidelines <i class="fa-solid fa-arrow-right"></i></span>
+          </a>
+
+          <!-- Card 4: Payment & Security -->
+          <a href="faq.html?cat=payment" class="help-card">
+            <div class="help-card-icon">
+              <i class="fa-solid fa-credit-card"></i>
+            </div>
+            <h3>Payment & Security</h3>
+            <p>Explore supported UPI options, credit cards, COD eligibility, and SSL 256-bit encryption safety.</p>
+            <span class="help-card-link">Payment Details <i class="fa-solid fa-arrow-right"></i></span>
+          </a>
+
+          <!-- Card 5: Manage My Account -->
+          <a href="profile.html" class="help-card">
+            <div class="help-card-icon">
+              <i class="fa-solid fa-user-gear"></i>
+            </div>
+            <h3>Manage Account</h3>
+            <p>Update personal profile details, delivery address book, security settings, and saved payment methods.</p>
+            <span class="help-card-link">Go to Profile <i class="fa-solid fa-arrow-right"></i></span>
+          </a>
+
+          <!-- Card 6: Talk to Support -->
+          <a href="contact.html" class="help-card">
+            <div class="help-card-icon">
+              <i class="fa-solid fa-headset"></i>
+            </div>
+            <h3>Talk to Support</h3>
+            <p>Need extra help? Send a message to our customer care team or check live contact channels.</p>
+            <span class="help-card-link">Contact Us <i class="fa-solid fa-arrow-right"></i></span>
+          </a>
+        </div>
+      </section>
+
+      <!-- ============ POPULAR QUESTIONS PREVIEW ============ -->
+      <section class="help-popular-section">
+        <div class="help-section-header">
+          <h2>Popular Questions</h2>
+          <p>Quick shortcuts to our most frequently requested answers</p>
+        </div>
+
+        <div class="help-popular-grid">
+          <a href="faq.html?cat=shipping" class="help-question-item">
+            <span><i class="fa-solid fa-truck-fast q-icon"></i> How fast is standard shipping?</span>
+            <i class="fa-solid fa-chevron-right arrow-icon"></i>
+          </a>
+
+          <a href="faq.html?cat=returns" class="help-question-item">
+            <span><i class="fa-solid fa-rotate-left q-icon"></i> What is NovaCart's return policy?</span>
+            <i class="fa-solid fa-chevron-right arrow-icon"></i>
+          </a>
+
+          <a href="faq.html?cat=payment" class="help-question-item">
+            <span><i class="fa-solid fa-credit-card q-icon"></i> What payment methods & UPI are accepted?</span>
+            <i class="fa-solid fa-chevron-right arrow-icon"></i>
+          </a>
+
+          <a href="faq.html?cat=account" class="help-question-item">
+            <span><i class="fa-solid fa-pen-to-square q-icon"></i> Can I change or cancel an order after placing it?</span>
+            <i class="fa-solid fa-chevron-right arrow-icon"></i>
+          </a>
+        </div>
+      </section>
+
+      <!-- ============ CONTACT CTA BANNER ============ -->
+      <section class="help-cta-banner">
+        <div class="help-cta-banner-glow" aria-hidden="true"></div>
+        <div class="help-cta-inner">
+          <h2>Still need assistance?</h2>
+          <p>If you can't find what you're looking for, our friendly support team is standing by to help you out.</p>
+          <a href="contact.html" class="help-cta-btn">
+            <i class="fa-solid fa-envelope"></i> Contact Customer Support
+          </a>
+        </div>
+      </section>
+
+    </div>
+  </main>
+
+  <!-- ============ FOOTER ============ -->
+  <div id="site-footer"></div>
+
+  <!-- Scripts -->
+  <script src="../js/script.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      const searchForm = document.getElementById('helpSearchForm');
+      const searchInput = document.getElementById('helpSearchInput');
+
+      if (searchForm && searchInput) {
+        searchForm.addEventListener('submit', (e) => {
+          const val = searchInput.value.trim();
+          if (!val) {
+            e.preventDefault();
+            return;
+          }
+          // Default action navigates to faq.html?q=encodeURIComponent(val)
+        });
+      }
+    });
+  </script>
+</body>
+
+</html>

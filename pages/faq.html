@@ -1,109 +1,323 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Frequently Asked Questions — NovaCart</title>
-<meta name="description" content="Find quick answers to common questions about shipping, delivery, order tracking, returns, and payment options at NovaCart.">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Sora:wght@300;400;500;600;700;800&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
-<link rel="stylesheet" href="../css/style.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Frequently Asked Questions — NovaCart</title>
+  <meta name="description"
+    content="Find quick answers to common questions about shipping, delivery, order tracking, returns, and payment options at NovaCart.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Sora:wght@300;400;500;600;700;800&family=Inter:wght@300;400;500;600;700&display=swap"
+    rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  <link rel="stylesheet" href="../css/style.css?v=20260727-v10">
+  <!-- FAQ Page Stylesheet -->
+  <link rel="stylesheet" href="../css/faq.css">
 </head>
+
 <body data-page="faq">
 
-<!-- ============ HEADER & NAVIGATION ============ -->
-<div id="site-header"></div>
+  <!-- ============ HEADER & NAVIGATION ============ -->
+  <div id="site-header"></div>
 
-<!-- ============ BREADCRUMBS ============ -->
-<nav class="breadcrumbs-wrapper" aria-label="Breadcrumb">
-  <div class="breadcrumbs">
-    <div class="breadcrumb-item"><a href="../index.html" class="breadcrumb-link"><i class="fa-solid fa-house"></i> Home</a></div>
-    <span class="breadcrumb-sep"><i class="fa-solid fa-chevron-right"></i></span>
-    <div class="breadcrumb-item"><span class="breadcrumb-current">FAQ & Help Center</span></div>
-  </div>
-</nav>
-
-<main>
-  <!-- ============ PAGE HERO ============ -->
-  <section class="page-hero">
-    <h1>Frequently Asked Questions</h1>
-    <p>Everything you need to know about shopping, delivery timelines, payment security, and our hassle-free return policy.</p>
-  </section>
-
-  <div class="faq-container">
-    <div class="faq-item active">
-      <button class="faq-header">
-        <span><i class="fa-solid fa-truck-fast" style="margin-right: 0.75rem; color: var(--primary);"></i> How fast is shipping?</span>
-        <i class="fa-solid fa-chevron-down faq-icon"></i>
-      </button>
-      <div class="faq-body">
-        Standard shipping delivers in 2–4 business days worldwide. Express overnight shipping options are available at checkout for urgent orders. Orders placed before 2 PM EST ship out the same day.
-      </div>
+  <!-- ============ BREADCRUMBS ============ -->
+  <nav class="breadcrumbs-wrapper" aria-label="Breadcrumb">
+    <div class="breadcrumbs">
+      <div class="breadcrumb-item"><a href="../index.html" class="breadcrumb-link"><i class="fa-solid fa-house"></i>
+          Home</a></div>
+      <span class="breadcrumb-sep"><i class="fa-solid fa-chevron-right"></i></span>
+      <div class="breadcrumb-item"><span class="breadcrumb-current">FAQ & Help Center</span></div>
     </div>
+  </nav>
 
-    <div class="faq-item">
-      <button class="faq-header">
-        <span><i class="fa-solid fa-rotate-left" style="margin-right: 0.75rem; color: var(--primary);"></i> What is your return & exchange policy?</span>
-        <i class="fa-solid fa-chevron-down faq-icon"></i>
-      </button>
-      <div class="faq-body">
-        We offer a 30-day money-back guarantee on all items. Items must be in original condition with tags intact. Returns are free — generate a pre-paid return shipping label directly from your <a href="orders.html" style="color: var(--primary); text-decoration: underline;">Orders Page</a>.
+  <main>
+    <!-- ============ PAGE HERO ============ -->
+    <section class="page-hero faq-hero">
+      <div class="faq-hero-glow" aria-hidden="true"></div>
+      <div class="faq-hero-inner">
+        <a href="help-center.html" class="faq-hero-badge" title="Go to Help Center Hub"><i class="fa-solid fa-circle-question"></i> Help Center Hub <i class="fa-solid fa-arrow-right" style="font-size: 0.75rem; margin-left: 0.2rem;"></i></a>
+        <h1>Frequently Asked <span class="faq-hero-accent">Questions</span></h1>
+        <p>Everything you need to know about shopping, delivery timelines, payment security, and our hassle-free return
+          policy.</p>
+
+        <div class="faq-search-wrap">
+          <i class="fa-solid fa-magnifying-glass faq-search-icon"></i>
+          <input type="text" id="faqSearchInput" class="faq-search-input"
+            placeholder="Search for a question... e.g. returns, UPI, tracking">
+        </div>
+
+        <div class="faq-hero-stats">
+          <div class="faq-hero-stat"><strong>12+</strong><span>Topics Covered</span></div>
+          <div class="faq-hero-stat-divider"></div>
+          <div class="faq-hero-stat"><strong>&lt;2 hrs</strong><span>Avg. Response Time</span></div>
+          <div class="faq-hero-stat-divider"></div>
+          <div class="faq-hero-stat"><strong>24/7</strong><span>Support Availability</span></div>
+        </div>
       </div>
-    </div>
+    </section>
 
-    <div class="faq-item">
-      <button class="faq-header">
-        <span><i class="fa-solid fa-credit-card" style="margin-right: 0.75rem; color: var(--primary);"></i> What payment methods do you accept?</span>
-        <i class="fa-solid fa-chevron-down faq-icon"></i>
-      </button>
-      <div class="faq-body">
-        We support Visa, Mastercard, American Express, Apple Pay, Google Pay, PayPal, and Klarna pay-in-4 installments. All transactions are protected with 256-bit SSL encryption.
+    <div class="faq-page-container">
+
+      <!-- Category quick-jump -->
+      <div class="faq-cat-nav" id="faqCatNav">
+        <button class="faq-cat-pill active" data-cat="all">All Topics</button>
+        <button class="faq-cat-pill" data-cat="shipping"><i class="fa-solid fa-truck-fast"></i> Shipping &
+          Delivery</button>
+        <button class="faq-cat-pill" data-cat="returns"><i class="fa-solid fa-rotate-left"></i> Returns &
+          Refunds</button>
+        <button class="faq-cat-pill" data-cat="payment"><i class="fa-solid fa-credit-card"></i> Payment &
+          Security</button>
+        <button class="faq-cat-pill" data-cat="account"><i class="fa-solid fa-user"></i> Account & Orders</button>
       </div>
-    </div>
 
-    <div class="faq-item">
-      <button class="faq-header">
-        <span><i class="fa-solid fa-location-dot" style="margin-right: 0.75rem; color: var(--primary);"></i> How do I track my shipment?</span>
-        <i class="fa-solid fa-chevron-down faq-icon"></i>
-      </button>
-      <div class="faq-body">
-        Once your order ships, you will receive an email notification with a direct tracking link. You can also view live tracking updates on your <a href="orders.html" style="color: var(--primary); text-decoration: underline;">My Orders</a> page at any time.
+      <!-- ---------- SHIPPING & DELIVERY ---------- -->
+      <div class="faq-category-block" data-category="shipping">
+        <h2 class="faq-category-heading"><i class="fa-solid fa-truck-fast"></i> Shipping & Delivery</h2>
+        <div class="faq-container">
+
+          <div class="faq-item active" data-faq-cat="shipping">
+            <button class="faq-header">
+              <span><i class="fa-solid fa-truck-fast faq-q-icon"></i> How fast is shipping?</span>
+              <i class="fa-solid fa-chevron-down faq-icon"></i>
+            </button>
+            <div class="faq-body">
+              Standard shipping delivers in 2–4 business days across India. Express delivery options are available at
+              checkout for urgent orders. Orders placed before 2 PM IST ship out the same day.
+            </div>
+          </div>
+
+          <div class="faq-item" data-faq-cat="shipping">
+            <button class="faq-header">
+              <span><i class="fa-solid fa-location-dot faq-q-icon"></i> How do I track my shipment?</span>
+              <i class="fa-solid fa-chevron-down faq-icon"></i>
+            </button>
+            <div class="faq-body">
+              Once your order ships, you'll receive an SMS and email notification with a direct tracking link. You can
+              also view live tracking updates anytime on your <a href="orders.html">My Orders</a> page.
+            </div>
+          </div>
+
+          <div class="faq-item" data-faq-cat="shipping">
+            <button class="faq-header">
+              <span><i class="fa-solid fa-map-location-dot faq-q-icon"></i> Do you deliver across all of India?</span>
+              <i class="fa-solid fa-chevron-down faq-icon"></i>
+            </button>
+            <div class="faq-body">
+              Yes, we deliver to all serviceable PIN codes across India, including most Tier 2 and Tier 3 cities.
+              Delivery timelines may vary slightly for remote or non-metro locations.
+            </div>
+          </div>
+
+        </div>
       </div>
-    </div>
 
-    <div class="faq-item">
-      <button class="faq-header">
-        <span><i class="fa-solid fa-shield-halved" style="margin-right: 0.75rem; color: var(--primary);"></i> Are NovaCart products covered by warranty?</span>
-        <i class="fa-solid fa-chevron-down faq-icon"></i>
-      </button>
-      <div class="faq-body">
-        Yes! All electronics and hardware products purchased on NovaCart come with a standard 1-Year Limited Manufacturer Warranty against defect in materials and craftsmanship.
+      <!-- ---------- RETURNS & REFUNDS ---------- -->
+      <div class="faq-category-block" data-category="returns">
+        <h2 class="faq-category-heading"><i class="fa-solid fa-rotate-left"></i> Returns & Refunds</h2>
+        <div class="faq-container">
+
+          <div class="faq-item" data-faq-cat="returns">
+            <button class="faq-header">
+              <span><i class="fa-solid fa-rotate-left faq-q-icon"></i> What is your return & exchange policy?</span>
+              <i class="fa-solid fa-chevron-down faq-icon"></i>
+            </button>
+            <div class="faq-body">
+              We offer a 30-day money-back guarantee on all items. Items must be in original condition with tags intact.
+              Returns are free — generate a prepaid return pickup directly from your <a href="orders.html">Orders
+                Page</a>.
+            </div>
+          </div>
+
+          <div class="faq-item" data-faq-cat="returns">
+            <button class="faq-header">
+              <span><i class="fa-solid fa-hand-holding-dollar faq-q-icon"></i> How long does a refund take?</span>
+              <i class="fa-solid fa-chevron-down faq-icon"></i>
+            </button>
+            <div class="faq-body">
+              Once we receive your returned item, refunds are processed within 5–7 business days to your original
+              payment method (or instantly as NovaCart Wallet credit, if selected).
+            </div>
+          </div>
+
+        </div>
       </div>
+
+      <!-- ---------- PAYMENT & SECURITY ---------- -->
+      <div class="faq-category-block" data-category="payment">
+        <h2 class="faq-category-heading"><i class="fa-solid fa-credit-card"></i> Payment & Security</h2>
+        <div class="faq-container">
+
+          <div class="faq-item" data-faq-cat="payment">
+            <button class="faq-header">
+              <span><i class="fa-solid fa-credit-card faq-q-icon"></i> What payment methods do you accept?</span>
+              <i class="fa-solid fa-chevron-down faq-icon"></i>
+            </button>
+            <div class="faq-body">
+              We support UPI (Google Pay, PhonePe, Paytm), all major Credit & Debit Cards, Net Banking, and Cash on
+              Delivery (COD) on eligible orders. All transactions are protected with 256-bit SSL encryption.
+            </div>
+          </div>
+
+          <div class="faq-item" data-faq-cat="payment">
+            <button class="faq-header">
+              <span><i class="fa-solid fa-shield-halved faq-q-icon"></i> Are NovaCart products covered by
+                warranty?</span>
+              <i class="fa-solid fa-chevron-down faq-icon"></i>
+            </button>
+            <div class="faq-body">
+              Yes! All electronics and hardware products purchased on NovaCart come with a standard 1-Year Limited
+              Manufacturer Warranty against defects in materials and craftsmanship.
+            </div>
+          </div>
+
+          <div class="faq-item" data-faq-cat="payment">
+            <button class="faq-header">
+              <span><i class="fa-solid fa-lock faq-q-icon"></i> Is it safe to save my card details?</span>
+              <i class="fa-solid fa-chevron-down faq-icon"></i>
+            </button>
+            <div class="faq-body">
+              Yes — we never store your full card number on our servers. Saved cards are tokenized through our PCI-DSS
+              compliant payment partner, so your details stay fully secure.
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+      <!-- ---------- ACCOUNT & ORDERS ---------- -->
+      <div class="faq-category-block" data-category="account">
+        <h2 class="faq-category-heading"><i class="fa-solid fa-user"></i> Account & Orders</h2>
+        <div class="faq-container">
+
+          <div class="faq-item" data-faq-cat="account">
+            <button class="faq-header">
+              <span><i class="fa-solid fa-pen-to-square faq-q-icon"></i> Can I change my order after placing it?</span>
+              <i class="fa-solid fa-chevron-down faq-icon"></i>
+            </button>
+            <div class="faq-body">
+              Orders can be modified or cancelled within 1 hour of placing them from your <a href="orders.html">Orders
+                Page</a>. After that, the order enters processing and can no longer be changed.
+            </div>
+          </div>
+
+          <div class="faq-item" data-faq-cat="account">
+            <button class="faq-header">
+              <span><i class="fa-solid fa-address-book faq-q-icon"></i> How do I update my saved address?</span>
+              <i class="fa-solid fa-chevron-down faq-icon"></i>
+            </button>
+            <div class="faq-body">
+              Go to <a href="profile.html">My Profile</a> → Saved Addresses, where you can add, edit, or remove delivery
+              addresses at any time.
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+      <!-- No-results state for search -->
+      <div class="faq-no-results" id="faqNoResults" style="display:none;">
+        <i class="fa-solid fa-magnifying-glass"></i>
+        <p>No questions matched your search. Try a different keyword, or <a href="contact.html">contact our support
+            team</a>.</p>
+      </div>
+
     </div>
-  </div>
-</main>
+  </main>
 
-<!-- ============ FOOTER ============ -->
-<div id="site-footer"></div>
+  <!-- ============ FOOTER ============ -->
+  <div id="site-footer"></div>
 
-<script src="../js/script.js"></script>
-<script>
-document.addEventListener('click', (e) => {
-  const header = e.target.closest('.faq-header');
-  if (header) {
-    e.preventDefault();
-    const item = header.closest('.faq-item');
-    if (item) {
-      const isOpen = item.classList.contains('active');
-      document.querySelectorAll('.faq-item').forEach(i => i.classList.remove('active'));
-      if (!isOpen) {
-        item.classList.add('active');
+  <script src="../js/script.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      const items = Array.from(document.querySelectorAll('.faq-item[data-faq-cat]'));
+      const catBlocks = Array.from(document.querySelectorAll('.faq-category-block'));
+      const catPills = Array.from(document.querySelectorAll('.faq-cat-pill'));
+      const searchInput = document.getElementById('faqSearchInput');
+      const noResults = document.getElementById('faqNoResults');
+
+      // ---- Accordion toggle ----
+      document.addEventListener('click', (e) => {
+        const header = e.target.closest('.faq-header');
+        if (header) {
+          e.preventDefault();
+          const item = header.closest('.faq-item');
+          if (item) {
+            const isOpen = item.classList.contains('active');
+            document.querySelectorAll('.faq-item').forEach(i => i.classList.remove('active'));
+            if (!isOpen) item.classList.add('active');
+          }
+        }
+      });
+
+      // ---- Category filter ----
+      catPills.forEach(pill => {
+        pill.addEventListener('click', () => {
+          catPills.forEach(p => p.classList.remove('active'));
+          pill.classList.add('active');
+          const cat = pill.dataset.cat;
+          catBlocks.forEach(block => {
+            block.style.display = (cat === 'all' || block.dataset.category === cat) ? '' : 'none';
+          });
+          if (searchInput) searchInput.value = '';
+          items.forEach(i => i.style.display = '');
+          if (noResults) noResults.style.display = 'none';
+        });
+      });
+
+      // ---- Live search filter ----
+      if (searchInput) {
+        searchInput.addEventListener('input', () => {
+          const query = searchInput.value.trim().toLowerCase();
+
+          if (query === '') {
+            catBlocks.forEach(b => b.style.display = '');
+            items.forEach(i => i.style.display = '');
+            if (noResults) noResults.style.display = 'none';
+            return;
+          }
+
+          // Searching resets category filter to show matches across all topics
+          catPills.forEach(p => p.classList.remove('active'));
+          const allPill = document.querySelector('.faq-cat-pill[data-cat="all"]');
+          if (allPill) allPill.classList.add('active');
+          catBlocks.forEach(b => b.style.display = '');
+
+          let visibleCount = 0;
+          items.forEach(item => {
+            const text = item.textContent.toLowerCase();
+            const match = text.includes(query);
+            item.style.display = match ? '' : 'none';
+            if (match) visibleCount++;
+          });
+
+          // Hide empty category headings
+          catBlocks.forEach(block => {
+            const visibleItems = block.querySelectorAll('.faq-item:not([style*="display: none"])');
+            block.style.display = visibleItems.length ? '' : 'none';
+          });
+
+          if (noResults) noResults.style.display = visibleCount === 0 ? 'block' : 'none';
+        });
       }
-    }
-  }
-});
-</script>
+
+      // ---- URL Query & Category Deep-Link Handling ----
+      const urlParams = new URLSearchParams(window.location.search);
+      const catParam = urlParams.get('cat');
+      const qParam = urlParams.get('q');
+
+      if (catParam) {
+        const targetPill = document.querySelector(`.faq-cat-pill[data-cat="${catParam}"]`);
+        if (targetPill) targetPill.click();
+      } else if (qParam && searchInput) {
+        searchInput.value = qParam;
+        searchInput.dispatchEvent(new Event('input'));
+      }
+    });
+  </script>
 </body>
+
 </html>

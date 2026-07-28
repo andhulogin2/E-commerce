@@ -1213,17 +1213,68 @@ document.addEventListener('DOMContentLoaded', () => {
     const searchClose = document.getElementById('searchClose');
     const searchInput = document.getElementById('searchInput');
     const searchResults = document.getElementById('searchResults');
+    const searchSuggestions = document.getElementById('searchSuggestions');
 
     if (searchToggle && searchPanel && searchClose && searchInput) {
-      searchToggle.onclick = () => {
+      const openSearch = () => {
         searchPanel.classList.add('open');
-        setTimeout(() => searchInput.focus(), 300);
+        if (!searchInput.value.trim()) {
+          if (searchSuggestions) searchSuggestions.style.display = 'flex';
+          if (searchResults) searchResults.classList.remove('active');
+        }
+        setTimeout(() => searchInput.focus(), 120);
       };
 
-      searchClose.onclick = () => {
+      const closeSearch = () => {
         searchPanel.classList.remove('open');
         if (searchResults) searchResults.classList.remove('active');
+        searchInput.blur();
       };
+
+      searchToggle.onclick = (e) => {
+        e.stopPropagation();
+        if (searchPanel.classList.contains('open')) {
+          closeSearch();
+        } else {
+          openSearch();
+        }
+      };
+
+      searchClose.onclick = (e) => {
+        e.stopPropagation();
+        closeSearch();
+      };
+
+      // Click on popular suggestion items
+      document.addEventListener('click', (e) => {
+        const suggestBtn = e.target.closest('.search-suggest-item');
+        if (suggestBtn && searchInput) {
+          const query = suggestBtn.dataset.query || suggestBtn.textContent.trim();
+          searchInput.value = query;
+          searchInput.dispatchEvent(new Event('input'));
+          searchInput.focus();
+        }
+      });
+
+      // Keydown shortcuts: '/' to open search, 'Escape' to close
+      document.addEventListener('keydown', (e) => {
+        const activeTag = document.activeElement ? document.activeElement.tagName : '';
+        const isEditable = document.activeElement ? document.activeElement.isContentEditable : false;
+
+        if (e.key === '/' && !['INPUT', 'TEXTAREA', 'SELECT'].includes(activeTag) && !isEditable) {
+          e.preventDefault();
+          openSearch();
+        } else if (e.key === 'Escape' && searchPanel.classList.contains('open')) {
+          closeSearch();
+        }
+      });
+
+      // Click outside to close search panel
+      document.addEventListener('click', (e) => {
+        if (searchPanel.classList.contains('open') && !e.target.closest('#searchPanel') && !e.target.closest('#searchToggle')) {
+          closeSearch();
+        }
+      });
 
       if (searchInput && searchResults) {
         searchInput.oninput = (e) => {
@@ -1231,8 +1282,11 @@ document.addEventListener('DOMContentLoaded', () => {
           if (!query) {
             searchResults.innerHTML = '';
             searchResults.classList.remove('active');
+            if (searchSuggestions) searchSuggestions.style.display = 'flex';
             return;
           }
+
+          if (searchSuggestions) searchSuggestions.style.display = 'none';
 
           const matches = PRODUCTS.filter(p => 
             p.title.toLowerCase().includes(query) ||
@@ -1244,7 +1298,11 @@ document.addEventListener('DOMContentLoaded', () => {
           const productLinkPrefix = isPagesDir ? '' : 'pages/';
 
           if (matches.length === 0) {
-            searchResults.innerHTML = `<div class="search-no-results">No products found matching "<strong>${query}</strong>"</div>`;
+            searchResults.innerHTML = `
+              <div class="search-no-results">
+                <i class="fa-solid fa-magnifying-glass"></i>
+                <div>No products found matching "<strong>${query}</strong>"</div>
+              </div>`;
           } else {
             searchResults.innerHTML = matches.map(p => `
               <div class="search-result-item" data-id="${p.id}">

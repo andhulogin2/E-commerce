@@ -15,27 +15,59 @@
       <li><a href="pages/about.html" class="nav-link" data-link="about">About</a></li>
       <li><a href="pages/contact.html" class="nav-link" data-link="contact">Contact</a></li>
       <li><a href="pages/faq.html" class="nav-link" data-link="faq">FAQ</a></li>
+      <li><a href="pages/help-center.html" class="nav-link" data-link="help">Help Center</a></li>
     </ul>
 
     <div class="nav-actions">
-      <button class="icon-btn" id="searchToggle" aria-label="Search"><i class="fa-solid fa-magnifying-glass"></i></button>
+      <div class="search-dropdown-wrapper">
+        <button class="icon-btn" id="searchToggle" aria-label="Search"><i class="fa-solid fa-magnifying-glass"></i></button>
+
+        <!-- Glassmorphic Floating Search Panel -->
+        <div class="search-panel" id="searchPanel">
+          <!-- Background Gradient Blobs -->
+          <div class="search-panel-glow glow-1" aria-hidden="true"></div>
+          <div class="search-panel-glow glow-2" aria-hidden="true"></div>
+          <div class="search-panel-glow glow-3" aria-hidden="true"></div>
+
+          <div class="search-panel-content">
+            <div class="search-input-wrapper">
+              <i class="fa-solid fa-magnifying-glass search-icon"></i>
+              <input type="text" placeholder="Search products, categories..." id="searchInput" autocomplete="off">
+              <kbd class="search-kbd" title="Press / to search">/</kbd>
+              <button id="searchClose" aria-label="Close search"><i class="fa-solid fa-xmark"></i></button>
+            </div>
+
+            <!-- Popular Suggestions (visible when query is empty) -->
+            <div class="search-suggestions" id="searchSuggestions">
+              <div class="search-section-label">Popular Searches</div>
+              <div class="search-suggest-list">
+                <button type="button" class="search-suggest-item" data-query="Headphones">
+                  <i class="fa-solid fa-clock-rotate-left"></i> Studio Wireless Headphones
+                </button>
+                <button type="button" class="search-suggest-item" data-query="Sneaker">
+                  <i class="fa-solid fa-fire"></i> Aero Runner Sneakers
+                </button>
+                <button type="button" class="search-suggest-item" data-query="Watch">
+                  <i class="fa-solid fa-arrow-trend-up"></i> Minimalist Chrono Watch
+                </button>
+                <button type="button" class="search-suggest-item" data-query="Electronics">
+                  <i class="fa-solid fa-tag"></i> Flash Deals Electronics
+                </button>
+              </div>
+            </div>
+
+            <!-- Live Product Results -->
+            <div class="search-results" id="searchResults"></div>
+          </div>
+        </div>
+      </div>
+
       <a href="pages/wishlist.html" class="icon-btn" aria-label="Wishlist"><i class="fa-regular fa-heart"></i><span class="badge" id="wishBadge">2</span></a>
       <a href="pages/cart.html" class="icon-btn" aria-label="Cart"><i class="fa-solid fa-bag-shopping"></i><span class="badge cart-badge" id="cartBadge">3</span></a>
       <a href="pages/orders.html" class="icon-btn" aria-label="Orders" title="My Orders"><i class="fa-solid fa-clock-rotate-left"></i></a>
       <a href="pages/signin.html" class="icon-btn" id="accountToggle" aria-label="Account" title="Account"><i class="fa-regular fa-user"></i></a>
       <button class="icon-btn theme-toggle" id="themeToggle" aria-label="Toggle dark mode"><i class="fa-solid fa-moon"></i></button>
       <button class="hamburger" id="hamburger" aria-label="Menu"><span></span><span></span><span></span></button>
-    </div>
-  </div>
-
-  <div class="search-panel" id="searchPanel">
-    <div class="search-panel-inner">
-      <div class="search-input-wrapper">
-        <i class="fa-solid fa-magnifying-glass search-icon"></i>
-        <input type="text" placeholder="Search products, categories, or brands..." id="searchInput" autocomplete="off">
-        <button id="searchClose" aria-label="Close search"><i class="fa-solid fa-xmark"></i></button>
-      </div>
-      <div class="search-results" id="searchResults"></div>
     </div>
   </div>
 </nav>
@@ -89,7 +121,8 @@
     <li><a href="pages/electronics.html">Shop</a></li>
     <li><a href="index.html#collections">Collections</a></li>
     <li><a href="pages/deals.html">Deals</a></li>
-    <li><a href="index.html#about">About</a></li>
-    <li><a href="index.html#contact">Contact</a></li>
+    <li><a href="pages/help-center.html">Help Center Hub</a></li>
+    <li><a href="pages/faq.html">FAQ</a></li>
+    <li><a href="pages/contact.html">Contact</a></li>
   </ul>
 </div>
