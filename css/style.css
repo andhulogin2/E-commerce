@@ -1000,7 +1000,7 @@ main > section { padding: clamp(2.5rem, 5vw, 4.5rem) clamp(1.25rem, 5vw, 4rem); 
 .eyebrow.reveal { animation-delay: 0s; }
 @keyframes fadeUp { from { opacity: 0; transform: translateY(16px); } to { opacity: 1; transform: translateY(0); } }
 
-.hero-visual { position: relative; height: 480px; }
+.hero-visual { display: block; position: relative; height: 480px; cursor: pointer; color: inherit; text-decoration: none; }
 .floating-card {
   position: absolute;
   background: var(--surface-glass);
