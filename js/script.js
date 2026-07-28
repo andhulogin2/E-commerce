@@ -1966,11 +1966,11 @@ document.addEventListener('DOMContentLoaded', () => {
               </div>
               <div style="display:flex; justify-content:space-between; margin-bottom:0.5rem; font-size:0.9rem;">
                 <span style="color:var(--text-muted);">Items Purchased:</span>
-                <strong>3 Items ($446.04)</strong>
+                <strong>3 Items (₹32,497)</strong>
               </div>
               <div style="display:flex; justify-content:space-between; font-size:0.9rem;">
                 <span style="color:var(--text-muted);">Payment Method:</span>
-                <strong>Credit Card (ending 4242)</strong>
+                <strong>UPI / RuPay / Net Banking</strong>
               </div>
             </div>
 
