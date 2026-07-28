@@ -999,7 +999,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
   /* ---------- Render homepage offer/deal sections ---------- */
   function productCardHTML(p) {
-    const oldPrice = p.old ? `<span class="price-old">$${p.old.toFixed(2)}</span>` : '';
+    const oldPrice = p.old ? `<span class="price-old">₹${p.old.toLocaleString('en-IN')}</span>` : '';
     const tag = p.tag ? `<span class="product-tag">${p.tag}</span>` : '';
     return `
       <div class="product-card fade-in" data-id="${p.id}">
@@ -1013,7 +1013,7 @@ document.addEventListener('DOMContentLoaded', () => {
           <h3 class="product-title">${p.title}</h3>
           <div class="product-rating"><span class="stars">${starString(p.rating)}</span> ${p.rating} · ${p.reviews}</div>
           <div class="product-price-row">
-            <div class="price-group"><span class="price">$${p.price.toFixed(2)}</span>${oldPrice}</div>
+            <div class="price-group"><span class="price">₹${p.price.toLocaleString('en-IN')}</span>${oldPrice}</div>
             <button class="add-cart-btn" data-id="${p.id}" aria-label="Add to cart"><i class="fa-solid fa-plus"></i></button>
           </div>
         </div>
@@ -1311,7 +1311,7 @@ document.addEventListener('DOMContentLoaded', () => {
                   <div class="search-result-title">${p.title}</div>
                   <div class="search-result-cat">${p.cat}</div>
                 </div>
-                <div class="search-result-price">$${p.price}</div>
+                <div class="search-result-price">₹${p.price.toLocaleString('en-IN')}</div>
               </div>
             `).join('');
 
@@ -1682,7 +1682,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const trendHTML = trendData.map(p => `
       <div class="trend-card">
         <img src="${p.img}" alt="${p.title}" loading="lazy">
-        <div class="ti"><h4>${p.title}</h4><span>$${p.price.toFixed(2)}</span></div>
+        <div class="ti"><h4>${p.title}</h4><span>₹${p.price.toLocaleString('en-IN')}</span></div>
       </div>`).join('');
     track.innerHTML = trendHTML + trendHTML;
 
@@ -1813,10 +1813,10 @@ document.addEventListener('DOMContentLoaded', () => {
       const taxEl = document.getElementById('cartTax');
       const totEl = document.getElementById('cartTotal');
 
-      if (subEl) subEl.textContent = `$${subtotal.toFixed(2)}`;
-      if (shipEl) shipEl.textContent = shipping === 0 ? 'FREE' : `$${shipping.toFixed(2)}`;
-      if (taxEl) taxEl.textContent = `$${tax.toFixed(2)}`;
-      if (totEl) totEl.textContent = `$${total.toFixed(2)}`;
+      if (subEl) subEl.textContent = `₹${subtotal.toLocaleString('en-IN')}`;
+      if (shipEl) shipEl.textContent = shipping === 0 ? 'FREE' : `₹${shipping.toLocaleString('en-IN')}`;
+      if (taxEl) taxEl.textContent = `₹${tax.toLocaleString('en-IN', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}`;
+      if (totEl) totEl.textContent = `₹${total.toLocaleString('en-IN', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}`;
     }
 
     cartContainer.addEventListener('click', (e) => {
@@ -2005,11 +2005,11 @@ document.addEventListener('DOMContentLoaded', () => {
       document.getElementById('pdpTitle').textContent = product.title;
       document.getElementById('pdpStars').textContent = starString(product.rating);
       document.getElementById('pdpReviewCount').textContent = `${product.rating} · ${product.reviews} customer reviews`;
-      document.getElementById('pdpPrice').textContent = `$${product.price.toFixed(2)}`;
+      document.getElementById('pdpPrice').textContent = `₹${product.price.toLocaleString('en-IN')}`;
 
       const oldPriceEl = document.getElementById('pdpOldPrice');
       if (product.old) {
-        oldPriceEl.textContent = `$${product.old.toFixed(2)}`;
+        oldPriceEl.textContent = `₹${product.old.toLocaleString('en-IN')}`;
         oldPriceEl.style.display = 'inline';
       } else {
         oldPriceEl.style.display = 'none';
